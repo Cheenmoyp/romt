@@ -8,7 +8,7 @@ export const Header = () => {
         <div className="container">
             <div className="row">
             <div className="col-md-2">
-                <div className="logo"> <a href="index.php"> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
+                <div className="logo"> <a href="index-new"> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
             </div>
             <div className="col-md-7">
                 <div className="nav-con">
@@ -23,13 +23,13 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">Destination By Places</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Bangalore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Mumbai</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Delhi</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Jaipur</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Pune</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Chandigarh</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destinations.php">Chennai</a> </li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Bangalore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Mumbai</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Delhi</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Jaipur</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Pune</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Chandigarh</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="destination">Chennai</a> </li>
                                 </ul>
                                 </div>
                                 
