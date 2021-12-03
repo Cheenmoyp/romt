@@ -15,7 +15,7 @@ const Destination = (response) => {
     const [startRating, setStarRating] = useState();
     let hotel_name = [];
 
-    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2564&city_name=${response.city}&star_rating=${startRating}&min_price&max_price`).then(response => {
+    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2565&city_name=${response.city}&star_rating=${startRating}&min_price&max_price`).then(response => {
         return response.data.hotels_data
     })
     .catch(error => {
@@ -27,6 +27,11 @@ const Destination = (response) => {
             setHotelList(response)
         }
     })
+	
+	const handleFormChange = (event) => {
+        setStarRating(event.target.value);
+        setHotelList([]);
+    };
 
     let url = base64_encode((hotelList.length > 0 && hotelList[0].hotel_id) +'/'+ response.url_param[0] +'/'+ response.url_param[1] +'/'+ response.url_param[2]); 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 // import OwlCarousel from 'react-owl-carousel';
 import Image from 'next/image';
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 export const Header = () => {
     return (
@@ -8,7 +9,7 @@ export const Header = () => {
         <div className="container">
             <div className="row">
             <div className="col-md-2">
-                <div className="logo"> <a href="index-new"> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
+                <div className="logo"> <a href="/index-new"> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
             </div>
             <div className="col-md-7">
                 <div className="nav-con">
@@ -23,13 +24,13 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">Destination By Places</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Bangalore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Mumbai</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Delhi</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Jaipur</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Pune</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Chandigarh</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="destination">Chennai</a> </li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore') }>Coimbatore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Mumbai</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Delhi</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Jaipur</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Pune</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Chandigarh</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="/destination">Chennai</a> </li>
                                 </ul>
                                 </div>
                                 
@@ -116,10 +117,10 @@ export const Header = () => {
                                 <div className="col-md-4">
                                 <span className="menu-heading">ROMT Packages</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href="package.php">Exclusive Packages</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href="package.php">VIP Premiere Offer</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href="package.php">Where Next Offer</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href="package.php">Last Minute Escapes</a> </li>
+                                    <li className="nav-item"> <a className="nav-link" href="/package">Exclusive Packages</a></li>
+                                    <li className="nav-item"> <a className="nav-link" href="/package">VIP Premiere Offer</a></li>
+                                    <li className="nav-item"> <a className="nav-link" href="/package">Where Next Offer</a></li>
+                                    <li className="nav-item"> <a className="nav-link" href="/package">Last Minute Escapes</a> </li>
                                 </ul>
                                 </div>
                             
