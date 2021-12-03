@@ -195,7 +195,7 @@ const Hotel = () => {
                                             <div className="col-md-3 hotel-box2-right">
                                                 <ul className="rating">
                                                 <li><span>4.5/5</span>185 Ratings</li>
-                                                <li><span className="cut-price">&#8377; 4300</span>&#8377; {slide.original_price}</li>
+                                                <li><span className="cut-price">₹4300</span>₹{slide.original_price}</li>
                                                 </ul>
                                                 <a href="hotel-details.php" className="book-now-btn">Book Now</a>
                                             </div>
