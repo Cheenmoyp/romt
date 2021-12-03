@@ -295,7 +295,7 @@ const destinationResponsive = {
           <div className={ index == 3 || index == 5 ? "box-2 mtop-60":"box-2" }>
             <figure><a href={'hotel-details/'+ slide.hotel_id }><img className={ index == 0 || index == 2 || index == 5? "height-237": index == 3 ? "height-360":"height-300" } src={slide.image} alt={slide.hotel_name} title={slide.hotel_name} /></a></figure>
             <div className="content">
-              <h3><a href="#">{slide.hotel_name} </a></h3>
+              <h3><a href={'hotel-details/'+ slide.hotel_id }>{slide.hotel_name} </a></h3>
               <div className="hotel-footer">
                 <div className="row">
                   <div className="col-6 text-left">
