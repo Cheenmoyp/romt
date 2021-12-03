@@ -12,7 +12,7 @@ const Hotel = () => {
     const [hotelList, setHotelList] = useState([])
     const [startRating, setStarRating] = useState();
 
-    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2564&city_name&star_rating=${startRating}&min_price&max_price`).then(response => {
+    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2565&city_name&star_rating=${startRating}&min_price&max_price`).then(response => {
         return response.data.hotels_data
       })
       .catch(error => {
