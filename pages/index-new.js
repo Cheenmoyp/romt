@@ -9,6 +9,8 @@ import axios from 'axios';
 import Search from '../components/search/search';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
+
 
 export default function Home() {
   const router = useRouter()
@@ -293,9 +295,9 @@ const destinationResponsive = {
           <div className={index == 1 || index == 4?  "col-md-6" : "col-md-3"} key={index}> 
          
           <div className={ index == 3 || index == 5 ? "box-2 mtop-60":"box-2" }>
-            <figure><a href={'hotel-details/'+ slide.hotel_id }><img className={ index == 0 || index == 2 || index == 5? "height-237": index == 3 ? "height-360":"height-300" } src={slide.image} alt={slide.hotel_name} title={slide.hotel_name} /></a></figure>
+            <figure><a href={'hotel-details/'+ base64_encode(slide.hotel_id) }><img className={ index == 0 || index == 2 || index == 5? "height-237": index == 3 ? "height-360":"height-300" } src={slide.image} alt={slide.hotel_name} title={slide.hotel_name} /></a></figure>
             <div className="content">
-              <h3><a href={'hotel-details/'+ slide.hotel_id }>{slide.hotel_name} </a></h3>
+              <h3><a href={'hotel-details/'+ base64_encode(slide.hotel_id) }>{slide.hotel_name} </a></h3>
               <div className="hotel-footer">
                 <div className="row">
                   <div className="col-6 text-left">

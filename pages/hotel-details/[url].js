@@ -17,7 +17,7 @@ const HotelDetails = (response) => {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <Search cityname={response.search[1]} checkin={response.search[2]} checkout={response.search[3]}/>
+				<Search cityname={response.search[1] && response.search[1]} checkin={response.search[2] && response.search[2]} checkout={response.search[3] && response.search[3]}/>
               </div>
             </div>
           </div>
