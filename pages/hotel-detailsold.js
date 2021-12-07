@@ -231,7 +231,7 @@ const HotelDetails = (props) => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h3>Roomes at the Signature INN</h3>
+              <h3>Rooms at the Signature INN</h3>
             </div>
           </div>
           <div className="packages-filter roomes-at-box-con">

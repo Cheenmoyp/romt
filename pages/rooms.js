@@ -56,7 +56,7 @@ export default function Rooms(props) {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h3>Roomes at the {props.name}</h3>
+              <h3>Rooms at the {props.name}</h3>
             </div>
           </div>
           <div className="packages-filter roomes-at-box-con">
