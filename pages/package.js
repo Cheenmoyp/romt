@@ -32,7 +32,7 @@ const Package = () => {
                         <div className="package-box">
                             <figure><a href="package-detail"><img src="/Images/packages/package-1.jpg" alt="" title=""/></a></figure>
                             <div className="p-content">
-                            <h3><a href="package-detail">Tranquil Homestay</a></h3>
+                            <h3><a href="package-detail">ROMT Special Winter Package</a></h3>
                             <div className="facilities">
                                 <ul>
                                 <li><img src="/Images/packages/icons/Hotels.png" alt="" title=""/><span>2 Hotels</span></li>
@@ -44,6 +44,7 @@ const Package = () => {
                             </div>
                             <div className="p-price">
                                 <h4>2N 3D Bangalore</h4>
+                                <h4>Valid from 19 Nov 2021 to 23 Dec 2021</h4>
                                 <h6>9999/- <span>Per person</span></h6>
                             </div>
                             </div>
