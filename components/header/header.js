@@ -25,23 +25,22 @@ export const Header = () => {
                                 <span className="menu-heading">Destination By Places</span>
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination/erode"}>Erode</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Delhi</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Jaipur</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Pune</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Chandigarh</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Chennai</a> </li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
+                        
                                 </ul>
                                 </div>
                                 
                                 <div className="col-md-4">
                                 <span className="menu-heading">Top Destinations</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href="#">Mysore</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Erode</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Bangolore</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Valparai</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Mysore</a> </li>
+                                <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
                                 </ul>
                                 </div>
 
@@ -64,13 +63,11 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">Hotel By Places</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href="hotel.php">Bangalore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="hotel.php">Mumbai</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="hotel.php">Delhi</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="hotel.php">Jaipur</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="hotel.php">Pune</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">Chandigarh</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">Chennai</a> </li>
+                                <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
                                 </ul>
                                 </div>
                                 <div className="col-md-4">
@@ -128,7 +125,7 @@ export const Header = () => {
                             </div>
                         </div>
                         </li>
-                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="membership.php" > Membership </a>
+                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" > Membership </a>
                         
                         </li>
                     </ul>
