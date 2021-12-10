@@ -330,7 +330,7 @@ const destinationResponsive = {
             <div className="box-3">
               <figure><img src="/Images/destinations/Coimbatore.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href="coimbatore.php">Coimbatore</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></h4>
               </div>
             </div>
           </div>
@@ -338,7 +338,7 @@ const destinationResponsive = {
             <div className="box-3">
               <figure><img src="/Images/destinations/Erode.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href="erode.php">Erode</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('erode')}>Erode</a></h4>
               </div>
             </div>
           </div>
@@ -346,7 +346,7 @@ const destinationResponsive = {
             <div className="box-3">
               <figure><img src="/Images/destinations/Krishnagiri.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href="krishnagiri.php">Krishnagiri</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></h4>
               </div>
             </div>
           </div>
@@ -354,7 +354,7 @@ const destinationResponsive = {
             <div className="box-3">
               <figure><img src="/Images/destinations/Munnar.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href="munnar.php">Munnar</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('munnar')}>Munnar</a></h4>
               </div>
             </div>
           </div>
@@ -362,7 +362,7 @@ const destinationResponsive = {
             <div className="box-3">
               <figure><img src="/Images/destinations/Yercaud.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href="yercaud.php">Yercaud</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></h4>
               </div>
             </div>
           </div>
