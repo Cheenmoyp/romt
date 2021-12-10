@@ -137,7 +137,7 @@ export const Header = () => {
                 </div>
             </div>
             <div className="col-md-3">
-                <div className="top-btn-group"> <a href="signIn.php" className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Join Us</a> </div>
+                <div className="top-btn-group"> <a href='#' className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Join Us</a> </div>
             </div>
             </div>
         </div>

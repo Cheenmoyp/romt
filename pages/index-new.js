@@ -109,24 +109,7 @@ const destinationResponsive = {
             <div className="col-md-12">
               <h1>Make Your Stay Comfortable </h1>
               <h3>Get instant benefits with ROMT Rewards at more than 650 hotels in over 80 countries</h3>
-              <form>
-                <div className="form-control">
-                  <input type="text" placeholder="What are you looking for?" />
-                </div>
-                <div className="form-control">
-                  <input id="datepicker" type="text" className="datepicker" data-zdp_readonly_element="false" placeholder="Check In" />
-                </div>
-                <div className="form-control">
-                  <input id="datepicker" type="text" className="datepicker" data-zdp_readonly_element="false" placeholder="Check Out" />
-                </div>
-                <div className="form-control dropdown-box">
-                  <input type="number" name="" placeholder="Adult" />
-                </div>
-                <div className="form-control" style={{border: "none"}}>
-                  <input type="number" name="" placeholder="Kids" />
-                </div>
-                <button className="site-button"> Search</button>
-              </form>
+              <Search props={1}/>
               <div className="search-categories">
                 <ul>
                   <li> <a href="#" className="category"> <i className="fa fa-ravelry" aria-hidden="true"></i>
