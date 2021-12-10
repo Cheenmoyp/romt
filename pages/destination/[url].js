@@ -182,7 +182,7 @@ const Destination = (response) => {
                                                     <li>311 Ratings</li>
                                                 </ul>
                                                 </div>
-                                                <h3><a href={'../hotel-details/'+ base64_encode(slide.hotel_name)}>{slide.hotel_name}</a></h3>
+                                                <h3><a href={'../hotel-details/'+ base64_encode(slide.hotel_id)}>{slide.hotel_name}</a></h3>
                                                 <div className="distance">
                                                 <p><span><img src="/Images/hotels/icons/location-icon.png"/></span>{slide.city_name}</p>
                                                 </div>
