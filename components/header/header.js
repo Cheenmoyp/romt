@@ -24,8 +24,8 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">Destination By Places</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination'}>Coimbatore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Mumbai</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/coimbatore'}>Coimbatore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={"/destination/erode"}>Erode</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Delhi</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Jaipur</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={"/destination"}>Pune</a></li>
