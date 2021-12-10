@@ -2,6 +2,8 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import axios from 'axios';
 import RoomDetailModal from './roomDetailModal';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function Rooms(props) {
     console.log('puupp', props);
@@ -34,6 +36,26 @@ export default function Rooms(props) {
       
     }
    
+    const responsive = {
+        superLargeDesktop: {
+          // the naming can be any, depends on you.
+          breakpoint: { max: 4000, min: 3000 },
+          items: 1
+        },
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 1
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 1
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+      };
+
     function myFunctionNew() {
         // var dots = document.getElementById("dots");
         // var moreText = document.getElementById("more");
@@ -69,13 +91,18 @@ export default function Rooms(props) {
                                 <div className="room-slider">
                                     <div id="carousel2_indicator" className="carousel slide" data-ride="carousel">
                                         <div className="carousel-inner">
+                                        <Carousel swipeable={true}
+				  draggable={true}
+				  infinite={true}
+				  responsive={responsive}>
                                         {amenities.map((image, index2)=>{ 
                                             return (   
-                                                <div className="carousel-item active" key={index2}> 
+                                                <div className="" key={index2}> 
                                                     <img className="d-block w-100" src={'https://d3ki85qs1zca4t.cloudfront.net/bookingEngine/'+ image.image_name} alt="First slide" /> 
                                                 </div>
                                             )
                                         })}
+                                        </Carousel>
                                         </div>
                                     </div>
                                     <div className="r-photo-counter">{slide.allImages.length} Photos <i className="fa fa-long-arrow-right" aria-hidden="true"></i></div>
