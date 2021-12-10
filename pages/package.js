@@ -44,7 +44,7 @@ const Package = () => {
                             </div>
                             <div className="p-price">
                                 <h4>2N 3D Bangalore</h4>
-                                <h4>Valid from 19 Nov 2021 to 23 Dec 2021</h4>
+                                <h6>Valid from 19 Nov 2021 to 23 Dec 2021</h6>
                                 <h6>9999/- <span>Per person</span></h6>
                             </div>
                             </div>
