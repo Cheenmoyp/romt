@@ -162,7 +162,7 @@ const Hotel = () => {
                                                     <li>311 Ratings</li>
                                                 </ul>
                                                 </div>
-                                                <h3><a href="hotel-details.php">{slide.hotel_name}</a></h3>
+                                                <h3><a href={'../hotel-details/'+ base64_encode(slide.hotel_id)}>{slide.hotel_name}</a></h3>
                                                 <div className="distance">
                                                 <p><span><img src="/Images/hotels/icons/location-icon.png"/></span>{slide.city_name}</p>
                                                 </div>
@@ -196,8 +196,10 @@ const Hotel = () => {
                                                 <ul className="rating">
                                                 <li><span>4.5/5</span>185 Ratings</li>
                                                 <li><span className="cut-price">₹4300</span>₹{slide.original_price}</li>
+                                                 
+                                            <li> <a href={'../hotel-details/'+ base64_encode(slide.hotel_id)} className="book-now-btn-destinationsearch">Book Now</a></li>
                                                 </ul>
-                                                <a href="hotel-details.php" className="book-now-btn">Book Now</a>
+                                     
                                             </div>
                                         </div>
                                     )
