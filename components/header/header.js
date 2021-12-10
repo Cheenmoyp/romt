@@ -22,7 +22,7 @@ export const Header = () => {
                             <div className="container">
                             <div className="row">
                                 <div className="col-md-4"> 
-                                <span className="menu-heading">Destination By Places</span>
+                                <span className="menu-heading">All Destinations</span>
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
@@ -45,7 +45,7 @@ export const Header = () => {
                                 </div>
 
                                 <div className="col-md-4">
-                                <span className="menu-heading">By Packages</span>
+                                <span className="menu-heading">Destination Ideas</span>
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link" href="#">Premium Resort</a> </li>
                                     <li className="nav-item"> <a className="nav-link" href="#">Standard Resort</a> </li>
@@ -61,7 +61,7 @@ export const Header = () => {
                             <div className="container">
                             <div className="row">
                                 <div className="col-md-4"> 
-                                <span className="menu-heading">Hotel By Places</span>
+                                <span className="menu-heading">Hotel By Location</span>
                                 <ul className="nav flex-column">
                                 <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
@@ -82,11 +82,11 @@ export const Header = () => {
                                 </div>
                                 
                                 <div className="col-md-4">
-                                <span className="menu-heading">Hotels By Packages</span>
+                                <span className="menu-heading">Hotel By Type</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href="#">Premium Resort</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Standard Resort</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Business & Leisure Hotel</a> </li>
+                                    <li className="nav-item"> <a className="nav-link" href="#"> Luxury</a> </li>
+                                    <li className="nav-item"> <a className="nav-link" href="#"> Boutique</a> </li>
+                                    <li className="nav-item"> <a className="nav-link" href="#"> Business</a> </li>
                                 </ul>
                                 </div>
                                 
@@ -114,10 +114,8 @@ export const Header = () => {
                                 <div className="col-md-4">
                                 <span className="menu-heading">ROMT Packages</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>Exclusive Packages</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>VIP Premiere Offer</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>Where Next Offer</a></li>
-                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>Last Minute Escapes</a> </li>
+                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>ROMT Special Winter Package</a></li>
+                                   
                                 </ul>
                                 </div>
                             
@@ -125,7 +123,7 @@ export const Header = () => {
                             </div>
                         </div>
                         </li>
-                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" > Membership </a>
+                       <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" > Blog </a>
                         
                         </li>
                     </ul>
@@ -134,7 +132,7 @@ export const Header = () => {
                 </div>
             </div>
             <div className="col-md-3">
-                <div className="top-btn-group"> <a href='#' className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Join Us</a> </div>
+                <div className="top-btn-group"> <a href='#' className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us">  Contact us</a> </div>
             </div>
             </div>
         </div>
