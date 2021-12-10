@@ -5081,3 +5081,23 @@ li a {
 .testimonial .react-multiple-carousel__arrow--right {
     right: calc(0% + 1px) !important;
 }
+
+
+
+.book-now-btn-destinationsearch {
+    color: #fff;
+    background: #ff8a34;
+    border: 1px solid #ff8a34;
+    position: relative;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 12px;
+    width: 147px;
+    margin: auto;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.book-now-btn-destinationsearch:hover{ color:#ff8a34; background: none; text-decoration: none;}
+ 
