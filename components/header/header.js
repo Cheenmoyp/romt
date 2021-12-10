@@ -73,11 +73,11 @@ export const Header = () => {
                                 <div className="col-md-4">
                                 <span className="menu-heading">Top Hotels</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href="#">Mysore</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Erode</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Bangolore</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Valparai</a> </li>
-                                    <li className="nav-item"> <a className="nav-link" href="#">Mysore</a> </li>
+                                <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
                                 </ul>
                                 </div>
                                 
@@ -102,12 +102,12 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">ROMT Offers</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">ROMT Member Rate</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">Stay More, Save More</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">ROMT Bed & Breakfast</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">ROMT Plus</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">ROMT Suites</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="offers.php">ROMT Pride</a> </li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Member Rate</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">Stay More, Save More</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Bed & Breakfast</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Plus</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Suites</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Pride</a> </li>
                                 </ul>
                                 </div>
                                 
