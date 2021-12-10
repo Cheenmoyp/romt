@@ -49,48 +49,8 @@ const Package = () => {
                             </div>
                         </div>
                         </div>
-                        <div className="col-md-4">
-                        <div className="package-box">
-                            <figure><a href="package-detail"><img src="/Images/packages/package-1.jpg" alt="" title=""/></a></figure>
-                            <div className="p-content">
-                            <h3><a href="package-detail">Tranquil Homestay</a></h3>
-                            <div className="facilities">
-                                <ul>
-                                <li><img src="/Images/packages/icons/Hotels.png" alt="" title=""/><span>2 Hotels</span></li>
-                                <li><img src="/Images/packages/icons/Camp-Fire.png" alt="" title=""/><span>Camp Fire</span></li>
-                                <li><img src="/Images/packages/icons/JeepSafari.png" alt="" title=""/><span>Jeep Safari</span></li>
-                                <li><img src="/Images/packages/icons/Swimming.png" alt="" title=""/><span>Swimming </span></li>
-                                <li><img src="/Images/packages/icons/Trekking.png" alt="" title=""/><span>Trekking </span></li>
-                                </ul>
-                            </div>
-                            <div className="p-price">
-                                <h4>2N 3D Bangalore</h4>
-                                <h6>9999/- <span>Per person</span></h6>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-md-4">
-                        <div className="package-box">
-                            <figure><a href="package-detail"><img src="/Images/packages/package-1.jpg" alt="" title=""/></a></figure>
-                            <div className="p-content">
-                            <h3><a href="package-detail">Tranquil Homestay</a></h3>
-                            <div className="facilities">
-                                <ul>
-                                <li><img src="/Images/packages/icons/Hotels.png" alt="" title=""/><span>2 Hotels</span></li>
-                                <li><img src="/Images/packages/icons/Camp-Fire.png" alt="" title=""/><span>Camp Fire</span></li>
-                                <li><img src="/Images/packages/icons/JeepSafari.png" alt="" title=""/><span>Jeep Safari</span></li>
-                                <li><img src="/Images/packages/icons/Swimming.png" alt="" title=""/><span>Swimming </span></li>
-                                <li><img src="/Images/packages/icons/Trekking.png" alt="" title=""/><span>Trekking </span></li>
-                                </ul>
-                            </div>
-                            <div className="p-price">
-                                <h4>2N 3D Bangalore</h4>
-                                <h6>9999/- <span>Per person</span></h6>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
+                   
+                       
                     </div>
                     </div>
                 </div>
