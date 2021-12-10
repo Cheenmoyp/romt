@@ -160,7 +160,7 @@ const Destination = (response) => {
                                     <div className="hotel-box2 row" key={index}>
                                         <div className="col-md-4">
                                         <figure>
-                                            <a href={'../hotel-details/'+ url }>
+                                            <a href={'../hotel-details/'+ base64_encode(slide.hotel_id)}>
                                                 <img src={slide.image} alt="" title="" />
                                             </a>
                                         </figure>
