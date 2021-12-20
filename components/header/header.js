@@ -93,10 +93,10 @@ export const Header = () => {
                                 <span className="menu-heading">Top Hotels</span>
                                 <ul className="nav flex-column">
                                 <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ4NA=='}>Livgrand Atisaya Resort</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5Ng=='}>Livgrand Bison Rise Resort</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA=='}>Livgrand Hotel Dreams Paradise</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA==')}>Livgrand Hotel Dreams Paradise</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjUwMg==')}>UDS Coco Hotels & Resorts, Udumalpet</a></li>
                                 </ul>
                                 </div>
                                 
