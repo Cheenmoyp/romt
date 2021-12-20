@@ -136,22 +136,7 @@ const PackageDetail = (response) => {
                                     </ul>
                                     </div>
                                     
-                                    <div className="write-review-sec">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                        <div className="write-review-box">
-                                            <div className="row">
-                                            <div className="co-sm-3">
-                                                <h4>Write your review</h4>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <p>Please <a href="#">log in</a> to submit a review.</p>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
+                                  
                                 </div>
                                 </div>
                             </div>
