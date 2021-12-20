@@ -74,7 +74,7 @@ const PackageDetail = (response) => {
                             <div className="package-page-left">
                                 <div className="package-detail-box-left">
                                 <div className="package-info">
-                                    <h2>ROMT Special Winter Package</h2>
+                                    <h2>{data.package_name}</h2>
                                     <div className="row">
                                     <div className="col-md-12">
                                         <div className="select-hotel-d">
