@@ -79,22 +79,7 @@ export const Footer = () => {
                 <div className="widget border-0">
                     <h5 className="m-b30 text-white">Site Information</h5>
                     <ul className="list-2 list-line">
-                    <li><a href="#">Hotel</a></li>
-                    <li><a href="#">For Employers</a></li>
-                    <li><a href="#">Account</a></li>
-                    <li><a href="#">Restaurant </a></li>
-                    <li><a href="#">Meet the Team</a></li>
-                    <li><a href="#">Legal</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Affiliate Program</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Rewards</a></li>
+                   
                     </ul>
                 </div>
                 </div>
