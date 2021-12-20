@@ -45,7 +45,7 @@ const Package = () => {
                             <div className="p-price">
                                 <h4>2N 3D Bangalore</h4>
                                 
-                                <h6>9999/- <span>Per person</span></h6>
+                                <h6>14,999/- <span>Per person</span></h6>
                             </div>
                             </div>
                         </div>

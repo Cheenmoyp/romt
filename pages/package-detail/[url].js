@@ -20,13 +20,14 @@ import {
 import moment from 'moment';
 
 const PackageDetail = (response) => {
-
+	//console.log('response', response);
     const router = useRouter()
 	const [checkAvailability, setCheckAvailability] = useState(true);
     const [location, setLocation] = useState([]);
     const [modal, setModal] = useState(false);
     const [formData, setFormData] = useState({});
     const [hotelId, setHotelId] = useState();
+    const [hotelName, setHotelName] = useState('');
     const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/TOP`).then(response => {
         return response.data.destinations;
     })
@@ -39,9 +40,10 @@ const PackageDetail = (response) => {
         }
     })
 
-    const handleBookClick = (hotel_id, package_name) => {
+    const handleBookClick = (hotel_id, package_name,hotel_name) => {
         console.log('hihihi', hotel_id);
         setHotelId(hotel_id);
+        setHotelName(hotel_name);
         setFormData({'hotel_id':hotel_id});
         setModal(true);
     }
@@ -74,7 +76,7 @@ const PackageDetail = (response) => {
                             <div className="package-page-left">
                                 <div className="package-detail-box-left">
                                 <div className="package-info">
-                                    <h2>{response.package_name} </h2>
+                                    <h2>{response.packages?response.packages[0].package_name:''} </h2>
                                     <div className="row">
                                     <div className="col-md-12">
                                         <div className="select-hotel-d">
@@ -112,7 +114,7 @@ const PackageDetail = (response) => {
                                                 <h5>14,999</h5>
                                                 </div>
                                                 <div className="boo-now-btn"> <a href="#" data-toggle="modal" data-target="#RoomDetails" 
-                                                onClick={() => handleBookClick(slide.hotel_id, slide.package_name)}>Book Now</a> </div>
+                                                onClick={() => handleBookClick(slide.hotel_id, slide.package_name, slide.hotel_name)}>Book Now</a> </div>
                                             </div>
                                             </div>
                                         )
@@ -196,19 +198,14 @@ const PackageDetail = (response) => {
 
                         <Modal className="modal fade hotel-detailmodal chek-availability" id="RoomDetails" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" show={modal}>
                             <Modal.Body>
-                                <Button variant="close" onClick={() => setModal(!modal)}>
-                                    <IconX />
-                                </Button>
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                    <div className="modal-header">
-                                        <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">×</span><span className="sr-only">Close</span></button>
-                                    </div>
-                                    <div className="modal-body">
+                                
+											<Button className="close" onClick={() => setModal(!modal)}>
+												<i className="fa fa-close"></i>
+											</Button>
                                         <div className="chek-availability-form">
                                         <form className="row">
                                             <div className="col-sm-3">
-                                            <label><i className="fa fa-map-marker" aria-hidden="true"></i> Signature Inn</label>
+                                            <label><i className="fa fa-map-marker" aria-hidden="true"></i> {hotelName}</label>
                                             </div>
                                             <div className="col-sm-2">
                                                 {/* <input id="datepicker" type="text" className="datepicker" data-zdp_readonly_element="false" placeholder="Check In"/> */}
@@ -263,7 +260,7 @@ const PackageDetail = (response) => {
                                                             <input type="button" id="CheckAvailability" name="" value=""/>
                                                         </div>
                                                         <div className="proceed-to-payment available">
-                                                            <input type="button" id="CheckAvailability" name="" value="" onClick={()=> proceed()} />
+                                                            <input type="button" id="CheckAvailability" name="" value="Proceed Now" onClick={()=> proceed()} />
                                                         </div>
                                                     </>
                                                 }
@@ -273,9 +270,6 @@ const PackageDetail = (response) => {
                                             </div>
                                         </form>
                                         </div>
-                                    </div>
-                                    </div>
-                                </div>
                             </Modal.Body>
                         </Modal>
                     {/* </div>

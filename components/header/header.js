@@ -121,7 +121,7 @@ export const Header = () => {
                                 <div className="col-md-4"> 
                                 <span className="menu-heading">ROMT Offers</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Member Rate</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={"/offers"}>ROMT Member Rate</a></li>
           
                                 </ul>
                                 </div>
