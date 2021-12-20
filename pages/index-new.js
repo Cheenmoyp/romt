@@ -61,11 +61,11 @@ const testimonialResponsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 2
+    items: 3
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 2
+    items: 3
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -225,7 +225,7 @@ const destinationResponsive = {
 		            <div className="col-md-12 row">
 		              <div className="col-md-7">
 		                <div className="welcome-sectio-left">
-		                  <h2>Book your perfect holiday packages in India </h2>
+		                  <h2>ROMT Special Winter Package </h2>
 		                  <div className="content">
 		                    <p> Just 3% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
 		                  </div>
@@ -242,7 +242,7 @@ const destinationResponsive = {
 		            <div className="col-md-12 row">
 		              <div className="col-md-7">
 		                <div className="welcome-sectio-left">
-		                  <h2>Book your perfect holiday packages in India </h2>
+		                  <h2>Honeymoon Package</h2>
 		                  <div className="content">
 		                    <p> Just 32% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
 		                  </div>
@@ -250,7 +250,7 @@ const destinationResponsive = {
 		              </div>
 		              <div className="col-md-5 no-padding">
 		                <div className="box-welcome">
-		                  <figure><img src="/Images/kashmir.png" alt="" title="" /></figure>
+		                  <figure><img src="/Images/honeymoon.png" alt="" title="" /></figure>
 		                </div>
 		              </div>
 		            </div>
@@ -381,23 +381,27 @@ const destinationResponsive = {
       </div>
     </div>
     <div className="row">
-      <div className="col-md-6"> 
+      <div className="col-md-12"> 
 		<div className="testimonial-video">
 			<div>
   <div>
     <Carousel swipeable={true}
 				  draggable={true}
 				  infinite={true}
-				  responsive={responsive}>
-        <div>
+				  responsive={testimonialResponsive}>
+        <div style={{padding: '10px'}}>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/3uNbBykYo6M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
         
-        <div>
+        <div style={{padding: '10px'}}>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/3uNbBykYo6M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
         
-        <div>
+        <div style={{padding: '10px'}}>
+	        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pw5OQvs28rs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+	    </div>
+        
+        <div style={{padding: '10px'}}>
 	        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pw5OQvs28rs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 	    </div>
     </Carousel>    
@@ -405,7 +409,7 @@ const destinationResponsive = {
 </div>
 		</div>
 	  </div>
-      <div className="col-md-6">
+      {/* <div className="col-md-6">
         <div className="testimonial-right">
           <div id="Testimonial" className="testimonial" >
           <Carousel swipeable={true}
@@ -455,7 +459,7 @@ const destinationResponsive = {
             </Carousel>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 </div>

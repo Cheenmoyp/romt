@@ -4,12 +4,22 @@ import axios from 'axios';
 import RoomDetailModal from './roomDetailModal';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import Modal from "react-bootstrap/Modal";
+
 
 export default function Rooms(props) {
-    console.log('puupp', props);
-    const [Rooms, setRooms] = useState([])
-    const [roomDetailsId, setRoomDetailsId] = useState()
+	console.log('dateFormat', props);
+    let hotel_id = (props && props.search && props.search[0] && props.search[0]) ? props.search[0] : null;
+    let checkin = (props && props.search && props.search[2] && props.search[2]) ? props.search[2] : null;
+    let checkout = (props && props.search && props.search[3] && props.search[3]) ? props.search[3] : null;
+    //console.log(hotel_id, checkin, checkout);
+    const [Rooms, setRooms] = useState([]);
+    const [roomDetailsId, setRoomDetailsId] = useState();
+    const [modal, setModal] = useState(false);
+    const [roomDetails, setRoomDetails] = useState();
 
+    const [roomModal, setRoomModal] = useState(true);
+    
     // api-key - 644406a7918f871f3a8568c58e56e77b
     // 1993 - hotel_id
     // 17-11-2021 - check-in
@@ -33,9 +43,25 @@ export default function Rooms(props) {
         setRoomDetailsId(id);
         var storage = {"room_type": id, "hotel_id": 2881, "room_type_name": room_type, "max_people": max_people, "rack_price": rack_price}
         localStorage.setItem("selectedRoom", JSON.stringify(storage)); 
+		setRoomModal(true);
       
     }
-   
+
+    const handleAddClick = () => {
+        setModal(true);
+    }
+
+    const handleRoomDetailsChange = (event) => {
+        var obj = {...roomDetails};
+        obj[event.target.name] = event.target.value;
+        setRoomDetails(obj);
+        //console.log(roomDetails.rooms);
+    }
+
+    const handleConfirm = () => {
+        setModal(false);
+    }
+
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -84,7 +110,8 @@ export default function Rooms(props) {
           <div className="packages-filter roomes-at-box-con">
             <div className="row">
                 {Rooms.map((slide, index1)=>{
-                    let amenities = slide.allImages
+                    let amenities = slide.allImages;
+                    let rateplans = slide.rate_plans;
                     return (
                         <div className="col-md-4" key={index1}>
                             <div className="rooms-box">
@@ -124,6 +151,33 @@ export default function Rooms(props) {
                                         })}
                                     </ul>
                                     </div>
+                                    <div className="more-add">
+                                        <ul>
+                                            {rateplans.map((rateplan,index4) =>{
+                                                return (
+                                                    <li key={index4}>
+                                                        <div className="row">
+                                                            <div className="col-4"><h5>{rateplan.plan_name}</h5></div>
+                                                            <div className="col-4">
+                                                                <div className="price">
+                                                                    <h6>₹ {rateplan.bar_price}</h6>
+                                                                    <p>Per room / Night</p>
+                                                                    <p>Excluding GST</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-4">
+                                                                <a href="#" className="addroom-btn"  data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick()}>Add Room</a>
+                                                                <div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })}
+                                            
+                                        </ul>
+                                    </div>
                                     <div className=" room-box-footer">
                                     <ul className="row">
                                         <li className="col-6">
@@ -147,7 +201,50 @@ export default function Rooms(props) {
         </div>
         </div>
 
-        {roomDetailsId &&  <RoomDetailModal id={roomDetailsId} />}
+        <Modal className="modal animate add-room-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true" show={modal}>
+            
+			<Modal.Body>
+                            <ul className="add-room">
+                                <li>
+                                    <label className="text-left">No. Of Rooms</label>
+                                    <select name="rooms" onChange={ (event) => {
+                                                    handleRoomDetailsChange(event)
+                                                  }}><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></li>
+                                <li>
+                                    <div className="multiple-room-wrap row">
+                                        <div className="col"><label className="one">Room1</label></div>
+                                        <div className="col">
+                                            <span>Adults</span>
+                                            <select name="adults" onChange={ (event) => {
+                                                    handleRoomDetailsChange(event)
+                                                  }}>
+                                                <option value="0">0</option><option value="2">2</option><option value="3">3</option>
+                                            </select>
+                                        </div>
+                                        <div className="col">
+                                            <span>(5 - 12 yrs)</span>
+                                            <select name="kids" onChange={ (event) => {
+                                                    handleRoomDetailsChange(event)
+                                                  }}><option value="0">0</option><option value="1">1</option></select></div>
+                                        <div className="col" >
+                                            <span>(0 - 5 yrs)</span>
+                                            <select name="age" onChange={ (event) => {
+                                                    handleRoomDetailsChange(event)
+                                                  }}><option value="0">0</option><option value="2">2</option><option value="3">3</option></select>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+            </Modal.Body>
+            <Modal.Footer>
+				<div className="modal-footer">
+					<button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setModal(!modal)}>Cancel</button>
+					<button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}>Confirm</button>
+				</div>
+            </Modal.Footer>
+        </Modal>
+
+        {roomDetailsId &&  <RoomDetailModal id={roomDetailsId} roomModal={roomModal} setRoomModal={setRoomModal} rooms={roomDetails && roomDetails.rooms} adults={roomDetails && roomDetails.adults} age={roomDetails && roomDetails.age} kids={roomDetails && roomDetails.kids} hotelid={hotel_id} checkin={checkin} checkout={checkout}/>}
        
         </>
     )

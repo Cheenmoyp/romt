@@ -2,8 +2,27 @@ import React, { useState, useEffect} from 'react';
 // import OwlCarousel from 'react-owl-carousel';
 import Image from 'next/image';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
+import Modal from "react-bootstrap/Modal";
+import axios from 'axios';
 
 export const Header = () => {
+    const [loginmodal, setLoginmodal] = useState(false);
+	const handleLoginBoxClick = () => {
+        setLoginmodal(!loginmodal);
+    }
+	//package list
+    const [packageList, setPackageList] = useState([]);
+    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-list/2565`).then(response => {
+        return response.data.package_details;
+    })
+    .catch(error => {
+        console.log('error', error);
+    });
+    fetcher.then(response => {
+        if(packageList.length == 0 ) {
+            setPackageList(response)
+        }
+    })
     return (
         <>
         <div className="container">
@@ -73,7 +92,7 @@ export const Header = () => {
                                 <div className="col-md-4">
                                 <span className="menu-heading">Top Hotels</span>
                                 <ul className="nav flex-column">
-                                <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
+                                <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ4NA=='}>Livgrand Atisaya Resort</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
@@ -114,8 +133,14 @@ export const Header = () => {
                                 <div className="col-md-4">
                                 <span className="menu-heading">ROMT Packages</span>
                                 <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link" href={"/package"}>ROMT Special Winter Package</a></li>
-                                   
+                                    {packageList.map((data,index)=>{
+                                        let url = base64_encode(2565 + '/' + data.package_name);
+                                        return (
+                                            <li className="nav-item" key={index}> 
+                                            <a className="nav-link" href={"/package-detail/"+url}>{data.package_name}</a>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                                 </div>
                             
@@ -132,9 +157,62 @@ export const Header = () => {
                 </div>
             </div>
             <div className="col-md-3">
-                <div className="top-btn-group"> <a href='#' className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us">  Contact us</a> </div>
+                <div className="top-btn-group"> <a href='#' data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()} className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us">  Contact us</a> </div>
             </div>
             </div>
+			
+			
+			<Modal className="modal fade sign-in-modal" tabIndex="-1" size="lg" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" show={loginmodal}>
+               <Modal.Body>
+			   <div className="modal-body seminor-login-modal-body">
+					  <button type="button" className="close" data-dismiss="modal" onClick={() => handleLoginBoxClick()} >
+						  <span><i className="fa fa-times-circle" aria-hidden="true"></i></span>
+					  </button>
+						<div className="sign-in-page-wraper">
+							<div className="container">
+							  <div className="row login-modal-container">
+								<div className="col-md-6 div1">
+								  <div className="signin-left">
+								   <div className="signinpage-logo">
+									 <a href="index-new"> <img src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a>
+								   </div>
+								   <div className="signin-form">
+									 <h4>Welcome back, please login to your account</h4>
+									 <div className="login-with"><h5>Log in with</h5><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i>
+									</a><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></div>
+									 <form>
+									   <input type="text" placeholder="Username or Email Address"/>
+									   <input type="password" placeholder="Type Password"/>
+									   <div className="clearfix"></div>
+									   <div className="row">
+										 <div className="col"><input type="checkbox" />Remember me</div>
+										 <div className="col"><a href="#forgot-password"  data-toggle="modal">Forgot Password</a></div>
+									   </div>
+									   <input type="submit" value="Login" />
+									   <div className="clearfix"></div>
+									   <p>Dont have an account? <a href="#register-form-modal"  data-toggle="modal">Register</a></p>
+									 </form>
+								   </div>
+								  </div>
+								</div>
+								<div className="col-md-6 div2">
+								  <div className="sign-in-right">
+									<ul>
+									  <li><i className="fa fa-bullhorn" aria-hidden="true"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+									  <li><i className="fa fa-car" aria-hidden="true"></i>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+									  <li><i className="fa fa-check" aria-hidden="true"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+						   
+									</ul>
+								  </div>
+								</div>
+							  </div>
+							</div>
+							</div>
+							</div>
+				</Modal.Body>
+            </Modal>
+			
+			
         </div>
         </>
     )

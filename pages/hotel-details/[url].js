@@ -6,8 +6,34 @@ import { Footer } from '../../components/footer/footer';
 import Rooms from '../rooms';
 import Search from '../../components/search/search';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
+import Modal from "react-bootstrap/Modal";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const HotelDetails = (response) => {
+	const [lightboxmodal, setLightboxmodal] = useState(false);
+	const handleLightBoxClick = () => {
+        setLightboxmodal(!lightboxmodal);
+    }
+	const responsive = {
+	  superLargeDesktop: {
+		// the naming can be any, depends on you.
+		breakpoint: { max: 4000, min: 3000 },
+		items: 1
+	  },
+	  desktop: {
+		breakpoint: { max: 3000, min: 1024 },
+		items: 1
+	  },
+	  tablet: {
+		breakpoint: { max: 1024, min: 464 },
+		items: 1
+	  },
+	  mobile: {
+		breakpoint: { max: 464, min: 0 },
+		items: 1
+	  }
+	};
   return (
     <>
     <Header></Header>
@@ -42,11 +68,7 @@ const HotelDetails = (response) => {
             <div className="col-md-9">
               <h2>{response.hoteldata.hotel_name}</h2>
               <p>
-                  <div
-                  dangerouslySetInnerHTML={{
-                    __html: response.hoteldata && response.hoteldata.hotel_description,
-                  }}
-                />
+              {response.hoteldata.address}
               </p>
             </div>
             <div className="col-md-3">
@@ -73,7 +95,7 @@ const HotelDetails = (response) => {
                 </div>
                 <div className="col-md-4">
                   <div className="hotel-detail-bannerbox hotel-gallery">
-                    <figure> <a href="#" data-toggle="modal" data-target="#hotelphotos"><img src={response.hoteldata.image} alt="" title=""/></a>
+                    <figure> <a href="#" data-toggle="modal" data-target="#hotelphotos" onClick={() => handleLightBoxClick()}><img src={response.hoteldata.image} alt="" title=""/></a>
                       <h3><a href="#">25+ Photos</a></h3>
                     </figure>
                   </div>
@@ -83,6 +105,15 @@ const HotelDetails = (response) => {
                         <span>Video</span> </a></h4>
                     </figure>
                   </div>
+                </div>
+                <div className="col-md-12">
+                  <p>
+                      <div
+                      dangerouslySetInnerHTML={{
+                        __html: response.hoteldata && response.hoteldata.hotel_description,
+                      }}
+                    />
+                  </p>
                 </div>
               </div>
             </div>
@@ -139,56 +170,81 @@ const HotelDetails = (response) => {
           <div className="row amenities">
             <div className="col">
               <div className="amenities-box">
-                <h4>Safety and Hygiene</h4>
+                <h4>Facilities</h4>
                 <ul>
-                  <li>Thermal Screening</li>
-                  <li>Sanitizers installed</li>
-                  <li>Contactless room service</li>
-                  <li>Contactles check-in</li>
+                {response.hoteldata.facility.map((slide, index)=>{
+					if (index < 4) {
+                                    return (
+										<>
+											<li key={index} >{slide}</li>
+										</>
+                                    )
+					}
+				})}
                 </ul>
               </div>
             </div>
             <div className="col">
               <div className="amenities-box">
-                <h4>Safety and Hygiene</h4>
+                <h4>   </h4>
                 <ul>
-                  <li>Thermal Screening</li>
-                  <li>Sanitizers installed</li>
-                  <li>Contactless room service</li>
-                  <li>Contactles check-in</li>
+                {response.hoteldata.facility.map((slide, index)=>{
+                  	if (4 <= index && index < 8) {
+                                    return (
+										<>
+											<li key={index} >{slide}</li>
+										</>
+                                    )
+					}
+				})}
                 </ul>
               </div>
             </div>
             <div className="col">
               <div className="amenities-box">
-                <h4>Safety and Hygiene</h4>
+                <h4>  </h4>
                 <ul>
-                  <li>Thermal Screening</li>
-                  <li>Sanitizers installed</li>
-                  <li>Contactless room service</li>
-                  <li>Contactles check-in</li>
+					{response.hoteldata.facility.map((slide, index)=>{
+						if (8 <= index && index < 12) {
+										return (
+											<>
+												<li key={index} >{slide}</li>
+											</>
+										)
+						}
+					})}
                 </ul>
               </div>
             </div>
             <div className="col">
               <div className="amenities-box">
-                <h4>Safety and Hygiene</h4>
+                <h4>  </h4>
                 <ul>
-                  <li>Thermal Screening</li>
-                  <li>Sanitizers installed</li>
-                  <li>Contactless room service</li>
-                  <li>Contactles check-in</li>
+					{response.hoteldata.facility.map((slide, index)=>{
+						if (12 <= index && index < 16) {
+										return (
+											<>
+												<li key={index} >{slide}</li>
+											</>
+										)
+						}
+					})}
                 </ul>
               </div>
             </div>
             <div className="col">
               <div className="amenities-box">
-                <h4>Safety and Hygiene</h4>
+                <h4>   </h4>
                 <ul>
-                  <li>Thermal Screening</li>
-                  <li>Sanitizers installed</li>
-                  <li>Contactless room service</li>
-                  <li>Contactles check-in</li>
+					{response.hoteldata.facility.map((slide, index)=>{
+						if (16 <= index && index < 20) {
+										return (
+											<>
+												<li key={index} >{slide}</li>
+											</>
+										)
+						}
+					})}
                 </ul>
               </div>
             </div>
@@ -343,49 +399,35 @@ const HotelDetails = (response) => {
       </div>
     </div>
 
-    <div className="modal fade hotel-detailmodal" id="hotelphotos" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">×</span><span className="sr-only">Close</span></button>
-      </div>
-      <div className="modal-body">
-        <section className="gallery">
-          <div className="carousel">
-            <input type="radio" id="image1" name="gallery-control" checked/>
-            <input type="radio" id="image2" name="gallery-control"/>
-            <input type="radio" id="image3" name="gallery-control"/>
-            <input type="radio" id="image4" name="gallery-control"/>
-            <input type="checkbox" id="fullscreen" name="gallery-fullscreen-control"/>
-            <div className="wrap">
-              <figure>
-                <label htmlFor="fullscreen"> <img src="Images/hotels/img-1.jpg" alt="image1"/> </label>
-              </figure>
-              <figure>
-                <label htmlFor="fullscreen"> <img src="Images/hotels/room.jpg" alt="image2"/> </label>
-              </figure>
-              <figure>
-                <label htmlFor="fullscreen"> <img src="Images/hotels/room-2.jpg" alt="image2"/> </label>
-              </figure>
-              <figure>
-                <label htmlFor="fullscreen"> <img src="Images/hotels/room-3.jpg" alt="image3" /> </label>
-              </figure>
-            </div>
-            <div className="thumbnails">
-              <div className="slider">
-                <div className="indicator"></div>
-              </div>
-              <label htmlFor="image1" className="thumb" style={{backgroundImage: "url('Images/hotels/img-1.jpg')"}}></label>
-              <label htmlFor="image2" className="thumb" style={{backgroundImage: "url('Images/hotels/room.jpg')"}}></label>
-              <label htmlFor="image3" className="thumb" style={{backgroundImage: "url('Images/hotels/room-3.jpg')"}}></label>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-    </div>
+    <Modal className="modal fade" tabIndex="-1" size="lg" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" show={lightboxmodal}>
+	   <Modal.Body>
+        <div>
+			<Carousel swipeable={true}
+				  draggable={true}
+				  infinite={true}
+				  responsive={responsive}>
+				  {response.hoteldata.images.map((slide, index)=>{
+					return (
+						<div key={index}>
+							<img src={slide} />
+						</div>
+					)
+				})}
+				
+			</Carousel>
+        </div>
+  </Modal.Body>
+	</Modal>
     
+	<Modal className="modal fade" tabIndex="-1" size="lg" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" show={lightboxmodal}>
+	   <Modal.Body>
+		
+	   </Modal.Body>
+	</Modal>
+	
+	
+	
+	
     <div className="modal fade videomodal" id="videoModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">

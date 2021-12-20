@@ -13,6 +13,7 @@ const Destination = (response) => {
 
     const [hotelList, setHotelList] = useState([])
     const [startRating, setStarRating] = useState();
+    const [expanded, setExpanded] = useState(false);
     let hotel_name = [];
 
     const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2565&city_name=${response.city}&star_rating=${startRating}&min_price&max_price`).then(response => {
@@ -36,7 +37,7 @@ const Destination = (response) => {
     let url = base64_encode((hotelList.length > 0 && hotelList[0].hotel_id) +'/'+ response.url_param[0] +'/'+ response.url_param[1] +'/'+ response.url_param[2]); 
 
     console.log('search', (hotelList.length > 0 && hotelList[0].hotel_id), url)
-
+	const toggledClass = expanded ? 'expanded' : 'collapsed';
   return (
     <>
     <Header></Header>
@@ -47,8 +48,19 @@ const Destination = (response) => {
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                 <h2>{hotelList.length > 0 && hotelList[0]['city_name']}</h2>
-                <h3>{hotelList.length > 0 && hotelList.length}</h3>
-                <p>{hotelList.length > 0 && hotelList[0].hotel_description}</p>
+                <h3>{hotelList.length > 0 && hotelList.length} Hotels </h3>
+				<div>
+					<p className={`desti-content ${toggledClass}`}>
+						<div
+						dangerouslySetInnerHTML={{
+							__html: hotelList.length > 0 && hotelList[0].hotel_description,
+						}}
+						/>
+					</p>
+					<button className="rmore-btn-1" id="myBtn" onClick={() => setExpanded(!expanded)}>
+						{expanded ? 'View Less' : 'View More'}
+					</button>
+				</div>
                 </div>
             </div>
             </div>
@@ -56,7 +68,9 @@ const Destination = (response) => {
         <div className="destination-page-banner">
             <div className="container-fluid">
             <div className="row">
-                <div className="col-md-12"> <img src={hotelList.length > 0 && hotelList[0].image} alt="" title=""/> </div>
+                <div className="col-md-12"> 
+                <img src="/Images/destinations/Coimbatore-banner.jpg" alt="" title=""/> 
+                </div>
             </div>
             </div>
         </div>
@@ -177,9 +191,9 @@ const Destination = (response) => {
                                                             name='rating'
                                                             starDimension="15px"
                                                             starSpacing="1px"
-                                                        />
+                                                        /> <span>{slide.star}/5</span>
                                                     </li>
-                                                    <li>311 Ratings</li>
+                                                    
                                                 </ul>
                                                 </div>
                                                 <h3><a href={'../hotel-details/'+ base64_encode(slide.hotel_id)}>{slide.hotel_name}</a></h3>
@@ -187,13 +201,13 @@ const Destination = (response) => {
                                                 <p><span><img src="/Images/hotels/icons/location-icon.png"/></span>{slide.city_name}</p>
                                                 </div>
                                                 <div className="content">
-                                                <p>
-                                                    <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: slide && slide.hotel_description,
-                                                    }}
-                                                    />
-                                                </p>
+													<p>
+														<div
+														dangerouslySetInnerHTML={{
+															__html: slide && slide.hotel_description,
+														}}
+														/>
+													</p>
                                                 </div>
                                                 <div className="amenities">
                                                 <ul>
@@ -213,7 +227,7 @@ const Destination = (response) => {
                                         </div>
                                         <div className="col-md-3 hotel-box2-right">
                                             <ul className="rating">
-                                            <li><span>4.5/5</span>185 Ratings</li>
+                                            <li> </li>
                                             <li><span className="cut-price">₹4300</span>₹{slide.original_price}</li>
                                             
                                             <li> <a href={'../hotel-details/'+ base64_encode(slide.hotel_id)} className="book-now-btn-destinationsearch">Book Now</a></li>
@@ -249,7 +263,7 @@ export async function getServerSideProps(context) {
     
     console.log(base64_decode(context.params.url));
     let url_param = base64_decode(context.params.url).split("/");
-
+	
     // Fetch data from external API
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_HOST_BE}/query/2564/${url_param[0]}`
