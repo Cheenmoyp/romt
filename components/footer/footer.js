@@ -87,8 +87,7 @@ export const Footer = () => {
                 <div className="footer-address">
                     <h5 className="m-b30 text-white">Contact us</h5>
                     <ul>
-                    <li><i className="fa fa-map-marker" aria-hidden="true"></i><strong>Address:</strong><br/>
-                        101,Sengupta st, Ram nagar, Coimbatore- 641009</li>
+                  
                     <li><i className="fa fa-mobile" aria-hidden="true"></i><strong>Phone:</strong><br/>
                         91 733 00 777 44 / <br/>
                         91 733 00 222 77 (24/7 Support)</li>

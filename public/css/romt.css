@@ -4000,7 +4000,7 @@ h3.heding-btmborder:before {
     padding: 15px;
 }
 .booking-page-right.package-bookingpayment span.discount-price {
-    background: url('../Images/packages/icons/offer-shape.jpg') no-repeat;
+    /* background: url('../Images/packages/icons/offer-shape.jpg') no-repeat; */
     color: #ff4766;
     padding: 5px 25px 5px 8px;
     background-size: cover;
@@ -5889,7 +5889,7 @@ h3.heding-btmborder:before {
     padding: 15px;
 }
 .booking-page-right.package-bookingpayment span.discount-price {
-    background: url(../images/packages/icons/offer-shape.jpg) no-repeat;
+    /* background: url(../images/packages/icons/offer-shape.jpg) no-repeat; */
     color: #ff4766;
     padding: 5px 25px 5px 8px;
     background-size: cover;
