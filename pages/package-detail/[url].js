@@ -74,7 +74,7 @@ const PackageDetail = (response) => {
                             <div className="package-page-left">
                                 <div className="package-detail-box-left">
                                 <div className="package-info">
-                                    <h2>{response.package_details.package_name} </h2>
+                                    <h2>{response.packagedetails.package_name} </h2>
                                     <div className="row">
                                     <div className="col-md-12">
                                         <div className="select-hotel-d">
@@ -205,56 +205,7 @@ const PackageDetail = (response) => {
                                 </div>
                                 </div>
                         
-                                <div className="package-policies">
-                                <div className="container">
-                                <div className="row">
-                                    <div className="col-md-12">
-                                    <div className="package-policies-wraper">
-                                        <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="package-info">
-                                            <h2>A Tranquil Homestay Amidst Cofee plantations in Coorg Polici</h2>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="policy-box">
-                                            <h5>Confirmation Policy</h5>
-                                            <ul className="highlight-list">
-                                                <li>The customer receives a confirmation voucher via email within 24 hours of successful booking</li>
-                                                <li>In case the preferred slots are unavailable, an alternate schedule of the customer’s preference will be arranged and a new confirmation voucher will be sent via email.</li>
-                                                <li>Alternatively, the customer may choose to cancel their booking before confirmation and a full refund will be processed.</li>
-                                            </ul>
-                                            <br/>
-                                            <h5>Refund Policy</h5>
-                                            <ul className="highlight-list">
-                                                <li>The applicable refund amount will be processed within 10 business days.</li>
-                                                <li>All applicable refunds will be done in the traveler&apos;s Thrillophilia wallet as Thrillcash.</li>
-                                            </ul>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="policy-box">
-                                            <h5>Cancellation Policy</h5>
-                                            <ul className="highlight-list">
-                                                <li>If cancellation are made 30 days before the date of travel then 25.0% of total tour cost will be charged as cancellation fees</li>
-                                                <li>If cancellation are made 15 days to 30 days before the date of travel then 50.0% of total tour cost will be charged as cancellation fees</li>
-                                                <li>If cancellation are made 0 days to 15 days before the date of travel then 100.0% of total tour cost will be charged as cancellation fees</li>
-                                            </ul>
-                                            <br/>
-                                            <h5>Payment Terms Policy</h5>
-                                            <ul className="highlight-list">
-                                                <li>100.0% of total tour cost will have to be paid 0 days before the date of booking</li>
-                                            </ul>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                </div>
+                                
                             </div>
                         </div>
 
