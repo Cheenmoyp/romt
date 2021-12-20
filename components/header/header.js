@@ -41,7 +41,7 @@ export const Header = () => {
                             <div className="container">
                             <div className="row">
                                 <div className="col-md-4"> 
-                                <span className="menu-heading">All Destinations</span>
+                                <span className="menu-heading">All Destinations</span> 
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('nagalur')}>Nagalur</a></li>
