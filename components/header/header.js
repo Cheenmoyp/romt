@@ -122,11 +122,7 @@ export const Header = () => {
                                 <span className="menu-heading">ROMT Offers</span>
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link active" href="#">ROMT Member Rate</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">Stay More, Save More</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Bed & Breakfast</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Plus</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Suites</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href="#">ROMT Pride</a> </li>
+          
                                 </ul>
                                 </div>
                                 
