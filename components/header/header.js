@@ -95,8 +95,8 @@ export const Header = () => {
                                 <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ4NA=='}>Livgrand Atisaya Resort</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5Ng=='}>Livgrand Bison Rise Resort</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA=='}>Livgrand Hotel Dreams Paradise</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA==')}>Livgrand Hotel Dreams Paradise</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjUwMg==')}>UDS Coco Hotels & Resorts, Udumalpet</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA=='}>Livgrand Hotel Dreams Paradise</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjUwMg=='}>UDS Coco Hotels & Resorts, Udumalpet</a></li>
                                 </ul>
                                 </div>
                                 
