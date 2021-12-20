@@ -44,9 +44,9 @@ export const Header = () => {
                                 <span className="menu-heading">All Destinations</span>
                                 <ul className="nav flex-column">
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('nagalur')}>Nagalur</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('namakkal')}>Namakkal</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('devikolam')}>Devikolam</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
                         
                                 </ul>
@@ -56,10 +56,10 @@ export const Header = () => {
                                 <span className="menu-heading">Top Destinations</span>
                                 <ul className="nav flex-column">
                                 <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
                                     <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('kodaiKanal')}>KodaiKanal</a></li>
+                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('mysore')}>Mysore</a></li>
+                   
                                 </ul>
                                 </div>
 
