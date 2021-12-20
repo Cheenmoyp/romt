@@ -229,7 +229,7 @@ const destinationResponsive = {
 		                  <div className="content">
 		                    <p> Just 3% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
 		                  </div>
-		                  <a href="package" className="exmore">Explore the Package </a><a href="#" className="exmore blue-bg">Book the package</a> </div>
+		                  <a href="package" className="exmore">Explore the Package </a><a  href={'/package-detail/MjU2NS9ST01UIFNwZWNpYWwgV2ludGVyIFBhY2thZ2U='} className="exmore blue-bg">Book the package</a> </div>
 		              </div>
 		              <div className="col-md-5 no-padding">
 		                <div className="box-welcome">
@@ -246,7 +246,7 @@ const destinationResponsive = {
 		                  <div className="content">
 		                    <p> Just 32% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
 		                  </div>
-		                  <a href="package" className="exmore">Explore the Package </a><a href="#" className="exmore blue-bg">Book the package</a> </div>
+		                  <a href="package" className="exmore">Explore the Package </a><a href={'/package-detail/MjU2NS9Ib25leW1vb24gUGFja2FnZQ=='} className="exmore blue-bg">Book the package</a> </div>
 		              </div>
 		              <div className="col-md-5 no-padding">
 		                <div className="box-welcome">
