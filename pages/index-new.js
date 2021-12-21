@@ -250,7 +250,7 @@ const destinationResponsive = {
 		              </div>
 		              <div className="col-md-5 no-padding">
 		                <div className="box-welcome">
-		                  <figure><img src="/Images/honeymoon.png" alt="" title="" /></figure>
+		                  <figure><img src="/Images/honeymoon.png" alt="package" title="" /></figure>
 		                </div>
 		              </div>
 		            </div>
