@@ -41,7 +41,7 @@ const HotelDetails = (response) => {
 	    var checkout = Date.parse(checkout_date); 
 	    var hotel_id = response.hoteldata.hotel_id;
 	    var q = base64_encode(checkin+"|"+checkout+"|"+hotel_id+"||||");
-	    var url = "https://wbhotels.bookingjini.com";
+	    var url = "https://roomsonmytravel.bookingjini.com";
 	    var be_url = url+'/property/?q='+q;
   return (
     <>
