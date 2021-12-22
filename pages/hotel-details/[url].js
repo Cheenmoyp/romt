@@ -34,6 +34,14 @@ const HotelDetails = (response) => {
 		items: 1
 	  }
 	};
+	  var checkin = Date.parse(new Date()); //to be calculated in miliseconds
+38	    var checkout_date = new Date(); //in miliseconds
+39	    checkout_date.setDate(checkout_date.getDate() + 1);
+40	    var checkout = Date.parse(checkout_date); //in miliseconds
+41	    var hotel_id = response.hoteldata.hotel_id; //will be the selected hotel id
+42	    var q = btoa(checkin+"|"+checkout+"|"+hotel_id+"||||");
+43	    var url = "https://wbhotels.bookingjini.com";
+44	    var be_url = url+'/property/?q='+q;
   return (
     <>
     <Header></Header>
@@ -142,7 +150,7 @@ const HotelDetails = (response) => {
                         1 * Room</p>
                     </div>
                   </div>
-                  <a href="#view-available-rooms">View available rooms</a> </div>
+                   <a href={be_url}>Book Now</a> </div>
               </div>
             </div>
           </div>
