@@ -10,7 +10,7 @@ import Search from '../components/search/search';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
-
+import ReactPlayer from 'react-player'
 
 export default function Home() {
   const router = useRouter()
@@ -100,9 +100,20 @@ const destinationResponsive = {
     <Header></Header> 
 <div className="slider-con">
    
-     <video >
-        <source src="/Images/video.mp4" type="video/mp4" />
-    </video>
+   <ReactPlayer
+          className='react-player'
+          url="/Images/video.mp4"
+		  playing
+		  muted
+		  loop
+		  config={{ file: { attributes: {
+			autoPlay: true,
+            preload: "auto",
+			muted: true
+		  }}}}
+          width='100%'
+          height='100%'
+        />
       <div className="search-con">
         <div className="container">
           <div className="row">

@@ -450,7 +450,7 @@ const HotelDetails = (response) => {
   <Footer></Footer>
     </>
   )
-}
+}    
 
 export async function getServerSideProps(context) {
   
