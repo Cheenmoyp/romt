@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const HotelDetails = (response) => {
+const HotelDetails = (response) => { 
 	const [lightboxmodal, setLightboxmodal] = useState(false);
 	const handleLightBoxClick = () => {
         setLightboxmodal(!lightboxmodal);
@@ -34,6 +34,14 @@ const HotelDetails = (response) => {
 		items: 1
 	  }
 	};
+	var checkin = Date.parse(new Date()); //to be calculated in miliseconds
+	var checkout_date = new Date(); //in miliseconds
+	checkout_date.setDate(checkout_date.getDate() + 1);
+	var checkout = Date.parse(checkout_date); //in miliseconds
+	var hotel_id = response.hoteldata.hotel_id; //will be the selected hotel id
+	var q = btoa(checkin+"|"+checkout+"|"+hotel_id+"||||");
+	var url = "https://wbhotels.bookingjini.com";
+	var be_url = url+'/property/?q='+q;
   return (
     <>
     <Header></Header>
@@ -142,7 +150,7 @@ const HotelDetails = (response) => {
                         1 * Room</p>
                     </div>
                   </div>
-                  <a href="#view-available-rooms">View available rooms</a> </div>
+                  <a href={be_url}>Book Now</a> </div>
               </div>
             </div>
           </div>
@@ -252,8 +260,9 @@ const HotelDetails = (response) => {
           </div>
         </div>
       </div>
-      <div  id="view-available-rooms"></div>
+      <div  id="view-available-rooms">
       <Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search}/>
+	  </div>
     </div>
   
     <div className="guestreviewssec">
@@ -460,7 +469,7 @@ export async function getServerSideProps(context) {
         `${process.env.NEXT_PUBLIC_HOST_BE}/hotel-details?hotel_id=${url_param[0]}`
     );
 
-    const response = await res.json()
+    const response = await res.json();
     return { props:  {hoteldata : response.hotel_data, search: url_param} };
 }
 
