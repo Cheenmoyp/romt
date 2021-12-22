@@ -34,14 +34,15 @@ const HotelDetails = (response) => {
 		items: 1
 	  }
 	};
-	  var checkin = Date.parse(new Date()); //to be calculated in miliseconds
-38	    var checkout_date = new Date(); //in miliseconds
-39	    checkout_date.setDate(checkout_date.getDate() + 1);
-40	    var checkout = Date.parse(checkout_date); //in miliseconds
-41	    var hotel_id = response.hoteldata.hotel_id; //will be the selected hotel id
-42	    var q = btoa(checkin+"|"+checkout+"|"+hotel_id+"||||");
-43	    var url = "https://wbhotels.bookingjini.com";
-44	    var be_url = url+'/property/?q='+q;
+	    var checkin = new Date();
+	    checkin = Date.parse(checkin);
+		var checkout_date = new Date();
+	    checkout_date.setDate(checkout_date.getDate() + 1);
+	    var checkout = Date.parse(checkout_date); 
+	    var hotel_id = response.hoteldata.hotel_id;
+	    var q = base64_encode(checkin+"|"+checkout+"|"+hotel_id+"||||");
+	    var url = "https://wbhotels.bookingjini.com";
+	    var be_url = url+'/property/?q='+q;
   return (
     <>
     <Header></Header>
