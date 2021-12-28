@@ -218,10 +218,7 @@ const Destination = (response) => {
                                                 </ul>
                                                 </div>
                                                 <div className="hotel-box2-footer">
-                                                <ul>
-                                                    <li><img src="/Images/hotels/icons/Couple.png" alt="" title=""/>Couple Friendly</li>
-                                                    <li>Free Cancellation till 12 Dec 2021</li>
-                                                </ul>
+                                                
                                                 </div>
                                             </div>
                                         </div>
