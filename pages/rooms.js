@@ -157,7 +157,7 @@ export default function Rooms(props) {
                                                 return (
                                                     <li key={index4}>
                                                         <div className="row">
-                                                            <div className="col-4"><h5>{rateplan.plan_name}</h5></div>
+                                                            <div className="col-8"><h5>{rateplan.plan_name}</h5></div>
                                                             <div className="col-4">
                                                                 <div className="price">
                                                                     <h6>₹ {rateplan.bar_price}</h6>
@@ -165,12 +165,7 @@ export default function Rooms(props) {
                                                                     <p>Excluding GST</p>
                                                                 </div>
                                                             </div>
-                                                            <div className="col-4">
-                                                                <a href="#" className="addroom-btn"  data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick()}>Add Room</a>
-                                                                <div>
-
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </li>
                                                 )
@@ -181,8 +176,7 @@ export default function Rooms(props) {
                                     <div className=" room-box-footer">
                                     <ul className="row">
                                         <li className="col-6">
-                                            <button onClick={() => handleClick(slide.room_type_id, slide.max_people, slide.rack_price, slide.room_type)} id={slide.room_type_id}
-                                            >More Details</button>
+                                          
                                         </li>
                                         <li className="col-6"><a href="../hotel-booking">Book Now</a></li>
                                     </ul>
