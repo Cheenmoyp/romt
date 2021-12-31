@@ -12,17 +12,20 @@ export const Header = () => {
     }
 	//package list
     const [packageList, setPackageList] = useState([]);
-    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-list/2565`).then(response => {
-        return response.data.package_details;
-    })
-    .catch(error => {
-        console.log('error', error);
-    });
-    fetcher.then(response => {
-        if(packageList.length == 0 ) {
-            setPackageList(response)
-        }
-    })
+    useEffect(()=>{
+        const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-list/2565`).then(response => {
+            return response.data.package_details;
+        })
+        .catch(error => {
+            console.log('error', error);
+        });
+        fetcher.then(response => {
+            if(packageList.length == 0 ) {
+                setPackageList(response)
+            }
+        })
+    },[])
+    
     return (
         <>
         <div className="container">

@@ -5174,9 +5174,9 @@ button.close {
     position: relative;
 }
 .more-add ul {
-    border-top: 1px solid #d5d5d5;
+    /* border-top: 1px solid #d5d5d5; */
     padding: 15px 0 0;
-    border-bottom: 1px solid #d5d5d5;
+    /* border-bottom: 1px solid #d5d5d5; */
     margin-top: 15px;
 }
 .more-add ul li {
@@ -5912,6 +5912,15 @@ h3.heding-btmborder:before {
 
 
 
+
+.red-text.text-darken-1{
+    color: #e53935 !important;
+}
+
+.confirm a{
+    text-decoration: none;
+    color: inherit;
+}
 
 
 

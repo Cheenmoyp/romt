@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import DatePicker from "react-datepicker";
@@ -31,7 +31,7 @@ export default function Search(props) {
                         checkout: tomorow_date,
                     }
 	}
-	
+		
 	
 	
     const [formData, setFormData] = useState({ ...date_checkin });
@@ -55,7 +55,11 @@ export default function Search(props) {
         setFormData({ ...formData, ...textData });
 		setSuggestBox(false);
     };
-    console.log(formData);
+
+
+	useEffect(()=>{
+		sessionStorage.setItem('be_checkin_checkout',JSON.stringify(formData));
+	},[formData])
 
 	
 	const suggestClass = suggestBox ? 'display-block' : 'display-none';

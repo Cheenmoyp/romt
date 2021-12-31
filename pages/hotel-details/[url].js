@@ -116,13 +116,13 @@ const HotelDetails = (response) => {
                   </div>
                 </div>
                 <div className="col-md-12">
-                  <p>
+                  {/* <p> */}
                       <div
                       dangerouslySetInnerHTML={{
                         __html: response.hoteldata && response.hoteldata.hotel_description,
                       }}
                     />
-                  </p>
+                  {/* </p> */}
                 </div>
               </div>
             </div>
@@ -151,7 +151,8 @@ const HotelDetails = (response) => {
                         1 * Room</p>
                     </div>
                   </div>
-                   <a href={be_url}>Book Now</a> </div>
+                   {/* <a href={be_url}>Book Now</a>  */}
+                  </div>
               </div>
             </div>
           </div>
@@ -184,9 +185,9 @@ const HotelDetails = (response) => {
                 {response.hoteldata.facility.map((slide, index)=>{
 					if (index < 4) {
                                     return (
-										<>
+										// <>
 											<li key={index} >{slide}</li>
-										</>
+										// </>
                                     )
 					}
 				})}
@@ -200,9 +201,9 @@ const HotelDetails = (response) => {
                 {response.hoteldata.facility.map((slide, index)=>{
                   	if (4 <= index && index < 8) {
                                     return (
-										<>
+										// <>
 											<li key={index} >{slide}</li>
-										</>
+										// </>
                                     )
 					}
 				})}
@@ -216,9 +217,9 @@ const HotelDetails = (response) => {
 					{response.hoteldata.facility.map((slide, index)=>{
 						if (8 <= index && index < 12) {
 										return (
-											<>
+											// <>
 												<li key={index} >{slide}</li>
-											</>
+											// </>
 										)
 						}
 					})}
@@ -232,9 +233,9 @@ const HotelDetails = (response) => {
 					{response.hoteldata.facility.map((slide, index)=>{
 						if (12 <= index && index < 16) {
 										return (
-											<>
+											// <>
 												<li key={index} >{slide}</li>
-											</>
+											// </>
 										)
 						}
 					})}
@@ -248,9 +249,9 @@ const HotelDetails = (response) => {
 					{response.hoteldata.facility.map((slide, index)=>{
 						if (16 <= index && index < 20) {
 										return (
-											<>
+											// <>
 												<li key={index} >{slide}</li>
-											</>
+											// </>
 										)
 						}
 					})}
@@ -262,7 +263,7 @@ const HotelDetails = (response) => {
         </div>
       </div>
       <div  id="view-available-rooms"></div>
-      <Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search}/>
+      <Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search} hotel_data={response.hoteldata}/>
     </div>
   
     <div className="guestreviewssec">
