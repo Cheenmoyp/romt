@@ -118,8 +118,8 @@ const destinationResponsive = {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1>Make Your Stay Comfortable </h1>
-              <h3>Get instant benefits with ROMT Rewards at more than 650 hotels in over 80 countries</h3>
+              <h1>Find your perfect hotels </h1>
+              <h3>Get the best prices on 20,000+ properties</h3>
               <Search props={1}/>
               <div className="search-categories">
                 <ul>
@@ -238,7 +238,7 @@ const destinationResponsive = {
 		                <div className="welcome-sectio-left">
 		                  <h2>ROMT Special Winter Package </h2>
 		                  <div className="content">
-		                    <p> Just 3% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
+		                    <p> Get best prices on winter holiday packages just for you on best locations</p>
 		                  </div>
 		                  <a href="package" className="exmore">Explore the Package </a><a  href={'/package-detail/MjU2NS9ST01UIFNwZWNpYWwgV2ludGVyIFBhY2thZ2U='} className="exmore blue-bg">Book the package</a> </div>
 		              </div>
@@ -255,7 +255,7 @@ const destinationResponsive = {
 		                <div className="welcome-sectio-left">
 		                  <h2>Honeymoon Package</h2>
 		                  <div className="content">
-		                    <p> Just 32% of rooms in each destination win the <strong>ROMT</strong> rewards, the new global quality standard for vacation homes. </p>
+		                    <p> Get best prices on hotels located in most romantic South Indian locations </p>
 		                  </div>
 		                  <a href="package" className="exmore">Explore the Package </a><a href={'/package-detail/MjU2NS9Ib25leW1vb24gUGFja2FnZQ=='} className="exmore blue-bg">Book the package</a> </div>
 		              </div>
@@ -355,21 +355,21 @@ const destinationResponsive = {
           </div>
 		  <div className="post-slide">
             <div className="box-3">
-              <figure><img src="/Images/destinations/Krishnagiri.jpg" alt="" title="" /></figure>
+              <figure><img src="/Images/destinations/udumalaipettai.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('udumalaipettai')}>Udumalaipettai</a></h4>
               </div>
             </div>
           </div>
 		  <div className="post-slide">
             <div className="box-3">
-              <figure><img src="/Images/destinations/Munnar.jpg" alt="" title="" /></figure>
+              <figure><img src="/Images/destinations/nagalur.jpg" alt="" title="" /></figure>
               <div className="content">
-                <h4><a href={'/destination/'+ base64_encode('munnar')}>Munnar</a></h4>
+                <h4><a href={'/destination/'+ base64_encode('nagalur')}>Nagalur</a></h4>
               </div>
             </div>
           </div>
-          <div className="post-slide">
+			<div className="post-slide">
             <div className="box-3">
               <figure><img src="/Images/destinations/Yercaud.jpg" alt="" title="" /></figure>
               <div className="content">
@@ -377,6 +377,56 @@ const destinationResponsive = {
               </div>
             </div>
           </div>
+		  
+		  <div className="post-slide">
+            <div className="box-3">
+              <figure><img src="/Images/destinations/namakkal.jpg" alt="" title="" /></figure>
+              <div className="content">
+                <h4><a href={'/destination/'+ base64_encode('namakkal')}>Namakkal</a></h4>
+              </div>
+            </div>
+          </div>
+		  
+		  <div className="post-slide">
+            <div className="box-3">
+              <figure><img src="/Images/destinations/kodaikanal.jpg" alt="" title="" /></figure>
+              <div className="content">
+                <h4><a href={'/destination/'+ base64_encode('kodaikanal')}>KodaiKanal</a></h4>
+              </div>
+            </div>
+          </div>
+		  
+		  <div className="post-slide">
+            <div className="box-3">
+              <figure><img src="/Images/destinations/devikolam.jpg" alt="" title="" /></figure>
+              <div className="content">
+                <h4><a href={'/destination/'+ base64_encode('devikolam')}>Devikolam</a></h4>
+              </div>
+            </div>
+          </div>
+		  
+		  
+		   <div className="post-slide">
+            <div className="box-3">
+              <figure><img src="/Images/destinations/mysore.jpg" alt="" title="" /></figure>
+              <div className="content">
+                <h4><a href={'/destination/'+ base64_encode('mysore')}>Mysore</a></h4>
+              </div>
+            </div>
+          </div>
+		  
+		   <div className="post-slide">
+            <div className="box-3">
+              <figure><img src="/Images/destinations/salem.jpg" alt="" title="" /></figure>
+              <div className="content">
+                <h4><a href={'/destination/'+ base64_encode('salem')}>Salem</a></h4>
+              </div>
+            </div>
+          </div>
+		  
+		  
+		  
+		  
           </Carousel>
         </div>
       </div>

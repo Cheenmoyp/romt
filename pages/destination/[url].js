@@ -218,10 +218,7 @@ const Destination = (response) => {
                                                 </ul>
                                                 </div>
                                                 <div className="hotel-box2-footer">
-                                                <ul>
-                                                    <li><img src="/Images/hotels/icons/Couple.png" alt="" title=""/>Couple Friendly</li>
-                                                    <li>Free Cancellation till 12 Dec 2021</li>
-                                                </ul>
+                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -261,16 +258,16 @@ const Destination = (response) => {
 // This gets called on every request
 export async function getServerSideProps(context) {
     
-    console.log(base64_decode(context.params.url));
+    //console.log(base64_decode(context.params.url));
     let url_param = base64_decode(context.params.url).split("/");
-	
+	//console.log('url_param',url_param);
     // Fetch data from external API
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_BE}/query/2564/${url_param[0]}`
+        `${process.env.NEXT_PUBLIC_HOST_BE}/query/2565/${url_param[0]}`
     );
 	
-    const response = await res.json();
-    const city = response.hotels_data[0].city_name
+    const response = await res.json();//console.log('response',response);
+    const city = response.hotels_data[0] && response.hotels_data[0].city_name
 
     if (!response) {
         return {
@@ -280,5 +277,5 @@ export async function getServerSideProps(context) {
     // Pass data to the page via props
     return { props: {city, url_param}  };
 }
-
+ 
 export default Destination;

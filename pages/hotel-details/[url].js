@@ -258,7 +258,7 @@ const HotelDetails = (response) => {
                 </ul>
               </div>
             </div>
-            <div className="col-md-12"> <a href="#" className="all-amenities">All 28 amenities</a> </div>
+           
           </div>
         </div>
       </div>
