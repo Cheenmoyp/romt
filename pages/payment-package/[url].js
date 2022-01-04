@@ -144,7 +144,8 @@ const PackageDetail = (response) => {
 
                             if (response_package.data.status == 1) {
                                 var invoice_id = btoa(response_package.data.invoice_id);
-                                let str = window.location.origin;
+                                // let str = window.location.origin;
+                                let str = "romtbooking.bookingjini.tech";
                                 if (str.search('bookingjini.com') >= 0) {
                                     var url =
                                         'https://be.bookingjini.com/payment/' +
