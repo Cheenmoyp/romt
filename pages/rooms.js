@@ -39,6 +39,13 @@ export default function Rooms(props) {
     // `${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/${props.search[0]}/${props.search[2]}/${props.search[3]/INR`
     // const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/1993/17-11-2021/18-11-2021/INR`).then(response => {
 
+    useEffect(()=>{
+        sessionStorage.removeItem("be_cart");
+        sessionStorage.removeItem("be_hotel_data");
+    },[])
+
+
+
     useEffect(() => {
         if (props && props.hotel_data) {
 
@@ -82,13 +89,13 @@ export default function Rooms(props) {
     
 
 
-    const handleClick = (id, max_people, rack_price, room_type) => {
-        setRoomDetailsId(id);
-        var storage = { "room_type": id, "hotel_id": 2881, "room_type_name": room_type, "max_people": max_people, "rack_price": rack_price }
-        localStorage.setItem("selectedRoom", JSON.stringify(storage));
-        setRoomModal(true);
+    // const handleClick = (id, max_people, rack_price, room_type) => {
+    //     setRoomDetailsId(id);
+    //     var storage = { "room_type": id, "hotel_id": 2881, "room_type_name": room_type, "max_people": max_people, "rack_price": rack_price }
+    //     localStorage.setItem("selectedRoom", JSON.stringify(storage));
+    //     setRoomModal(true);
 
-    }
+    // }
 
     const handleAddClick = (data, rateplan_data) => {
         let cartItem = {

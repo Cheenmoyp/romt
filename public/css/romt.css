@@ -5924,6 +5924,9 @@ h3.heding-btmborder:before {
     color: inherit;
 }
 
+.package_booking_modal .modal-body{
+    height: 300px;
+}
 
  
 .menublocks li{float:left!important; width:20%; list-style-type:none;}

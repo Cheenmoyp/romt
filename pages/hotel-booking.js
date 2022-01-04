@@ -372,7 +372,7 @@ const HotelBooking = () => {
                                 <span className="price">10</span></li> */}
                                         <li>
                                             <h6>Total Amount to be paid</h6>
-                                            <span className="price">{cart.display_price}</span></li>
+                                            <span className="price">{cart.paid_amount}</span></li>
                                     </ul>
                                 </div>}
                                 {/* <div className="booking-supperoffers">
