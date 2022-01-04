@@ -173,7 +173,7 @@ const HotelBooking = () => {
                                 var invoice_id = btoa(response_be.data.invoice_id);
 
                                 // let str = window.location.origin;
-                                let str = "romtbooking.bookingjini.tech";
+                                let str = "http://romtbooking.bookingjini.tech";
 
                                 if (str.search("bookingjini.com") >= 0) {
                                     var url =
