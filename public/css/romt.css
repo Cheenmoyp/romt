@@ -2653,6 +2653,7 @@ a.all-amenities {
     border-radius: 5px;
     overflow: hidden;
     width: 100%;
+    height:200px;
     position: relative;
 }
 
