@@ -10,6 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Search(props) {
 	
+	const [city, setCity] = useState(props ? props.cityid : '');
+	const [val, setVal] = useState();
     const [searchData, setSearchData] = useState({})
     const [suggestBox, setSuggestBox] = useState(false);
     const [suggestBoxData,setSuggestBoxData] = useState([]);
@@ -66,7 +68,10 @@ export default function Search(props) {
 
     const handleTextChange = (textData) => {
 		setFormData({ ...formData, ...textData });
+		setVal(textData.cityid);
 		if(textData.cityid) {
+			console.log('city', textData.cityid);
+			setCity('');
 			loadHotel(textData.cityid);
 		}
     };
@@ -103,21 +108,20 @@ export default function Search(props) {
                 handleTextChange({
                     cityid: event.target.value,
                 });}} 
-				value={props.cityid}
+				value={city ? city : val}
 				>
 					<option value="">Select</option>
 					{cityList.map((city,index) => {
-						/* if (props.cityid == city.city_id) {
+						if (city == city.city_id) {
 							return (
 								<option value={city.city_id} key={index} selected>{city.city_name}</option>
 							);
-						} else { */
+						} else { 
 							return (
-								<option value={city.city_id} key={index}>{city.city_name}</option>
+								<option value={city.city_id} key={index} >{city.city_name}</option>
 							);
-						/* } */
-						
-					})}
+							} 
+ 					})}
 				</select>
 				
             </div>
