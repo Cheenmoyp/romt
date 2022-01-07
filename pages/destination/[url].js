@@ -14,25 +14,29 @@ const Destination = (response) => {
     const [hotelList, setHotelList] = useState([])
     const [startRating, setStarRating] = useState();
     const [expanded, setExpanded] = useState(false);
+    const [destinationBanner, setDestinationBanner] = useState('');
     let hotel_name = [];
+	if (hotelList.length == 0) {
+		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2565&city_name=${response.city}&star_rating=${startRating}&min_price&max_price`).then(response => {
+			return response.data
+		})
+		.catch(error => {
+			console.log('error', error);
+		});
 
-    const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter?group_id=2565&city_name=${response.city}&star_rating=${startRating}&min_price&max_price`).then(response => {
-        return response.data.hotels_data
-    })
-    .catch(error => {
-        console.log('error', error);
-    });
-
-    fetcher.then(response => {
-        if(hotelList.length == 0 ) {
-            setHotelList(response)
-        }
-    })
-	
-	const handleFormChange = (event) => {
-        setStarRating(event.target.value);
-        setHotelList([]);
-    };
+		fetcher.then(response => {
+			if(hotelList.length == 0 ) {
+				setHotelList(response.hotels_data);
+				setDestinationBanner(response.destination_image && response.destination_image)
+			}
+		})
+		
+		const handleFormChange = (event) => {
+			setStarRating(event.target.value);
+			setHotelList([]);
+		};
+	}
+    
 
     let url = base64_encode((hotelList.length > 0 && hotelList[0].hotel_id) +'/'+ response.url_param[0] +'/'+ response.url_param[1] +'/'+ response.url_param[2]); 
 
@@ -68,8 +72,8 @@ const Destination = (response) => {
         <div className="destination-page-banner">
             <div className="container-fluid">
             <div className="row">
-                <div className="col-md-12"> 
-                <img src="/Images/destinations/Coimbatore-banner.jpg" alt="" title=""/> 
+                <div className="col-md-12">
+                <img src={destinationBanner?destinationBanner:""} alt="" title=""/> 
                 </div>
             </div>
             </div>
@@ -214,7 +218,7 @@ const Destination = (response) => {
                                                     <li><span><img src="/Images/packages/icons/Safe.png" alt="" title=""/></span>ROMT Safe</li>
                                                     <li><span><img src="/Images/packages/icons/free-wifi.png" alt="" title=""/></span>Free WIFI</li>
                                                     <li><span><img src="/Images/packages/icons/Housekeeping.png" alt="" title=""/></span>Hosekeeping</li>
-                                                    <li><a href="#">+More</a></li>
+                                                    
                                                 </ul>
                                                 </div>
                                                 <div className="hotel-box2-footer">

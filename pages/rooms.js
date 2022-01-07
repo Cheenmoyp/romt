@@ -722,7 +722,7 @@ export default function Rooms(props) {
                                                         </Carousel>
                                                     </div>
                                                 </div>
-                                                <div className="r-photo-counter">{slide.allImages.length} Photos <i className="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+                                                <div  >{slide.allImages.length}    </div>
                                             </div>
                                             <h4>{slide.room_type}</h4>
                                             <div className="room-content">

@@ -59,24 +59,37 @@ export default function Search(props) {
 		.catch(error => {
 			console.log('error', error);
 		});
-		fetcher2.then(response => {
-			setHotelList(response);
+		fetcher2.then(response => { 
+			setHotelList(response); console.log('helloworld3');
+			//if (props.cityid == formData.cityid) {
+				handleTextChange({hotelid:props.hotelid})
+			//}
+			
 		})
 	}
 
-    const handleTextChange = (textData) => {
-		setFormData({ ...formData, ...textData });
-		if(textData.cityid) {
+    const handleDateChange = (textData) => {		
+		setFormData({ ...formData, textData });
+    };
+	const handleTextChange = (textData) => {
+		var fetchFormData = { ...formData};
+		
+		if(textData.cityid) { 
+			fetchFormData.cityid = textData.cityid;
+			console.log('helloworld234',textData);
 			loadHotel(textData.cityid);
 		}
+		if(textData.hotelid) { 
+			fetchFormData.hotelid = textData.hotelid;
+		}
+		
+		setFormData(fetchFormData);
+			console.log('helloworld2',formData);
     };
-
 	useEffect(()=>{
 		sessionStorage.setItem('be_checkin_checkout',JSON.stringify(formData));
 		cityListFetch();
-		if (props.cityid && props.hotelid) {
-			loadHotel(props.cityid);
-		}
+		
 	},[formData])
 	
 	function cityListFetch() {
@@ -90,6 +103,10 @@ export default function Search(props) {
 			fetcher1.then(response => {
 				if(cityList.length == 0 ) {
 					setCityList(response)
+					if (props.cityid && props.hotelid) { console.log('helloworld');
+						handleTextChange({cityid:props.cityid})
+						//loadHotel(props.cityid);console.log('useeffect')
+					}
 				}
 			})
 		}
@@ -103,7 +120,7 @@ export default function Search(props) {
                 handleTextChange({
                     cityid: event.target.value,
                 });}} 
-				value={props.cityid}
+				value={formData.cityid?formData.cityid:''}
 				>
 					<option value="">Select</option>
 					{cityList.map((city,index) => {
@@ -127,7 +144,7 @@ export default function Search(props) {
 					handleTextChange({
 						hotelid: event.target.value,
 					});}} 
-				value={props.hotelid}>
+				value={formData.hotelid?formData.hotelid:''}>
 					<option value="">Select</option>
 					{hotelList.map((hotel,index) => {
 						/* if (props.hotelid == hotel.hotel_id) {
@@ -147,7 +164,7 @@ export default function Search(props) {
             <div className="form-control">
                 
 				<DatePicker id="datepicker" className="datepicker" selected={formData.checkin?formData.checkin :''} placeholder="Check In" onChange={(date) => {
-                    handleTextChange({
+                    handleDateChange({
                         checkin: date,
                     });
                 }} />
@@ -155,7 +172,7 @@ export default function Search(props) {
             <div className="form-control">
                
 				<DatePicker id="datepicker" className="datepicker" selected={formData.checkout?formData.checkout :''} placeholder="Check Out" onChange={(date) => {
-                    handleTextChange({
+                    handleDateChange({
                         checkout: date,
                     });
                 }} />

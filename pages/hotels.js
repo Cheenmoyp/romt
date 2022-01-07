@@ -51,7 +51,7 @@ const Hotel = () => {
                     <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                        <h2>Luxury Resorts Around Bangalore - Upto 70% Off</h2>
+                        
                         </div>
                     </div>
                     </div>
@@ -108,7 +108,7 @@ const Hotel = () => {
                                         <span>50</span></li>
                                     </ul>
                                 </div>
-                                <div className="filter-list-con">
+                                {/* <div className="filter-list-con">
                                     <h4>Star Ratings</h4>
                                     <ul>
                                     <li>
@@ -132,7 +132,7 @@ const Hotel = () => {
                                         <label htmlFor="star_rating">5 Star</label>
                                         <span>80</span></li>
                                     </ul>
-                                </div>
+                                </div> */}
                                 </div>
                             </div>
                             </div>
@@ -181,7 +181,7 @@ const Hotel = () => {
                                                     <li><span><img src="/Images/packages/icons/Safe.png" alt="" title=""/></span>ROMT Safe</li>
                                                     <li><span><img src="/Images/packages/icons/free-wifi.png" alt="" title=""/></span>Free WIFI</li>
                                                     <li><span><img src="/Images/packages/icons/Housekeeping.png" alt="" title=""/></span>Hosekeeping</li>
-                                                    <li><a href="#">+More</a></li>
+                                                    
                                                 </ul>
                                                 </div>
                                                 <div className="hotel-box2-footer">

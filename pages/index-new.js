@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Header } from '../components/header/header';
 import { Footer } from '../components/footer/footer';
@@ -13,22 +13,25 @@ import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import ReactPlayer from 'react-player'
 
 export default function Home() {
-  const router = useRouter()
-  const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST}/group-hotel-list/2565`).then(response => {
-        return response.data.hotels_data
-      })
-      .catch(error => {
-          console.log('error', error);
-      });
-  
+  const router = useRouter();
   const [ourHotelData, setOurHotelData] = useState([])
   const [searchData, setSearchData] = useState()
+  useEffect(()=>{
+	  if(ourHotelData.length == 0 ) {
+		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST}/group-hotel-list/2565`).then(response => {
+				return response.data.hotels_data
+			  })
+			  .catch(error => {
+				  console.log('error', error);
+			  });
+		  
 
-  fetcher.then(response => {
-    if(ourHotelData.length == 0 ) {
-      setOurHotelData(response)
-    }
-  })
+		fetcher.then(response => {
+			
+			 setOurHotelData(response)
+		})
+	 }
+	},[])
 
   const handleClick = e => {
     e.preventDefault()

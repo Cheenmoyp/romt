@@ -13,6 +13,7 @@ export const Header = () => {
 	//package list
     const [packageList, setPackageList] = useState([]);
     useEffect(()=>{
+		destinatinListFetch();
         const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-list/2565`).then(response => {
             return response.data.package_details;
         })
@@ -29,16 +30,18 @@ export const Header = () => {
 
 	//package list
     const [destinationList, setDestinatioList] = useState([]);
-	if (!destinationList.length) {
-		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/ALL`).then(response => {
-			return response.data;
-		})
-		.catch(error => {
-			console.log('error', error);
-		});
-		fetcher.then(response => {
-			setDestinatioList(response.destinations)  
-		}) 
+	function destinatinListFetch() {
+		if (!destinationList.length) {
+			const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/ALL`).then(response => {
+				return response.data;
+			})
+			.catch(error => {
+				console.log('error', error);
+			});
+			fetcher.then(response => {
+				setDestinatioList(response.destinations); 
+			});
+		}
 	}
 	
 	
@@ -204,7 +207,6 @@ export const Header = () => {
 							</div>
 				</Modal.Body>
             </Modal>
-			
 			
         </div>
         </>

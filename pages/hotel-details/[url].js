@@ -11,6 +11,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const HotelDetails = (response) => {
+  console.log(response);
 	const [lightboxmodal, setLightboxmodal] = useState(false);
 	const handleLightBoxClick = () => {
         setLightboxmodal(!lightboxmodal);
@@ -52,7 +53,7 @@ const HotelDetails = (response) => {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-				<Search cityname={response.search[1] && response.search[1]} checkin={response.search[2] && response.search[2]} checkout={response.search[3] && response.search[3]}/>
+				<Search hotelid={response.search[0] ? response.search[0]:""} cityid={response.search[1] ? response.search[1]:''  } checkin={response.search[2] ? response.search[2]:''} checkout={response.search[3] ? response.search[3]:''} adult={response.search[4] ? response.search[4]:''} kid={response.search[5] ? response.search[5]:''}/>
               </div>
             </div>
           </div>
@@ -99,13 +100,26 @@ const HotelDetails = (response) => {
               <div className="row">
                 <div className="col-md-8">
                   <div className="hotel-detail-bannerbox">
-                    <figure> <img src={response.hoteldata.image} alt="" title="" /> </figure>
+                    <figure > 
+						<Carousel swipeable={true}
+						  draggable={true}
+						  infinite={true}
+						  responsive={responsive}>
+							{response.hoteldata.images && response.hoteldata.images.map((slide, index)=>{
+								return (
+									<img className="hotel-banner-img" src={slide} alt="" title="" key={index}  />
+								)
+							
+							})}
+						</Carousel>
+					
+					 </figure>
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="hotel-detail-bannerbox hotel-gallery">
                     <figure> <a href="#" data-toggle="modal" data-target="#hotelphotos" onClick={() => handleLightBoxClick()}><img src={response.hoteldata.image} alt="" title=""/></a>
-                      <h3><a href="#">25+ Photos</a></h3>
+                      <h3> </h3>
                     </figure>
                   </div>
                   <div className="hotel-detail-bannerbox hotel-video">
@@ -465,6 +479,7 @@ const HotelDetails = (response) => {
 export async function getServerSideProps(context) {
   
   let url_param = base64_decode(context.params.url).split("/");
+  console.log('psrams', base64_decode(context.params.url));
     // Fetch data from external API
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_HOST_BE}/hotel-details?hotel_id=${url_param[0]}`

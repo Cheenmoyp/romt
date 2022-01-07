@@ -566,7 +566,7 @@ div#register-form-modal {
 }
 .search-con form {
     width: 100%;
-    max-width: 945px;
+    max-width: 90%;
     border-radius: 30px;
     position: relative;
     background: #fff;
@@ -1267,9 +1267,11 @@ button.owl-next {left:unset; right: -50px;}
 }
 .hotel-box2 figure img {
     width: 100%;
+	height:300px;
     transition:5s;
 }
 .hotel-box2:hover figure img {
+	 
 transform: scale(1.5);}
 .hotel-box2 .rating img {
     width: 79px;
@@ -1300,8 +1302,18 @@ transform: scale(1.5);}
     float: left;
     padding: 30px 0 15px;
 }
+.hotel-box2-content h3   {
+    font-size: 16px;
+	clear:both;
+	line-height:18px;
+    color: #0071c2;
+    text-decoration: none;
+    font-weight: 600;
+}
 .hotel-box2-content h3 a {
-    font-size: 18px;
+    font-size: 16px;
+	clear:both;
+	line-height:12px;
     color: #0071c2;
     text-decoration: none;
     font-weight: 600;
@@ -2642,6 +2654,8 @@ a.all-amenities {
     float: left;
     padding: 0;
     margin: 30px 0 0;
+	    background: #fff;
+    box-shadow: 0px 0px 14px 0px #cdcdcd;
 }
 .room-content {
     font-size: 14px;
@@ -5270,6 +5284,15 @@ label.one{
     float: right;
     text-decoration: none;
 }
+
+/*CSS New*/
+
+.room-am li{ float:left; width:50%; font-size:12px;}
+
+
+
+
+
 /*Animated Modal End*/
 .hotel-detailmodal .modal-header button.close {
     position: absolute;
@@ -5932,3 +5955,10 @@ h3.heding-btmborder:before {
  
 .menublocks li{float:left!important; width:20%; list-style-type:none;}
 .menublocks li a{float:left!important; width:20%; list-style-type:none;}
+
+.hotelfield{width:140px;}
+.hotel-banner-img { height:381px }
+
+
+
+
