@@ -79,8 +79,8 @@ export const Footer = () => {
                 <div className="widget border-0">
                     <h5 className="m-b30 text-white">Site Information</h5>
                     <ul className="list-2 list-line">
-							 <li><a href="/privacy-policy" className="site-button   ">Privacy Policy</a></li>
-							<li><a href="/terms-and-condition" className="site-button  ">Terms & Conditions</a></li>
+							 <li><a href={"/privacy-policy"} className="site-button   ">Privacy Policy</a></li>
+							<li><a href={"/terms-and-condition"} className="site-button  ">Terms & Conditions</a></li>
 							 
                     </ul>
                 </div>

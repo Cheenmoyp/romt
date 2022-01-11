@@ -20,7 +20,7 @@ const Package = () => {
 	<div className="row">
     	<div className="col-md-12 intro">
         	<h2>1. Introduction </h2>
-				<p>The terms and conditions set out below ("Conditions") apply to your use of this web site and related websites ("Site"), including the use of the information services offered on the Site.
+				<p>The terms and conditions set out below (&quot;Conditions&quot;) apply to your use of this web site and related websites (&quot;Site&quot;), including the use of the information services offered on the Site.
 In accessing and using the Site, you agree to be bound by these Conditions so please carefully read this section before proceeding.
 If you do not accept these Conditions, you must refrain from using the Site.
 These Conditions must be read in conjunction with any other applicable terms and conditions governing the use of the Site.
@@ -31,7 +31,7 @@ These Conditions must be read in conjunction with any other applicable terms and
 			<h2>Conditions </h2>
 			<h4>Site</h4>
 			<p>
-				The Site makes available information relating to hotels and resorts owned or managed ROMT , a corporation constituted under the laws of India, and its subsidiaries, controlled entities, affiliates and related parties ( "ROMT").
+				The Site makes available information relating to hotels and resorts owned or managed ROMT , a corporation constituted under the laws of India, and its subsidiaries, controlled entities, affiliates and related parties ( &quot;ROMT&quot;).
 			</p>
 			
 			
@@ -134,7 +134,7 @@ You must ensure that any information which you provide to ROMT is accurate and c
 				  
 				   <h2>Linked Websites</h2>
 				   
-				   <p>The Site may contain links to other web sites ("Linked Web Sites"). Those links are provided for convenience only and may not remain current or be maintained.
+				   <p>The Site may contain links to other web sites (&quot;Linked Web Sites&quot;). Those links are provided for convenience only and may not remain current or be maintained.
 You acknowledge and agree that ROMT does not have any control over the content or availability of Linked Web Sites and accepts no responsibility for the content, privacy practices or any other aspect of Linked Web Sites.
 Links with Linked Web Sites should not be construed as an endorsement, approval or recommendation by ROMT of the owners or operators of those Linked Web Sites, or of any information, graphics, materials, products or services referred to or contained on those Linked Web Sites, unless and then only to the extent expressly stipulated to the contrary.
 </p>

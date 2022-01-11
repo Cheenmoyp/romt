@@ -174,16 +174,16 @@ If you refuse consent for processing your personal information for the mentioned
 				7.2 Data transfers<br/>
 		 
 				ROMT is a global organisation and provides a global service. Sharing information cross borders is essential so that you receive the same high quality service wherever you are in the world. As a result, we may, subject to applicable law, transfer Personal and Other Information collected in connection with the Services, to these entities in countries where information protection standards may differ from those in the country where you reside. By making a reservation, staying at an ROMT hotel or using any ROMT-branded service, you understand that we may transfer your personal information globally as deemed appropriate.
-				<br/>In most cases, the information you provide is added to an ROMT local or global database. In the course of processing your information, it may be necessary to transfer your personal data to ROMT's affiliates, and/or third party service providers located in India and throughout the world for the purposes outlined within this Privacy Statement.
+				<br/>In most cases, the information you provide is added to an ROMT local or global database. In the course of processing your information, it may be necessary to transfer your personal data to ROMT&apos;s affiliates, and/or third party service providers located in India and throughout the world for the purposes outlined within this Privacy Statement.
 
 <br/><br/>
 			<h2>8. Consent and Control</h2>
 			8.1 Consent<br/>
-			<p>Consent is often referred to as an individual's choice to "opt-in" or "opt-out" of ROMT's use of personal information and is usually obtained by a "check box" or signature confirming the individual understands and agrees to the processing of their personal information. At times, express written consent from the individual may be required based on the information processing activity. ROMT receives consent from individuals prior to:</p>
+			<p>Consent is often referred to as an individual&apos;s choice to &quot;opt-in&quot; or &quot;opt-out&quot; of ROMT&apos;s use of personal information and is usually obtained by a &quot;check box&quot; or signature confirming the individual understands and agrees to the processing of their personal information. At times, express written consent from the individual may be required based on the information processing activity. ROMT receives consent from individuals prior to:</p>
 			<ul>
-				<li> 	collecting, using, or processing their personal information, including sensitive personal information, in certain ways or sharing the individual's personal information with any third party. Sensitive personal data is data revealing an individual's trade union membership, loyalty program membership, stay and booking patterns, biometric data, data concerning health or data concerning preferences during hotel stays;</li>
-				<li> transferring the individual's personal information outside of the individual's country of residence</li>
-				<li> 	using or placing web cookies on an individual's computer or other electronic devices.</li>
+				<li> 	collecting, using, or processing their personal information, including sensitive personal information, in certain ways or sharing the individual&apos;s personal information with any third party. Sensitive personal data is data revealing an individual&apos;s trade union membership, loyalty program membership, stay and booking patterns, biometric data, data concerning health or data concerning preferences during hotel stays;</li>
+				<li> transferring the individual&apos;s personal information outside of the individual&apos;s country of residence</li>
+				<li> 	using or placing web cookies on an individual&apos;s computer or other electronic devices.</li>
 			
 			</ul>
 			
@@ -215,7 +215,7 @@ ROMT ensures that our third party service providers employ industry standard sec
 		
 		<h2>10. Retention and disposal</h2>
 		
-		<p>Your personal data will be retained in a form which enables ROMT to identify the individual for no longer than is necessary for the purposes for which the data was collected and used. Your personal data may be retained in certain files and systems for a period of time as required by applicable law and following ROMT's data retention policies in order to comply with such financial or legal requirements, to properly resolve disputes or to troubleshoot problems. If you wish to review or delete your information, contact us at . We will respond to your request to access or delete your information within 30 days.
+		<p>Your personal data will be retained in a form which enables ROMT to identify the individual for no longer than is necessary for the purposes for which the data was collected and used. Your personal data may be retained in certain files and systems for a period of time as required by applicable law and following ROMT&apos;s data retention policies in order to comply with such financial or legal requirements, to properly resolve disputes or to troubleshoot problems. If you wish to review or delete your information, contact us at . We will respond to your request to access or delete your information within 30 days.
 In addition, some types of information may be stored for an infinite duration due to technical constraints, and will be blocked from further processing for purposes which are not mandatory by law or when consent is withdrawn. The information that you provide may be stored or transferred in our systems or on the systems provided by our third parties.
 </p>
 

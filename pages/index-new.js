@@ -101,8 +101,8 @@ const destinationResponsive = {
   return (
   <>
     <Header></Header> 
-<div className="slider-con">
-   
+<div className="slider-con ">
+   <div className="banner-mob">
    <ReactPlayer
           className='react-player'
           url="/Images/video.mp4"
@@ -117,6 +117,7 @@ const destinationResponsive = {
           width='100%'
           height='100%'
         />
+		</div>
       <div className="search-con">
         <div className="container">
           <div className="row">
@@ -454,19 +455,19 @@ const destinationResponsive = {
 				  infinite={true}
 				  responsive={testimonialResponsive}>
         <div style={{padding: '10px'}}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/G0zFNzP-Mzo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/G0zFNzP-Mzo" title="YouTube video player" ></iframe>
         </div>
         
         <div style={{padding: '10px'}}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Jifwew0xsow" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Jifwew0xsow" title="YouTube video player" ></iframe>
         </div>
         
         <div style={{padding: '10px'}}>
-	       <iframe width="560" height="315" src="https://www.youtube.com/embed/WH2RjedDkRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	       <iframe width="560" height="315" src="https://www.youtube.com/embed/WH2RjedDkRU" title="YouTube video player" ></iframe>
 	    </div>
         
         <div style={{padding: '10px'}}>
-	        <iframe width="560" height="315" src="https://www.youtube.com/embed/wnYpRYmhxQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	        <iframe width="560" height="315" src="https://www.youtube.com/embed/wnYpRYmhxQY" title="YouTube video player" ></iframe>
 	    </div>
     </Carousel>    
   </div>

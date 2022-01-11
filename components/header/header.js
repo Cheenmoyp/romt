@@ -56,97 +56,88 @@ export const Header = () => {
             <div className="col-md-7">
                 <div className="nav-con">
 						
-		 
-						
-						
-						
-					    <nav className="navbar navbar-expand-lg navbar-dark">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Destination </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div className="container">
-                            <div className="row">
-                                <div className="col-md-12"> 
-                                <span className="menu-heading">All Destinations</span> 
-                                  <ul className="menublocks">
-                                    {destinationList && destinationList.map((destination, index) => {
-                                        
-                                        return (
-                                            <li  key={index}> <a className="nav-link active" href={'/destination/'+ base64_encode(destination)} >{destination}</a></li>
-                                           
-                                        )
-                                    })}
-                                </ul>
-                                </div>
+					<input id="collapsible2" className="toggle" type="checkbox" checked="" />
+						<label className="lbl-toggle"><i className="fa fa-bars" aria-hidden="true"></i></label>
+							<div className="collapsible-content">
+							
+											 <nav className="navbar navbar-expand-lg navbar-dark">
+						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
+						<div className="collapse navbar-collapse" id="navbarSupportedContent">
+								<ul className="navbar-nav mr-auto">
+								<li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Destination </a>
+									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+										<div className="container">
+											<div className="row">
+												<div className="col-md-12"> 
+												<span className="menu-heading">All Destinations</span> 
+												  <ul className="menublocks">
+													{destinationList && destinationList.map((destination, index) => {
+														
+														return (
+															<li  key={index}> <a className="nav-link active" href={'/destination/'+ base64_encode(destination)} >{destination}</a></li>
+														   
+														)
+													})}
+												</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href={"/hotels"} > Hotels </a> </li>
+								<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a >
+									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+										<div className="container">
+											<div className="row">
+												<div className="col-md-4"> 
+													<span className="menu-heading">ROMT Offers</span>
+														<ul className="nav flex-column">
+															<li className="nav-item"> <a  className="nav-link active" href={"/offers"}>ROMT Member Rate</a></li>
+								  
+														</ul>
+												</div>
                                 
-                               
- 
-                            </div>
-                            </div>
-                        </div>
-                        </li>
-                        <li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href="/hotels" > Hotels </a> </li>
-                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div className="container">
-                            <div className="row">
-                                <div className="col-md-4"> 
-                                <span className="menu-heading">ROMT Offers</span>
-                                <ul className="nav flex-column">
-                                    <li className="nav-item"> <a className="nav-link active" href={"/offers"}>ROMT Member Rate</a></li>
-          
-                                </ul>
-                                </div>
-                                
-                                <div className="col-md-4">
-                                <span className="menu-heading">ROMT Packages</span>
-                                <ul className="nav flex-column">
-                                    {packageList.map((data,index)=>{
-                                        let url = base64_encode(2565 + '/' + data.package_name);
-                                        return (
-                                            <li className="nav-item" key={index}> 
-                                            <a className="nav-link" href={"/package-detail/"+url}>{data.package_name}</a>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                                </div>
+												<div className="col-md-4">
+												<span className="menu-heading">ROMT Packages</span>
+												<ul className="nav flex-column">
+													{packageList.map((data,index)=>{
+														let url = base64_encode(2565 + '/' + data.package_name);
+														return (
+															<li className="nav-item" key={index}> 
+															<a  className="nav-link" href={"/package-detail/"+url}>{data.package_name}</a >
+															</li>
+														)
+													})}
+												</ul>
+												</div>
                             
-                            </div>
-                            </div>
-                        </div>
-                        </li>
-                       <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" > Blog </a>
-                        
-                        </li>
-                    </ul>
-                    </div>
-                </nav>	
+											</div>
+										</div>
+									</div>
+							</li>
+							<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" href="#" > Blog </a ></li>
+						</ul>
+						</div>
+					</nav>	
+							
+							
+							
+							</div>
+					
+						 
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-                </div>
+				  </div>
             </div>
             <div className="col-md-3">
 					  <div className="top-btn-group"> 
 			 
-			 <a href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
+			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
 					<p><strong>Address:</strong>101,Sengupta st, Ram nagar, Coimbatore- 641009</p>
 					<p><strong>Phone:</strong>91 733 00 777 44 / 91 733 00 222 77 (24/7 Support)</p>
 					<p><strong>Email:</strong>reservations@roomsonmytravel.in</p>
 				</div>
-			 </a>
+			 </a >
 		</div>
 				
 				
