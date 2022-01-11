@@ -124,8 +124,8 @@ const HotelDetails = (response) => {
                   </div>
                   <div className="hotel-detail-bannerbox hotel-video">
                     <figure> <a href="#" className="v-button" data-toggle="modal" data-src="https://youtu.be/X4p4dFHDQgE" data-target="#videoModal"><img src={response.hoteldata.image} alt="" title=""/></a>
-                      <h4 className="video"><a href="#" className="v-button" data-toggle="modal" data-src="https://youtu.be/X4p4dFHDQgE" data-target="#videoModal"><i className="fa fa-play" aria-hidden="true"></i><br/>
-                        <span>Video</span> </a></h4>
+                      <h4 className="video"><a href="#" className="v-button"  > 
+                        <span> </span> </a></h4>
                     </figure>
                   </div>
                 </div>

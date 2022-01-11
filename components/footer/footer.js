@@ -10,39 +10,39 @@ export const Footer = () => {
                     <div className="col-md-12">
                         <ul>
                             <li><strong>Treding Hotel Cities:</strong></li>
-                            <li><a href="#">Treding Hotel Cities:</a></li>
-                            <li><a href="#">Hotels in Delhi</a></li>
-                            <li><a href="#">Hotels in Goa</a></li>
-                            <li><a href="#">Hotels in Bangalore</a></li>
-                            <li><a href="#">Hotels in Srinagar</a></li>
-                            <li><a href="#">Hotels in Jaipur</a></li>
-                            <li><a href="#">Hotels in Chenai</a></li>
-                            <li><a href="#">Hotels in Gurgaon</a></li>
-                            <li><a href="#">Hotels in Mumbai</a></li>
-                            <li><a href="#">Hotels in Manali</a></li>
-                            <li><a href="#">Hotels in Hydrabad</a></li>
+                            
+                            <li><a href="#">Hotels in Yercaud</a></li>
+                            <li><a href="#">Hotels in Nagalur</a></li>
+                            <li><a href="#">Hotels in Coimbatore</a></li>
+                            <li><a href="#">Hotels in Udumalaipettai</a></li>
+                            <li><a href="#">Hotels in Namakkal</a></li>
+                            <li><a href="#">Hotels in KodaiKanal</a></li>
+                            <li><a href="#">Hotels in Devikolam</a></li>
+                            <li><a href="#">Hotels in Mysore</a></li>
+                            <li><a href="#">Hotels in Salem</a></li>
+                            <li><a href="#">Hotels in Erode</a></li>
                         </ul>
                         <ul>
                             <li><strong>Top Destination :</strong></li>
-                            <li><a href="#">Yercuad</a></li>
+                            <li><a href="#">Coimbatore</a></li>
                             <li><a href="#">Salem</a></li>
-                            <li><a href="#">Munnar</a></li>
+                            <li><a href="#">Yercaud</a></li>
                             <li><a href="#">Udumalpet</a></li>
-                            <li><a href="#">Thekkady</a></li>
-                            <li><a href="#">Mysuru</a></li>
+                            <li><a href="#">KodaiKanal</a></li>
+                            <li><a href="#">Mysore</a></li>
                         </ul>
                         <ul>
                             <li><strong>Top Searched Routes:</strong></li>
-                            <li><a href="#">Delhi to Munnar</a></li>
-                            <li><a href="#">Delhi to Shirdi</a></li>
-                            <li><a href="#">Mumbaito Katra</a></li>
-                            <li><a href="#">Hyderabad to Ajmer</a></li>
-                            <li><a href="#">Chennai to Darjeeling</a></li>
-                            <li><a href="#">Bangalore to Leh</a></li>
-                            <li><a href="#">Gurgaon to Gangtok</a></li>
-                            <li><a href="#">Delhi to Dwarka</a></li>
-                            <li><a href="#">Kolkata to Alleppey</a></li>
-                            <li><a href="#">Mumbai to Puri</a></li>
+                            <li><a href="#">Delhi to Coimbatore</a></li>
+                            <li><a href="#">Delhi to KodaiKanal</a></li>
+                            <li><a href="#">Mumbai to Mysore</a></li>
+                            <li><a href="#">Hyderabad to KodaiKanal</a></li>
+                            <li><a href="#">Kolkota to Coimbatore</a></li>
+                            <li><a href="#">Delhi to Mysore</a></li>
+                            <li><a href="#">Gurgaon to KodaiKanal</a></li>
+                            <li><a href="#">Delhi to Salem</a></li>
+                            <li><a href="#">Kolkata to Udumalaipettai</a></li>
+                            <li><a href="#">Mumbai to Namakkal</a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,10 +52,10 @@ export const Footer = () => {
         <div className="footer-top">
             <div className="container">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-5">
                 <div className="widget"> 
                 {/* <Image src="../assets/Images/logo-white.png" className="m-b15" alt="" width="180" /> */}
-                    <p className="text-capitalize m-b20">Bringing affordable and trusted accommodation that guests can book instantly.</p>
+                    <p className="text-capitalize m-b20">Bringing affordable and trusted accommodation <br/>that guests can book instantly.</p>
                     <div className="subscribe-form m-b20">
                     <form className="dzSubscribe" action="script/mailchamp.php" method="post">
                         <div className="dzSubscribeMsg"></div>
@@ -75,15 +75,17 @@ export const Footer = () => {
                     </ul>
                 </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-3">
                 <div className="widget border-0">
                     <h5 className="m-b30 text-white">Site Information</h5>
                     <ul className="list-2 list-line">
-                   
+							 <li><a href="/privacy-policy" className="site-button   ">Privacy Policy</a></li>
+							<li><a href="/terms-and-condition" className="site-button  ">Terms & Conditions</a></li>
+							 
                     </ul>
                 </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-4">
                 <div className="footer-address">
                     <h5 className="m-b30 text-white">Contact us</h5>
                     <ul>

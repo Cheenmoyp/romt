@@ -420,6 +420,7 @@ span.menu-heading:before {
 .top-btn-group {
     display: inline-block;
     float: right;
+	display:block;
     padding-top: 19px;
     padding-right: 53px;
 }
@@ -646,7 +647,7 @@ div#register-form-modal {
 }
 .search-con form button.site-button:hover{ background: #f25c0b; color:#fff; border-color: #f25c0b;}
 input#datepicker {
-    max-width: 154px;
+    max-width: 125px;
 }
 .search-categories {
    width: 100%;
@@ -4145,7 +4146,7 @@ footer.site-footer {
 }
 .list-2 li {
     float: left;
-    min-width: 158px;
+    min-width: 100%;
     padding: 5px 5px 5px 15px;
     width: 33.33%;
     position: relative;
@@ -4512,6 +4513,13 @@ header {
 	line-height: 16px;
 	font-size: 11px;
 }
+
+.filter-list-con li label{ position:relative!important; left:10px!important;}
+.filter-list-con li input{margin:0px 10px 0px 0px; position:relative;}
+.nav-side-menu li input{margin:0px 10px 0px 0px; position:relative;}
+.nav-side-menu li label{ position:relative!important; left:10px!important;}
+
+
 .hotel-box2-content h3 a {
 	font-size: 14px;
 }
@@ -4792,6 +4800,7 @@ ul.rating li:nth-child(2) {
 }
 .top-btn-group {
     padding-right: 48px;
+	display:block;
 }
 .logo {
     width: 78px;
@@ -4892,6 +4901,15 @@ footer h5.text-white {
 /*
  * Plugin style
  */
+ 
+ .top-btn-group {
+    display: inline-block;
+    float: right;
+    padding-top: 0px;
+	display:block;
+    padding-right: 0px;
+}
+ 
 .numberstyle-qty {
   position: relative;
   border-radius: 6px;
@@ -5958,7 +5976,100 @@ h3.heding-btmborder:before {
 
 .hotelfield{width:140px;}
 .hotel-banner-img { height:381px }
+.hotel-pagination li{
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    color: #000;
+    border: 1px solid #f48124;
+    border-radius: 50%;
+    padding-top: 8px;
+}
+.hotel-pagination li:first-child, .hotel-pagination li:last-child, .hotel-pagination .selected, .hotel-pagination li:hover {
+    background: #f48124;
+    color: #fff;
+    border: 1px solid #f48124;
+    text-decoration: none;
+}
+
+.intro {font-size:13px; padding:20px 0px 20px 0px;}
+.intro h2{font-size:15px;}
+
+.intro li{ list-style-type:decimal;}
+.intro ul{ padding:0px 0px 0px 30px;}
+
+.banner_page{width:100%; float:left; background:#ddd; height:200px;}
+.banner_page h3{text-align:center; padding:60px 0px 0px 0px;}
+
+
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    position:absolute; top:45px; left:-100px; padding:5px;
+}
+
+
+.kids-adult .dropdown-menu{width:210px; }
+.kids-adult .label-control{font-size:11px; width:100%; float:left;}
 
 
 
 
+
+
+ 
+.join-us {
+    color: #fff;
+    padding: 7px 14px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    line-height: 1.42857;
+    border-radius: 57px!important;
+    font-weight: 400;
+    text-align: center;
+    background: #f16b23;
+    border: 1px solid #f16b23;
+    margin-right: 10px;
+    text-decoration: none;
+    position: relative;
+}
+.join-us:hover {
+    background: none;
+    color: #f16b23;
+    text-decoration: none;
+    
+}
+.contact-us-box {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 110%;
+    left: -150px;
+    transform: translateY(-2em);
+ 
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    display: inline-block;
+    border-radius: 0px;
+    background: #fff;
+    text-align: left;
+    padding: 19px 15px 15px;
+    box-shadow: 0 11px 10px;
+    color: #000000a1;
+	z-index:99999999;
+}
+.join-us:hover .contact-us-box{
+	visibility: visible;
+    opacity: 1;
+    z-index: 9999;
+    transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.3s;}
+
+
+
+.navbar:hover div#navbarSupportedContent {
+    display: inline-block!important;
+}

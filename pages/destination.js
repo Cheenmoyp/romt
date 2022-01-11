@@ -313,7 +313,7 @@ const Destination = () => {
                     <div className="col-md-3 hotel-box2-right">
                         <ul className="rating">
                         <li><span>4.5/5</span>185 Ratings</li>
-                        <li><span className="cut-price">₹ 4300</span>₹ 3,700</li>
+                        <li><span className="cut-price"> </span>₹{slide.starting_price}</li>
                         </ul>
                         <a href="hotel-details.php" className="book-now-btn">Book Now</a>
                     </div>

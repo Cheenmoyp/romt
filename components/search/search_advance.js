@@ -17,7 +17,6 @@ export default function Search(props) {
 	const suggestClass = suggestBox ? 'display-block' : 'display-none';
 	const [cityList, setCityList] = useState([]);
     const router = useRouter();
-	console.log('props', props);
 	var tomorow_date = new Date();
 	var today_date = new Date();
 	var date_checkin = '';

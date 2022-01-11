@@ -55,7 +55,12 @@ export const Header = () => {
             </div>
             <div className="col-md-7">
                 <div className="nav-con">
-                <nav className="navbar navbar-expand-lg navbar-dark">
+						
+		 
+						
+						
+						
+					    <nav className="navbar navbar-expand-lg navbar-dark">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
@@ -82,38 +87,7 @@ export const Header = () => {
                             </div>
                         </div>
                         </li>
-                        <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Hotels </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div className="container">
-                            <div className="row">
-                                <div className="col-md-4"> 
-                                <span className="menu-heading">Hotel By Location</span>
-                                <ul className="nav flex-column">
-                                <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('coimbatore')}>Coimbatore</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('erode')}>Erode</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('krishnagiri')}>Krishnagiri</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('munnar')}>Munnar</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/destination/'+ base64_encode('yercaud')}>Yercaud</a></li>
-                                </ul>
-                                </div>
-                                <div className="col-md-8">
-                                <span className="menu-heading">Top Hotels</span>
-                                <ul className="nav flex-column">
-                                <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ4NA=='}>Livgrand Atisaya Resort</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5Ng=='}>Livgrand Bison Rise Resort</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA=='}>Livgrand Hotel Dreams Paradise</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjQ5OA=='}>Livgrand Hotel Dreams Paradise</a></li>
-                                    <li className="nav-item"> <a className="nav-link active" href={'/hotel-details/MjUwMg=='}>UDS Coco Hotels & Resorts, Udumalpet</a></li>
-                                </ul>
-                                </div>
-                                
-                                
-                                
-                            </div>
-                            </div>
-                            
-                        </div>
-                        </li>
+                        <li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href="/hotels" > Hotels </a> </li>
                         <li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <div className="container">
@@ -149,12 +123,35 @@ export const Header = () => {
                         </li>
                     </ul>
                     </div>
-                </nav>
+                </nav>	
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
                 </div>
             </div>
             <div className="col-md-3">
-                <div className="top-btn-group"> <a href='#' data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()} className="sign-in-btn"><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> <a href="#" className="join-us">  Contact us</a> </div>
-            </div>
+					  <div className="top-btn-group"> 
+			 
+			 <a href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
+				<div className="contact-us-box">
+					<p><strong>Address:</strong>101,Sengupta st, Ram nagar, Coimbatore- 641009</p>
+					<p><strong>Phone:</strong>91 733 00 777 44 / 91 733 00 222 77 (24/7 Support)</p>
+					<p><strong>Email:</strong>reservations@roomsonmytravel.in</p>
+				</div>
+			 </a>
+		</div>
+				
+				
+				
+				</div>
             </div>
 			
 			
