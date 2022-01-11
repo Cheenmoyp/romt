@@ -44,6 +44,9 @@ export const Header = () => {
 		}
 	}
 	
+	useEffect(()=>{
+		var jiniAssist_API=jiniAssist_API||{}, jini_LoadStart=new Date();let s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.id='jini-script-id';s.src = 'https://admin.bookingjini.com/v3/jiniAssist/index.js?api_key=ca3fcd53020d0702dd7c1d1b00de4324';var x = document.getElementsByTagName('script')[0];s.charset='UTF-8';s.setAttribute('Access-Control-Allow-Origin','*');x.parentNode.insertBefore(s, x);
+	},[])
 	
 	
     return (
