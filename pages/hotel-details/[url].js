@@ -118,12 +118,12 @@ const HotelDetails = (response) => {
                 </div>
                 <div className="col-md-4">
                   <div className="hotel-detail-bannerbox hotel-gallery">
-                    <figure> <a href="#" data-toggle="modal" data-target="#hotelphotos" onClick={() => handleLightBoxClick()}><img src={response.hoteldata.image} alt="" title=""/></a>
+                    <figure> <a href="#"  data-target="#hotelphotos" ><img src={response.hoteldata.image} alt="" title=""/></a>
                       <h3> </h3>
                     </figure>
                   </div>
                   <div className="hotel-detail-bannerbox hotel-video">
-                    <figure> <a href="#" className="v-button" data-toggle="modal" data-src="https://youtu.be/X4p4dFHDQgE" data-target="#videoModal"><img src={response.hoteldata.image} alt="" title=""/></a>
+                    <figure> <a href="#" className="v-button"   ><img src={response.hoteldata.image} alt="" title=""/></a>
                       <h4 className="video"><a href="#" className="v-button"  > 
                         <span> </span> </a></h4>
                     </figure>
