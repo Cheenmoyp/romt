@@ -11,16 +11,16 @@ export const Footer = () => {
                         <ul>
                             <li><strong>Treding Hotel Cities:</strong></li>
                             
-                            <li><a href="#">Hotels in Yercaud</a></li>
-                            <li><a href="#">Hotels in Nagalur</a></li>
-                            <li><a href="#">Hotels in Coimbatore</a></li>
-                            <li><a href="#">Hotels in Udumalaipettai</a></li>
-                            <li><a href="#">Hotels in Namakkal</a></li>
-                            <li><a href="#">Hotels in KodaiKanal</a></li>
-                            <li><a href="#">Hotels in Devikolam</a></li>
-                            <li><a href="#">Hotels in Mysore</a></li>
-                            <li><a href="#">Hotels in Salem</a></li>
-                            <li><a href="#">Hotels in Erode</a></li>
+                            <li><a  href={"/destination/WWVyY2F1ZA=="}>Hotels in Yercaud</a></li>
+                            <li><a href={"/destination/TmFnYWx1cg=="}>Hotels in Nagalur</a></li>
+                            <li><a href={"/destination/Q29pbWJhdG9yZQ=="}>Hotels in Coimbatore</a></li>
+                            <li><a href={"/destination/VWR1bWFsYWlwZXR0YWk="}>Hotels in Udumalaipettai</a></li>
+                            <li><a href={"/destination/TmFtYWtrYWw="}>Hotels in Namakkal</a></li>
+                            <li><a href={"/destination/S29kYWlLYW5hbA=="}>Hotels in KodaiKanal</a></li>
+                            <li><a href={"/destination/RGV2aWtvbGFt"}>Hotels in Devikolam</a></li>
+                            <li><a href={"/destination/TXlzb3Jl"}>Hotels in Mysore</a></li>
+                            <li><a href={"/destination/U2FsZW0="}>Hotels in Salem</a></li>
+                            <li><a href={"/destination/RXJvZGU="}>Hotels in Erode</a></li>
                         </ul>
                         <ul>
                             <li><strong>Top Destination :</strong></li>

@@ -68,7 +68,7 @@ export const Header = () => {
 									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 										<div className="container">
 											<div className="row">
-												<div className="col-md-12"> 
+												<div className="col-md-5"> 
 												<span className="menu-heading">All Destinations</span> 
 												  <ul className="menublocks">
 													{destinationList && destinationList.map((destination, index) => {
@@ -80,11 +80,45 @@ export const Header = () => {
 													})}
 												</ul>
 												</div>
+												
+												<div className="col-md-7"> 
+													<span className="menu-heading">Destination Ideas</span> 
+												
+												</div>
 											</div>
 										</div>
 									</div>
 								</li>
-								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href={"/hotels"} > Hotels </a> </li>
+								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href={"/hotels"} > Hotels </a> 
+								
+										<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+										<div className="container">
+											<div className="row">
+												<div className="col-md-4"> 
+												<span className="menu-heading">Hotel By Location</span> 
+												 
+												</div>
+												
+												<div className="col-md-4"> 
+													<span className="menu-heading">Hotel By Type</span> 
+												
+												</div>
+													<div className="col-md-4"> 
+													<span className="menu-heading">Top Hotels</span> 
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								
+								
+								
+								
+								
+								
+								
+								
+								</li>
 								<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a >
 									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 										<div className="container">
@@ -133,9 +167,9 @@ export const Header = () => {
 			 
 			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
-					<p><strong>Address:</strong>101,Sengupta st, Ram nagar, Coimbatore- 641009</p>
-					<p><strong>Phone:</strong>91 733 00 777 44 / 91 733 00 222 77 (24/7 Support)</p>
-					<p><strong>Email:</strong>reservations@roomsonmytravel.in</p>
+					 <h6>For Enquiry</h6>
+					<p><strong>Phone:</strong>  82 200 267 77 </p>
+					<p><strong>Email:</strong> enquiry@roomsonmytravel.in</p>
 				</div>
 			 </a >
 		</div>

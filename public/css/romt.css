@@ -228,6 +228,7 @@ input:checked + .slide-container .nav label, input:checked + .slide-container-2 
     top: 98%;
     left: 0;
     width: 100%;
+	min-height:200px;
     transform: translateY(-2em);
     z-index: -1;
     transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
@@ -5998,8 +5999,8 @@ h3.heding-btmborder:before {
 }
 
  
-.menublocks li{float:left!important; width:20%; list-style-type:none;}
-.menublocks li a{float:left!important; width:20%; list-style-type:none;}
+.menublocks li{float:left!important; width:50%; list-style-type:none;}
+.menublocks li a{float:left!important; width:50%; list-style-type:none;}
 
 .hotelfield{width:140px;}
 .hotel-banner-img { height:381px }
@@ -6197,3 +6198,42 @@ select {
 
 
 .css-majisu-InputComponent{display:none!important;}
+
+
+
+
+
+
+
+
+
+
+
+
+.room-am {
+    height: 106px;
+    overflow-y: scroll;
+}
+.room-am {
+    height: 106px;
+    overflow-y: scroll;
+}
+.room-am::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.room-am::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.room-am::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #f25c0b;
+}
