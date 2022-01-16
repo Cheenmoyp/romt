@@ -107,7 +107,15 @@ const Hotel = () => {
     setItemOffset(newOffset);
   };
 
-
+  const [showFilterbar, setShowFilterbar] = useState('collapse out');
+  const handleFilterBar = () => {
+      if (showFilterbar) {
+          setShowFilterbar(''); 
+      } else {
+          setShowFilterbar('collapse out');
+      }
+      
+  }
 
 
     
@@ -142,9 +150,9 @@ const Hotel = () => {
                         <div className="filter-box">
                             <div className="nav-side-menu">
                             <div className="brand">Filters</div>
-                            <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+                            <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" onClick={() => handleFilterBar()}></i>
                             <div className="menu-list">
-                                <div id="menu-content" className="menu-content collapse out">
+                                <div id="menu-content" className={'menu-content '+showFilterbar}>
                                 <div className="filter-list-con">
                                     <h4>Price Range</h4>
                                     

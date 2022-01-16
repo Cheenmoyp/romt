@@ -125,6 +125,15 @@ const Destination = (response) => {
     })
 })
 
+const [showFilterbar, setShowFilterbar] = useState('collapse out');
+const handleFilterBar = () => {
+    if (showFilterbar) {
+        setShowFilterbar(''); 
+    } else {
+        setShowFilterbar('collapse out');
+    }
+    
+}
     // let url = base64_encode((hotelList.length > 0 && hotelList[0].hotel_id) +'/'+ response.url_param[0] +'/'+ response.url_param[1] +'/'+ response.url_param[2]); 
 
     // console.log('search', (hotelList.length > 0 && hotelList[0].hotel_id), url)
@@ -183,9 +192,9 @@ const Destination = (response) => {
                         <div className="filter-box">
                             <div className="nav-side-menu">
                             <div className="brand">Filters</div>
-                            <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+                            <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" onClick={() => handleFilterBar()}></i>
                             <div className="menu-list">
-                                <div id="menu-content" className="menu-content collapse out">
+                                <div id="menu-content" className={'menu-content '+showFilterbar}>
                                 <div className="filter-list-con">
                                     <h4>Price Range</h4>
                                     
@@ -518,7 +527,7 @@ const Destination = (response) => {
                                         <div className="col-md-3 hotel-box2-right">
                                             <ul className="rating">
                                             <li> </li>
-                                            <li><span className="cut-price">₹ {slide.ending_price}</span>₹{slide.starting_price}</li>
+                                            <li>₹{slide.starting_price}</li>
                                             
                                             <li> <a href={"../hotel-details/"+ base64_encode(slide.hotel_id+'/'+(response.url_param[2] ? response.url_param[2]:'')+'/'+(response.url_param[3] ? response.url_param[3]:'')+'/'+(response.url_param[4] ? response.url_param[4]:1)+'/'+(response.url_param[5] ? response.url_param[5]:0))} className="book-now-btn-destinationsearch">Book Now</a>
                                             </li>
