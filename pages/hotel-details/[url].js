@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
@@ -44,16 +44,30 @@ const HotelDetails = (response) => {
 	    var q = base64_encode(checkin+"|"+checkout+"|"+hotel_id+"||||");
 	    var url = "https://roomsonmytravel.bookingjini.com";
 	    var be_url = url+'/property/?q='+q;
+
+   //for sticky scroll
+   const [scrollval, setScrollval] = useState('')
+   useEffect(() => {
+        document.addEventListener("scroll", () => {
+            const scrollCheck = window.scrollY > 150
+            console.log('scroll', window.scrollY);
+            if (scrollCheck) {
+                setScrollval('shrink')
+            } else {
+                setScrollval('')
+            }
+        })
+    })
   return (
     <>
     <Header></Header>
     <div className="inner-page-wrapper">
       <div className="inner-page-search-con">
-        <div className="search-con">
+        <div className={`search-con ${scrollval}`}>
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-				<Search hotelid={response.search[0] ? response.search[0]:""} cityid={response.search[1] ? response.search[1]:''  } checkin={response.search[2] ? response.search[2]:''} checkout={response.search[3] ? response.search[3]:''} adult={response.search[4] ? response.search[4]:''} kid={response.search[5] ? response.search[5]:''}/>
+              <Search cityid={response.search[0] ? response.search[0]:''  } checkin={response.search[1] ? response.search[1]:''} checkout={response.search[2] ? response.search[2]:''} adult={response.search[3] ? response.search[3]:''} kid={response.search[4] ? response.search[4]:''}/>
               </div>
             </div>
           </div>
@@ -479,7 +493,7 @@ const HotelDetails = (response) => {
 export async function getServerSideProps(context) {
   
   let url_param = base64_decode(context.params.url).split("/");
-  console.log('psrams', base64_decode(context.params.url));
+  console.log('psrams', url_param);
     // Fetch data from external API
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_HOST_BE}/hotel-details?hotel_id=${url_param[0]}`

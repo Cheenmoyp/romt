@@ -98,6 +98,21 @@ const destinationResponsive = {
     items: 1
   }
 };
+
+
+ //for sticky scroll
+ const [scrollval, setScrollval] = useState('')
+ useEffect(() => {
+      document.addEventListener("scroll", () => {
+          const scrollCheck = window.scrollY > 150
+          console.log('scroll', window.scrollY);
+          if (scrollCheck) {
+              setScrollval('shrink')
+          } else {
+              setScrollval('')
+          }
+      })
+  })
   return (
   <>
     <Header></Header> 
@@ -118,7 +133,7 @@ const destinationResponsive = {
           height='100%'
         />
 		</div>
-      <div className="search-con">
+      <div className={`search-con ${scrollval}`}>
         <div className="container">
           <div className="row">
             <div className="col-md-12">

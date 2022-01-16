@@ -13,23 +13,25 @@ const Hotel = () => {
 
     const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState('');
-    const [amenities, setAmenities] = useState('');
+    const [amenities, setAmenities] = useState([]);
     const [maxPrice, setMaxPrice] = useState('');
     const [minPrice, setMinprice] = useState('');
-	const loadHotels = async () => { 
-		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter2?group_id=2565&city_name&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities}`).then(response => {
-			return response.data.hotels_data
-		  })
-		  .catch(error => {
-			  console.log('error', error);
-		  });
+	function loadHotels() {
+        if (hotelList.length == 0) {
+            const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter2?group_id=2565&city_name&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}`).then(response => {
+                return response.data
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
 
-		await  fetcher.then(response => {
-			if(hotelList.length == 0 ) {
-				setHotelList(response)
-			}
-		})
-	}
+            fetcher.then(response => {
+                //if(hotelList.length == 0 ) {
+                    setHotelList(response)
+                //}
+            })
+        }
+    }
 	
 
     const handleFormChange = (event) => {
@@ -52,6 +54,19 @@ const Hotel = () => {
 		loadHotels()
 	} */
 	
+    var aminityFilter = [];
+    const handleAminityChange = (aminity_id, event_status) => {
+        aminityFilter = [...amenities];
+        if (event_status) {
+            //var aminty_filter = aminityFilter;
+            (aminityFilter.push(aminity_id));
+        } else {
+            aminityFilter = (aminityFilter.filter(item => item !== aminity_id));
+        }
+        setAmenities(aminityFilter);
+        setHotelList([]);
+
+    }
 
 
 
@@ -65,16 +80,22 @@ const Hotel = () => {
 	var itemsPerPage= 3;
   useEffect(() => {
 	   
-	   if (hotelList.length == 0) {
-		   loadHotels();
-	   }
+	   //if (hotelList.length == 0) {
+        loadHotels();
+        var hotels = hotelList.hotels_data;//console.log('hotels', hotels);
+	   //}
     // Fetch items from another resources.
-	const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(hotelList.slice(itemOffset, endOffset));
-	console.log('Loading items2',hotelList);
-	console.log('Loading items',hotelList.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(hotelList.length / itemsPerPage));
+    if (hotels && hotels.length != 0) {
+        
+        const endOffset = itemOffset + itemsPerPage;
+        //console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        setCurrentItems(hotels.slice(itemOffset, endOffset));
+        //console.log('Loading items2',hotels);
+        //console.log('Loading items',hotels.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(hotels.length / itemsPerPage));
+    } else {
+        setCurrentItems([]);
+    }
   }, [hotelList, itemOffset, itemsPerPage]);
 
   // Invoke when user click to request another page.
@@ -268,123 +289,125 @@ const Hotel = () => {
                                     <h4>Amenities</h4>
                                     <ul>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="42" onChange={(event) => { handleFormChange({
-                                            amenity: event.target.value,
-                                        });}}
+                                        <input type="checkbox" id="amenities" name="amenities" value="42" onChange={(event) => {
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                    }}
                                         />
-                                        <label htmlFor="amenities">Free parking</label>
+                                        <label htmlFor="amenities"> Free parking</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="2" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
+                                        <input type="checkbox" id="amenities" name="amenities" value="2" onChange={(event) => {
+                                            handleAminityChange(
+                                                 event.target.value,event.target.checked
+                                            );
                                         }}/>
-                                        <label htmlFor="amenities">24-hour room service</label>
+                                        <label htmlFor="amenities"> 24-hour room service</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="28" onChange={(event) => { 
+                                        <input type="checkbox" id="amenities" name="amenities" value="28" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Doctor on call</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="227" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Complimentary Breakfast</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="35" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Gym</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="55" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Jacuzzi</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="76" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Restaurant</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="84" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Spa</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="96" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Dry cleaning</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="165" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
+                                         }}/>
+                                        <label htmlFor="amenities"> Bar</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="amenities" name="amenities" value="269" onChange={(event) => { 
                                             handleFormChange({
                                                 amenity: event.target.value,
                                             });
                                          }}/>
-                                        <label htmlFor="amenities">Doctor on call</label>
+                                        <label htmlFor="amenities"> Meeting rooms</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="227" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
+                                        <input type="checkbox" id="amenities" name="amenities" value="365" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
                                          }}/>
-                                        <label htmlFor="amenities">Complimentary Breakfast</label>
+                                        <label htmlFor="amenities"> Pets Allowed</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="35" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
+                                        <input type="checkbox" id="amenities" name="amenities" value="367" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
                                          }}/>
-                                        <label htmlFor="amenities">Gym</label>
+                                        <label htmlFor="amenities"> Couple Friendly</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="55" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
+                                        <input type="checkbox" id="amenities" name="amenities" value="376" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
                                          }}/>
-                                        <label htmlFor="amenities">Jacuzzi</label>
+                                        <label htmlFor="amenities"> Swimming Pool</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="amenities" name="amenities" value="76" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
+                                        <input type="checkbox" id="amenities" name="amenities" value="400" onChange={(event) => { 
+                                            handleAminityChange(
+                                                event.target.value,event.target.checked
+                                           );
                                          }}/>
-                                        <label htmlFor="amenities">Restaurant</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="84" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Spa</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="96" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Dry cleaning</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="165" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Bar</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="269" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Meeting rooms</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="365" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Pets Allowed</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="367" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Couple Friendly</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="376" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Swimming Pool</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="amenities" name="amenities" value="400" onChange={(event) => { 
-                                            handleFormChange({
-                                                amenity: event.target.value,
-                                            });
-                                         }}/>
-                                        <label htmlFor="amenities">Terrace</label>
+                                        <label htmlFor="amenities"> Terrace</label>
                                     </li>
 									<li>
 										

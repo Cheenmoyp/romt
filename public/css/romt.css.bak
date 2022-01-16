@@ -6242,10 +6242,3 @@ select {
 
 
 .guestbar{width:200px;}
-.react-dropdown-select-content span {
-	display: inline-block;
-    width: 155px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-}

@@ -91,7 +91,7 @@ export const Footer = () => {
                     <ul>
                   
                     <li><i className="fa fa-mobile" aria-hidden="true"></i><strong>Phone:</strong><br/>
-                        91 733 00 777 44 / <br/>
+                        82 200 267 77 / <br/>
                         91 733 00 222 77 (24/7 Support)</li>
                     <li><i className="fa fa-envelope" aria-hidden="true"></i><strong>Email:</strong><br/>
                         reservations@roomsonmytravel.in</li>
@@ -104,7 +104,7 @@ export const Footer = () => {
         <div className="footer-bottom">
             <div className="container">
             <div className="row">
-                <div className="col-lg-12 text-center  "><span className="fbottom-like">© 2021 | ROMT - Rooms On My Travel</span></div>
+                <div className="col-lg-12 text-center  "><span className="fbottom-like">© 2022 | ROMT - Rooms On My Travel</span></div>
             </div>
             </div>
         </div>

@@ -7,13 +7,59 @@ import axios from 'axios';
 
 export const Header = () => {
     const [loginmodal, setLoginmodal] = useState(false);
+    const [showNavbar, setShowNavbar] = useState('');
+    const [showDestinationNav, setShowDestinationNav] = useState('');
+    const [showHotelNav, setShowHotelNav] = useState('');
+    const [showOfferNav, setShowOfferNav] = useState('');
+	//package list
+    const [packageList, setPackageList] = useState([]);
 	const handleLoginBoxClick = () => {
         setLoginmodal(!loginmodal);
     }
-	//package list
-    const [packageList, setPackageList] = useState([]);
+
+	
+	const handleNavBar = () => {
+		if (showNavbar) {
+			setShowNavbar(''); 
+		} else {
+			setShowNavbar('show');
+		}
+        
+    }
+	
+	const handleDestinationNav = () => {
+		if (showDestinationNav) {
+			setShowDestinationNav('');
+		} else {
+			setShowDestinationNav('show');
+			setShowHotelNav('');
+			setShowOfferNav('');
+		}
+	}
+	const handleHotelNav = () => {
+		if (showHotelNav) {
+			setShowHotelNav('');
+		} else {
+			setShowHotelNav('show');
+			setShowDestinationNav('');
+			setShowOfferNav('');
+		}
+        
+    }
+	const handleOfferNav = () => {
+		if (showOfferNav) {
+			setShowOfferNav('');
+		} else {
+			setShowOfferNav('show');
+			setShowHotelNav('');
+			setShowDestinationNav('');
+		}
+        
+    }
     useEffect(()=>{
 		destinatinListFetch();
+		headerHotelFetch();
+		topCityFetch();
         const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-list/2565`).then(response => {
             return response.data.package_details;
         })
@@ -43,9 +89,43 @@ export const Header = () => {
 			});
 		}
 	}
+
+	
+	//hotel list
+    const [headerHotelList, setHeaderHotelList] = useState([]);
+	function headerHotelFetch() {
+		if (!headerHotelList.length) {
+			const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-city-and-hotels/2565`).then(response => {
+				return response.data;
+			})
+			.catch(error => {
+				console.log('error', error);
+			});
+			fetcher.then(response => {
+				setHeaderHotelList(response.results); 
+			});
+		}
+	}
+	
+	//top city list
+    const [topCityList, setTopCityList] = useState([]);
+	function topCityFetch() {
+		if (!topCityList.length) {
+			const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/TOP`).then(response => {
+				return response.data;
+			})
+			.catch(error => {
+				console.log('error', error);
+			});
+			fetcher.then(response => {
+				setTopCityList(response.destinations); 
+			});
+		}
+	}
 	
 	
-	
+	var keyHotelLocation = 0;
+	var keyTopHotel = 0;
     return (
         <>
         <div className="container">
@@ -61,11 +141,11 @@ export const Header = () => {
 							<div className="collapsible-content">
 							
 											 <nav className="navbar navbar-expand-lg navbar-dark">
-						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
-						<div className="collapse navbar-collapse" id="navbarSupportedContent">
+						<button className="navbar-toggler" type="button" data-toggle="collapse" onClick={() => handleNavBar()} data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
+						<div className={'collapse navbar-collapse '+showNavbar} id="navbarSupportedContent">
 								<ul className="navbar-nav mr-auto">
-								<li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Destination </a>
-									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li className="nav-item dropdown"> <a className="nav-link dropdown-toggle" onClick={() => handleDestinationNav()} href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Destination </a>
+									<div className={'dropdown-menu '+showDestinationNav} aria-labelledby="navbarDropdown">
 										<div className="container">
 											<div className="row">
 												<div className="col-md-5"> 
@@ -80,8 +160,20 @@ export const Header = () => {
 													})}
 												</ul>
 												</div>
+												<div className="col-md-3"> 
+												<span className="menu-heading">Top Destinations</span> 
+												  <ul className="">
+													{topCityList && topCityList.map((destination, index) => {
+														
+														return (
+															<li  key={index}> <a className="nav-link active" href={'/destination/'+ base64_encode(destination)} >{destination}</a></li>
+														   
+														)
+													})}
+												</ul>
+												</div>
 												
-												<div className="col-md-7"> 
+												<div className="col-md-4"> 
 													<span className="menu-heading">Destination Ideas</span> 
 												
 												</div>
@@ -89,14 +181,24 @@ export const Header = () => {
 										</div>
 									</div>
 								</li>
-								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" href={"/hotels"} > Hotels </a> 
+								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" onClick={() => handleHotelNav()} href={"/hotels"} > Hotels </a> 
 								
-										<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+										<div className={'dropdown-menu '+showHotelNav} aria-labelledby="navbarDropdown">
 										<div className="container">
 											<div className="row">
 												<div className="col-md-4"> 
 												<span className="menu-heading">Hotel By Location</span> 
-												 
+													<ul className="">
+														{headerHotelList && headerHotelList.map((headerHotel, index) => {
+															if (headerHotel.type == 'city' && keyHotelLocation<=4) {
+																keyHotelLocation++;
+																return (
+																	<li  key={index}> <a className="nav-link active" href={'/destination/'+ base64_encode(headerHotel.name)} >{headerHotel.name}</a></li>
+																
+																)
+															}	
+														})}
+													</ul>
 												</div>
 												
 												<div className="col-md-4"> 
@@ -105,7 +207,18 @@ export const Header = () => {
 												</div>
 													<div className="col-md-4"> 
 													<span className="menu-heading">Top Hotels</span> 
-												
+													<ul className="">
+														{headerHotelList && headerHotelList.map((headerHotel, index) => {
+															if (headerHotel.type == 'hotel' && keyTopHotel<=4) {
+																keyTopHotel++;
+																return (
+																	<li  key={index}> <a className="nav-link active" href={'/hotel-details/'+ base64_encode(headerHotel.id)} >{headerHotel.name}</a></li>
+																
+																)
+																
+															}	
+														})}
+													</ul>
 												</div>
 											</div>
 										</div>
@@ -119,8 +232,8 @@ export const Header = () => {
 								
 								
 								</li>
-								<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a >
-									<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" onClick={() => handleOfferNav()} href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Offers & Packages </a >
+									<div className={'dropdown-menu '+showOfferNav} aria-labelledby="navbarDropdown">
 										<div className="container">
 											<div className="row">
 												<div className="col-md-4"> 
@@ -163,8 +276,11 @@ export const Header = () => {
 				  </div>
             </div>
             <div className="col-md-3">
+			
+				
+			
 					  <div className="top-btn-group"> 
-			 
+			 <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>  
 			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
 					 <h6>For Enquiry</h6>
