@@ -4223,6 +4223,9 @@ font-size: 23px;
 	max-width: 1140px;
 }
 
+ 
+
+
   .nav-con .navbar-dark .navbar-nav .nav-link {
     color:#363636;
     text-transform: uppercase;
@@ -4630,6 +4633,30 @@ display:none;
 }
 }
 
+
+
+@media (min-width: 1024px){
+
+
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    position:absolute; top:45px; left:-100px; padding:5px;
+}
+
+a.addroom-btn {
+    padding: 3px 8px;
+    background: #ff8a34;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ff8a34;
+    float: right;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+}
+
+
 @media (max-width: 1024px){
 	
 	.top-btn-group {
@@ -4637,13 +4664,66 @@ display:none;
 	position:absolute; 
 	right:200px;
 }
-	
+
+
+
+
+
+
+
+.react-dropdown-select {
+	width:150px !important
+}
+ 
+.join-us {
+    color: #fff;
+    padding: 7px 14px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    line-height: 1.42857;
+    border-radius: 57px!important;
+    font-weight: 400;
+    text-align: center;
+    background: #f16b23;
+    border: 1px solid #f16b23;
+    margin-right: 10px;
+    text-decoration: none;
+    position: relative;
+}
+.join-us:hover {
+    background: none;
+    color: #f16b23;
+    text-decoration: none;
+    
 }
 
 
 
 
+
+
+	
+}
+
+
+
 @media (max-width: 768px){
+	
+.hotel-detail-bannerbox.hotel-gallery, .hotel-detail-bannerbox.hotel-video {
+    display: none;
+}
+
+.room-slider {
+    border-radius: 5px;
+    height: auto;
+    margin-bottom: 15px;
+}
+	
 .container { max-width: 716px;}
 .col-lg-3.col-md-4 {
     position: absolute;
@@ -4911,6 +4991,44 @@ footer h5.text-white {
 }
 @media (max-width: 450px){
 	
+	
+a.addroom-btn {
+    padding: 3px 8px;
+    background: #ff8a34;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ff8a34;
+    float: right;
+    text-decoration: none;
+    font-size: 13px;
+}	
+	
+	
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    position:absolute; top:41px; left:-13px; padding:5px;
+}
+	
+.welcome-sectio-left .content {
+    margin-bottom: 0px;
+}	
+.package-home li{ padding:0px 20px 0px 20px; text-align:center;}	
+	
+.nav-con .navbar-dark .navbar-toggler {
+    color: rgba(255,255,255,.5);
+    border-color: rgba(255,255,255,.1);
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+}	
+	
+.react-dropdown-select{width:100%!important;}
+	
+	
+.join-us{display:none;}	
+	
 	.top-btn-group {
     display: inline-block;
     float: right;
@@ -5101,7 +5219,7 @@ footer h5.text-white {
 	margin-top: -60px
 }
 .box-2.box-bx {
-    padding: 44px 0;
+    padding: 33px 0;
 }
 
 
@@ -5251,16 +5369,7 @@ button.close {
 	position:relative;
 }
 .more-add ul li:last-child{ border:none; }
-a.addroom-btn {
-    padding: 3px 8px;
-    background: #ff8a34;
-    color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ff8a34;
-    float: right;
-    text-decoration: none;
-    font-size: 14px;
-}
+
 a.addroom-btn:hover{
 	background: none;
     color: #ff8a34;
@@ -5378,9 +5487,6 @@ button#myBtn:before {
     right: 0;
     color: #d7630d;
 }
-
-
-
 
 
 
@@ -6033,9 +6139,6 @@ h3.heding-btmborder:before {
 .banner_page h3{text-align:center; padding:60px 0px 0px 0px;}
 
 
-.show-on-hover:hover > ul.dropdown-menu {
-    display: block;    position:absolute; top:45px; left:-100px; padding:5px;
-}
 
 
 .kids-adult .dropdown-menu{width:210px; }
@@ -6046,39 +6149,13 @@ h3.heding-btmborder:before {
 
 
 
- 
-.join-us {
-    color: #fff;
-    padding: 7px 14px;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    border-width: 0;
-    border-style: solid;
-    border-color: transparent;
-    line-height: 1.42857;
-    border-radius: 57px!important;
-    font-weight: 400;
-    text-align: center;
-    background: #f16b23;
-    border: 1px solid #f16b23;
-    margin-right: 10px;
-    text-decoration: none;
-    position: relative;
-}
-.join-us:hover {
-    background: none;
-    color: #f16b23;
-    text-decoration: none;
-    
-}
+
 .contact-us-box {
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    top: 110%;
-    left: -150px;
+    top: 86px;
+    right: 95px;
     transform: translateY(-2em);
  
     transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
@@ -6189,9 +6266,7 @@ select {
   width: 100%;
   background: white;
 }
-.react-dropdown-select {
-	width:150px !important
-}
+
 
 
 .css-majisu-InputComponent{width:200px;}

@@ -780,7 +780,10 @@ export default function Rooms(props) {
                                 )
                             })}
                         </div>
- 
+
+                        <div className="text-center">
+                            <button onClick={myFunctionNew()} id="myBtn" className="more-rooms">View More Rooms</button>
+                        </div>
                     </div>
                 </div>
             </div>

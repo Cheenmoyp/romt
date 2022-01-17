@@ -24,25 +24,25 @@ export const Footer = () => {
                         </ul>
                         <ul>
                             <li><strong>Top Destination :</strong></li>
-                            <li><a href={"/destination/Q29pbWJhdG9yZQ=="}>Coimbatore</a></li>
-                            <li><a href={"/destination/U2FsZW0="}>Salem</a></li>
-                            <li><a href={"/destination/WWVyY2F1ZA=="}>Yercaud</a></li>
-                            <li><a href={"/destination/VWR1bWFsYWlwZXR0YWk="}>Udumalaipettai</a></li>
-                            <li><a href={"/destination/S29kYWlLYW5hbA=="}>KodaiKanal</a></li>
-                            <li><a href={"/destination/TXlzb3Jl"}>Mysore</a></li>
+                            <li><a href="#">Coimbatore</a></li>
+                            <li><a href="#">Salem</a></li>
+                            <li><a href="#">Yercaud</a></li>
+                            <li><a href="#">Udumalpet</a></li>
+                            <li><a href="#">KodaiKanal</a></li>
+                            <li><a href="#">Mysore</a></li>
                         </ul>
                         <ul>
                             <li><strong>Top Searched Routes:</strong></li>
-                            <li><a href={"/destination/Q29pbWJhdG9yZQ=="}>Delhi to Coimbatore</a></li>
-                            <li><a href={"/destination/S29kYWlLYW5hbA=="}>Delhi to KodaiKanal</a></li>
-                            <li><a href={"/destination/TXlzb3Jl"}>Mumbai to Mysore</a></li>
-                            <li><a href={"/destination/S29kYWlLYW5hbA=="}>Hyderabad to KodaiKanal</a></li>
-                            <li><a href={"/destination/Q29pbWJhdG9yZQ=="}>Kolkota to Coimbatore</a></li>
-                            <li><a href={"/destination/TXlzb3Jl"}>Delhi to Mysore</a></li>
-                            <li><a href={"/destination/S29kYWlLYW5hbA=="}>Gurgaon to KodaiKanal</a></li>
-                            <li><a href={"/destination/U2FsZW0="}>Delhi to Salem</a></li>
-                            <li><a href={"/destination/VWR1bWFsYWlwZXR0YWk="}>Kolkata to Udumalaipettai</a></li>
-                            <li><a href={"/destination/TmFtYWtrYWw="}>Mumbai to Namakkal</a></li>
+                            <li><a href="#">Delhi to Coimbatore</a></li>
+                            <li><a href="#">Delhi to KodaiKanal</a></li>
+                            <li><a href="#">Mumbai to Mysore</a></li>
+                            <li><a href="#">Hyderabad to KodaiKanal</a></li>
+                            <li><a href="#">Kolkota to Coimbatore</a></li>
+                            <li><a href="#">Delhi to Mysore</a></li>
+                            <li><a href="#">Gurgaon to KodaiKanal</a></li>
+                            <li><a href="#">Delhi to Salem</a></li>
+                            <li><a href="#">Kolkata to Udumalaipettai</a></li>
+                            <li><a href="#">Mumbai to Namakkal</a></li>
                         </ul>
                     </div>
                 </div>
