@@ -567,12 +567,13 @@ div#register-form-modal {
     margin: 0 0 25px;
 }
 .search-con form {
-    width: 100%;
-    max-width: 90%;
+width: auto;
+ 
     border-radius: 30px;
     position: relative;
     background: #fff;
-    /*padding-right: 150px;*/
+    /* float: left; */
+    padding: 0px 129px 0px 22px;
     display: inline-block;
     border: 1px solid #f3f3f3cc;
 }
@@ -624,9 +625,9 @@ div#register-form-modal {
     left: 0;
     background: none;
     /*padding-left: 51px!important;*/
-    padding-left: 20px!important;
+    
     width: 96px;
-    padding-right: 3px!important;
+    padding:0px 27px 0px 21px!important;
 }
 .search-con form .form-control.dropdown-box label {
     font-size: 14px;
@@ -645,8 +646,8 @@ div#register-form-modal {
     text-transform: uppercase;
     letter-spacing: 1px;
     position: absolute;
-    top: -1px;
-    right: -1px;
+    top: -2px;
+    /*right: -1px;*/
 }
 .search-con form button.site-button:hover{ background: #f25c0b; color:#fff; border-color: #f25c0b;}
 input#datepicker {
@@ -4437,7 +4438,7 @@ header.dashboard-header .nav-con div#navbarSupportedContent {
 	font-size: 12px;
 }
 .search-con form button, .search-con form input, .search-con form optgroup, .search-con form select, .search-con form textarea {
-    padding: 5PX;
+    padding: 5px;
     border: none;
     font-size: 11px;
 	 
@@ -4639,7 +4640,11 @@ display:none;
 
 
 .show-on-hover:hover > ul.dropdown-menu {
-    display: block;    position:absolute; top:45px; left:-100px; padding:5px;
+    display: block;    
+    position:absolute; 
+    top:48px; 
+    /* left:-100px;  */
+    padding:5px;
 }
 
 a.addroom-btn {
@@ -5005,7 +5010,11 @@ a.addroom-btn {
 	
 	
 .show-on-hover:hover > ul.dropdown-menu {
-    display: block;    position:absolute; top:41px; left:-13px; padding:5px;
+    display: block;    
+    position:absolute; 
+    top:41px; 
+    /* left:-13px;  */
+    padding:5px;
 }
 	
 .welcome-sectio-left .content {
@@ -6316,7 +6325,7 @@ select {
 }
 
 
-.guestbar{width:200px;}
+.guestbar{ }
 .react-dropdown-select-content span {
 	display: inline-block;
     width: 155px;
@@ -6324,3 +6333,31 @@ select {
     overflow: hidden !important;
     text-overflow: ellipsis;
 }
+
+.bgd-count{
+	    background: #d5d5d5;
+    color: #fff;
+    border-radius: 40px;
+	
+}
+.counter-box-new{width:40px;}
+
+
+.css-148o527-ItemComponent{
+	padding: 5px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+    font-size: 14px;
+    text-align: left;
+    color: #7d7d7d;
+	
+	
+}
+
+.filter-list-con label{
+display: inline-block;
+    position: relative;
+    left: 7px;
+}
+
+.nav-con .navbar-dark .navbar-nav .nav-link a{color:#363636!important;}

@@ -1,22 +1,21 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Header } from '../components/header/header';
-import { Footer } from '../components/footer/footer';
+import { Header } from '../../components/header/header';
+import { Footer } from '../../components/footer/footer';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
-import Seacrch from '../components/search/search';
+import Seacrch from '../../components/search/search';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import ReactPaginate from 'react-paginate';
 
-const Hotel = () => {
-
+const HotelCategory = (props) => {
     const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState('');
     const [amenities, setAmenities] = useState([]);
     const [maxPrice, setMaxPrice] = useState('');
     const [minPrice, setMinprice] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(props.category);
     var categories = [];
 	function loadHotels() {
         if (hotelList.length == 0) {
@@ -321,6 +320,7 @@ const Hotel = () => {
                                             <input type="radio" id="category" name="category" value="Luxury" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
+                                            checked={category === "Luxury"}
                                             />
                                             <label htmlFor="category">Luxury</label>
                                         </li>
@@ -328,6 +328,7 @@ const Hotel = () => {
                                             <input type="radio" id="category" name="category" value="TOP" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
+                                            checked={category === "TOP"}
                                             />
                                             <label htmlFor="category">TOP</label>
                                         </li>
@@ -335,6 +336,7 @@ const Hotel = () => {
                                             <input type="radio" id="category" name="category" value="Boutique" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
+                                            checked={category === "Boutique"}
                                             />
                                             <label htmlFor="category">Boutique</label>
                                         </li>
@@ -342,6 +344,7 @@ const Hotel = () => {
                                             <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
+                                            checked={category === "Business"}
                                             />
                                             <label htmlFor="category">Business</label>
                                         </li>
@@ -547,10 +550,13 @@ const Hotel = () => {
                                 })}
                             </div>
                             :
+
                             <div className="col-md-9">
                                 <h1 style={{textAlign: 'center'}}>No Hotels Found</h1>
                             </div>
                         }
+						
+						
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
@@ -577,6 +583,10 @@ const Hotel = () => {
     )
 }
 
-export default Hotel;
+export async function getServerSideProps(context) {
+    let url_param = base64_decode(context.params.url);
+    
+    return { props:  { category: url_param ? url_param : ''} };
+  }
 
-
+export default HotelCategory;

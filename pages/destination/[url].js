@@ -18,13 +18,14 @@ const Destination = (response) => {
     const [maxPrice, setMaxPrice] = useState('');
     const [minPrice, setMinprice] = useState('');
     const [destinationBanner, setDestinationBanner] = useState('');
+    const [category, setCategory] = useState('');
     let hotel_name = [];
     
 	function loadHotels() {
 	if (hotelList.length == 0) {
         //console.log('aminities',amenities);return;
 		//const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter2?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price&max_price`).then(response => {
-		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter2?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}`).then(response => {
+		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
 			return response.data
 		})
 		.catch(error => {
@@ -53,6 +54,9 @@ const Destination = (response) => {
             var price = event.price.split('-');
             setMinprice(price[0] ? price[0] : '');
             setMaxPrice(price[1] ? price[1] : '');
+        }
+        if(event.category) {
+            setCategory(event.category ? event.category : '');
         }
         setHotelList([]);
         
@@ -336,6 +340,39 @@ const handleFilterBar = () => {
                                     </ul>
                                 </div>
                                 <div className="filter-list-con">
+                                    <h4>Categories</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="category" name="category" value="Luxury" onChange={(event) => { handleFormChange({
+                                                category: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="category">Luxury</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="category" name="category" value="TOP" onChange={(event) => { handleFormChange({
+                                                category: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="category">TOP</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="category" name="category" value="Boutique" onChange={(event) => { handleFormChange({
+                                                category: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="category">Boutique</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
+                                                category: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="category">Business</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="filter-list-con">
                                     <h4>Amenities</h4>
                                     <ul>
                                     <li>
@@ -540,7 +577,9 @@ const handleFilterBar = () => {
                         </div>
                         :
 
-                        'No Hotels Found'
+                        <div className="col-md-9">
+                            <h1 style={{textAlign: 'center'}}>No Hotels Found</h1>
+                        </div>
                     }
                 </div>
                 <div className="row">

@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-dropdown-select";
 
 export default function Search(props) {
-	
+	console.log('pp', props);
 	const [city, setCity] = useState(props ? props.cityid : '');
 	const [val, setVal] = useState();
     const [searchData, setSearchData] = useState({})
@@ -55,7 +55,7 @@ export default function Search(props) {
 				let url = base64_encode(formData.cityid+'/'+moment(formData.checkin).format("MM-DD-YYYY") +'/'+ moment(formData.checkout).format("MM-DD-YYYY") +'/'+formData.adult+'/'+formData.kid);
 				router.push(`/hotel-details/${url}`)
 			} else {
-				let url = base64_encode(selected_data[0].label+'/'+formData.cityid+'/'+moment(formData.checkin).format("MM-DD-YYYY") +'/'+ moment(formData.checkout).format("MM-DD-YYYY") +'/'+formData.adult+'/'+formData.kid);
+				let url = base64_encode(selected_data[0].label+'/'+formData.cityid+'/'+moment(formData.checkin).format("MM-DD-YYYY") +'/'+ moment(formData.checkout).format("MM-DD-YYYY") +'/'+(formData.adult ? formData.adult : adult)+'/'+(formData.kid ? formData.kid : kid));
 				router.push(`/destination/${url}`)
 			}			
 		} else {
@@ -233,7 +233,7 @@ export default function Search(props) {
 							  <div className="form-control ">
 							  <span className="label-control">ADULTS (12y +)</span>
 							  
-								<span className="btn btn-default"  onClick={(event) => {
+								<span className="btn btn-default bgd-count"  onClick={(event) => {
 									if (adult > 1) {
 										handleTextChange({
 											adult: formData.adult?parseInt(formData.adult)-1:1,
@@ -241,9 +241,9 @@ export default function Search(props) {
 									}
 								}} >-</span>
 								
-								<input type="number" name="" placeholder="Adult" max="3" min="0" value={formData.adult ? formData.adult:adult}
+								<input className="counter-box-new" type="number" name="" placeholder="Adult" max="3" min="0" value={formData.adult ? formData.adult:adult}
 								 onKeyPress="return '0';"  />
-								<span className="btn btn-default"  onClick={(event) => {
+								<span className="btn btn-default bgd-count"  onClick={(event) => {
 									if (adult == 0 || adult <=3) {
 										handleTextChange({
 											adult: formData.adult?parseInt(formData.adult)+1:1,
@@ -256,7 +256,7 @@ export default function Search(props) {
 							<div className="form-control" >
 							
 								<span className="label-control">CHILDREN (Age 12y and below)</span>
-								<span className="btn btn-default  " onClick={(event) => {
+								<span className="btn btn-default bgd-count  " onClick={(event) => {
 									if (kid >= 0) {
 										handleTextChange({
 												kid: formData.kid?parseInt(formData.kid)-1:0,
@@ -264,8 +264,8 @@ export default function Search(props) {
 									}
 								}} >-</span>
 								
-								<input type="number" name="" placeholder="Kids" max="2" min="0" value={formData.kid || formData.kid == 0 ? formData.kid: kid} readOnly />
-								<span className="btn btn-default" onClick={(event) => {
+								<input className="counter-box-new" type="number" name="" placeholder="Kids" max="2" min="0" value={formData.kid || formData.kid == 0 ? formData.kid: kid} readOnly />
+								<span className="btn btn-default bgd-count" onClick={(event) => {
 									if ((kid<=2)) {
 										handleTextChange({
 											kid: formData.kid?parseInt(formData.kid)+1:1,

@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-export const Header = () => {
+export const Loginheader = () => {
     const [loginmodal, setLoginmodal] = useState(false);
     const [showNavbar, setShowNavbar] = useState('');
     const [showDestinationNav, setShowDestinationNav] = useState('');
@@ -379,8 +379,8 @@ export const Header = () => {
 			
 				
 			
-					  <div className="top-btn-group"> 
-			 <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>  
+					  <div className="top-btn-group" style={{paddingRight:'46px'}}> 
+			 <a href={'/index-new'} className="sign-in-btn"><i className="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>  
 			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
 					 <h6>For Enquiry</h6>

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
-import { useRouter } from 'next/router';
 
 export const Header = () => {
     const [loginmodal, setLoginmodal] = useState(false);
@@ -15,14 +14,8 @@ export const Header = () => {
 	//package list
     const [packageList, setPackageList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
-    const [mobile, setMobile] = useState('');
-    const [otp, setOtp] = useState('');
-    const [otpActual, setOtpActual] = useState('');
-    const [error, setError] = useState('');
-    const router = useRouter();
     var categories = [];
 	const handleLoginBoxClick = () => {
-		setError('');
         setLoginmodal(!loginmodal);
     }
 
@@ -150,69 +143,7 @@ export const Header = () => {
 			});
 		}
 	}
-	function submitLogin() {
-		//e.preventDefault();
-		if (mobile) {
-			//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2565`).then(response => {
-			const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2035`).then(response => {
-				return response.data;
-			})
-			.catch(error => {
-				console.log('error', error);
-			});
-			check.then(response => {
-				//setTopCityList(response.destinations); 
-				if ( response.status ) {
-					const otpsend  = axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/send-otp`, {'mobile': mobile}).then(response => {
-						console.log('response',response)
-						if(response.data.status){
-							setOtpActual(response.data.otp_value);
-						}
-						return response.data;
-					})
-					.catch(error => {
-						console.log('error', error);
-					});
-				} else {
-					setError('Mobile number is not registered');
-					//console.log('error', 'invalid')
-				}
-			});
-		} else {
-			setError('Enter Registered Mobile Number');
-		}
-	}
-	function otpValidate() {
-		//e.preventDefault();
-		if (mobile && otp) {
-			if (otp == otpActual) {
-				//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2565`).then(response => {
-				const check  = axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/post`, {'mobileno': mobile, 'otp_validity': otp, 'company_id':2035}).then(response => {
-					return response.data;
-				})
-				.catch(error => {
-					console.log('error', error);
-				});
-				check.then(response => {
-					//setTopCityList(response.destinations); 
-					if ( response.status ) {
-						if (otp == otpActual) {
-							//router.push(`/dashboard/${response.auth_token}`)
-							router.push(`/dashboard`)
-						}
-					} else {
-						setError('Invalid OTP');
-						//console.log('error', 'invalid')
-					}
-				});
-			} else {
-				setError('Invalid OTP');
-				//console.log('error', 'invalid')
-			}
-		} else {
-			setError('Enter OTP');
-		}
-	}
+	
 	
 	var keyHotelLocation = 0;
 	var keyTopHotel = 0;
@@ -234,7 +165,7 @@ export const Header = () => {
 						<label className="lbl-toggle"><i className="fa fa-bars" aria-hidden="true"></i></label>
 							<div className="collapsible-content">
 							
-							<nav className="navbar navbar-expand-lg navbar-dark">
+											 <nav className="navbar navbar-expand-lg navbar-dark">
 						<button className="navbar-toggler" type="button" data-toggle="collapse" onClick={() => handleNavBar()} data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
 						<div className={'collapse navbar-collapse '+showNavbar} id="navbarSupportedContent">
 								<ul className="navbar-nav mr-auto">
@@ -347,7 +278,7 @@ export const Header = () => {
 												<div className="col-md-4">
 												<span className="menu-heading">ROMT Packages</span>
 												<ul className="nav flex-column">
-													{packageList && packageList.map((data,index)=>{
+													{packageList.map((data,index)=>{
 														let url = base64_encode(2565 + '/' + data.package_name);
 														return (
 															<li className="nav-item" key={index}> 
@@ -415,24 +346,16 @@ export const Header = () => {
 									 <div className="login-with"><h5>Log in with</h5><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i>
 									</a><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></div>
 									 <form>
-										<span className="text-danger">{error}</span>
-									   <input type="text" placeholder="Registered Mobile" onChange={(e) => setMobile(e.target.value)}/>
-									   <div >
-											<input type="text" style={{width: '70%'}} placeholder="OTP" onChange={(e) => setOtp(e.target.value)} />
-											<button type="button" className="btn btn-default btn-warning btn-box" onClick={() => submitLogin()} >Send OTP</button>
-									   </div>
+									   <input type="text" placeholder="Username or Email Address"/>
+									   <input type="password" placeholder="Type Password"/>
 									   <div className="clearfix"></div>
-									   {/* <div className="row">
+									   <div className="row">
 										 <div className="col"><input type="checkbox" />Remember me</div>
 										 <div className="col"><a href="#forgot-password"  data-toggle="modal">Forgot Password</a></div>
-									   </div> 
-									   <input type="submit" value="Login" onClick={() => submitLogin()}/>*/}
-									   <div>										   
-										   <button type="button" style={{width:'100%'}} className="btn btn-default btn-success btn-box" onClick={() => otpValidate()} >Login</button>
 									   </div>
+									   <input type="submit" value="Login" />
 									   <div className="clearfix"></div>
-									   {/* <p>Dont have an account? <a href="#register-form-modal"  data-toggle="modal">Register</a></p> */}
-									   <p></p>
+									   <p>Dont have an account? <a href="#register-form-modal"  data-toggle="modal">Register</a></p>
 									 </form>
 								   </div>
 								  </div>
