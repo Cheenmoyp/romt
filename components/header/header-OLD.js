@@ -153,8 +153,8 @@ export const Header = () => {
 	function submitLogin() {
 		//e.preventDefault();
 		if (mobile) {
-			//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2035`).then(response => {
-			const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2565`).then(response => {
+			//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2565`).then(response => {
+			const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2035`).then(response => {
 				return response.data;
 			})
 			.catch(error => {
@@ -186,19 +186,17 @@ export const Header = () => {
 		//e.preventDefault();
 		if (mobile && otp) {
 			if (otp == otpActual) {
-				//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2035`).then(response => {
-				const check  = axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/post`, {'mobileno': mobile, 'otp_validity': otp, 'company_id':2565}).then(response => {
+				//const check  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/fetch_user_login_details/${mobile}/2565`).then(response => {
+				const check  = axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/public_user/post`, {'mobileno': mobile, 'otp_validity': otp, 'company_id':2035}).then(response => {
 					return response.data;
 				})
 				.catch(error => {
 					console.log('error', error);
 				});
 				check.then(response => {
-					console.log(response);
 					//setTopCityList(response.destinations); 
 					if ( response.status ) {
 						if (otp == otpActual) {
-							localStorage.setItem('userToken', response.auth_token);
 							//router.push(`/dashboard/${response.auth_token}`)
 							router.push(`/dashboard`)
 						}

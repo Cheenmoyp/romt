@@ -3265,7 +3265,7 @@ ul.hotel-faq-list li:nth-child(2) {
     width: 50%;
     right: 0;
     top: 0;
-    background: #f16b23;
+    background: #f16b23 url(../Images/images/romt.png) no-repeat;
 }
 .signinpage-logo {
     padding-top: 30px;
@@ -4751,7 +4751,7 @@ a.addroom-btn {
     border: 1px solid #d9d9d9;
 }
 .sign-in-right {
-    background: #f16b23;
+    background: #f16b23 url(../Images/images/romt.png) no-repeat;
     display: none;
 }
 .sign-in-modal button.close {
@@ -6130,6 +6130,7 @@ h3.heding-btmborder:before {
     border: 1px solid #f48124;
     border-radius: 50%;
     padding-top: 8px;
+	margin:0px 4px 0px 4px;
 }
 .hotel-pagination li:first-child, .hotel-pagination li:last-child, .hotel-pagination .selected, .hotel-pagination li:hover {
     background: #f48124;
@@ -6361,3 +6362,9 @@ display: inline-block;
 }
 
 .nav-con .navbar-dark .navbar-nav .nav-link a{color:#363636!important;}
+
+
+.nopad{padding:0px; margin:0px;}
+.fullhead{width:100%; float:left; box-shadow: -1px 2px 7px 0px #ddd;}
+
+.loginbutton-sign{background:#ff8318; color:#fff;}

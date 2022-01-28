@@ -148,8 +148,8 @@ const handleFilterBar = () => {
     
     <div className="inner-page-wrapper">
         <div className="d-page-sec1">
-            <div className="container">
-            <div className="row">
+            <div className="container  ">
+            <div className="row  ">
                 <div className="col-md-8 offset-md-2">
                 <h2>{response.city}</h2>
                 <h3>{hotelList.hotels_data ? (hotelList.hotels_data.length == 1? '1 Hotel': hotelList.hotels_data.length+' Hotels'):'No Notels'} </h3>
@@ -170,9 +170,9 @@ const handleFilterBar = () => {
             </div>
         </div>
         <div className="destination-page-banner">
-            <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-12">
+            <div className="container-fluid nopad">
+            <div className="row nopad">
+                <div className="col-md-12 nopad">
                 <img src={destinationBanner?destinationBanner:""} alt="" title=""/> 
                 </div>
             </div>
@@ -211,7 +211,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹1000 - ₹2000</label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>1000 - <i className="fa fa-inr" aria-hidden="true"></i>2000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="2000-3000"
@@ -221,7 +221,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹2000 - ₹3000</label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>2000 - <i className="fa fa-inr" aria-hidden="true"></i>3000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="3000-4000"
@@ -231,7 +231,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹3000 - ₹4000</label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>3000 - <i className="fa fa-inr" aria-hidden="true"></i>4000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="4000-5000"
@@ -241,7 +241,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹4000 - ₹5000 </label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>4000 - <i className="fa fa-inr" aria-hidden="true"></i>5000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="5000-8000"
@@ -251,7 +251,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹5000 - ₹8000 </label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>5000 - <i className="fa fa-inr" aria-hidden="true"></i>8000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="8000-10000"
@@ -261,7 +261,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹8000 - ₹10000 </label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>8000 - <i className="fa fa-inr" aria-hidden="true"></i>10000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="10000-12000"
@@ -271,7 +271,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹10000 - ₹12000 </label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>10000 - <i className="fa fa-inr" aria-hidden="true"></i>12000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="12000-15000"
@@ -281,7 +281,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹12000 - ₹15000 </label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>12000 - <i className="fa fa-inr" aria-hidden="true"></i>15000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="15000-1000000"
@@ -291,7 +291,7 @@ const handleFilterBar = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> ₹15000 - more</label>
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>15000 - more</label>
                                     </li>
                                     </ul>
                                 </div>
@@ -564,7 +564,7 @@ const handleFilterBar = () => {
                                         <div className="col-md-3 hotel-box2-right">
                                             <ul className="rating">
                                             <li> </li>
-                                            <li>₹{slide.starting_price}</li>
+                                            <li><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
                                             
                                             <li> <a href={"../hotel-details/"+ base64_encode(slide.hotel_id+'/'+(response.url_param[2] ? response.url_param[2]:'')+'/'+(response.url_param[3] ? response.url_param[3]:'')+'/'+(response.url_param[4] ? response.url_param[4]:1)+'/'+(response.url_param[5] ? response.url_param[5]:0))} className="book-now-btn-destinationsearch">Book Now</a>
                                             </li>

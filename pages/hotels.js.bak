@@ -186,7 +186,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>1000 - <i className="fa fa-inr" aria-hidden="true"></i>2000</label>
+                                        <label htmlFor="price"> ₹1000 - ₹2000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="2000-3000"
@@ -196,7 +196,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>2000 - <i className="fa fa-inr" aria-hidden="true"></i>3000</label>
+                                        <label htmlFor="price"> ₹2000 - ₹3000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="3000-4000"
@@ -206,7 +206,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>3000 - <i className="fa fa-inr" aria-hidden="true"></i>4000</label>
+                                        <label htmlFor="price"> ₹3000 - ₹4000</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="4000-5000"
@@ -216,7 +216,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>4000 - <i className="fa fa-inr" aria-hidden="true"></i>5000 </label>
+                                        <label htmlFor="price"> ₹4000 - ₹5000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="5000-8000"
@@ -226,7 +226,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>5000 - <i className="fa fa-inr" aria-hidden="true"></i>8000 </label>
+                                        <label htmlFor="price"> ₹5000 - ₹8000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="8000-10000"
@@ -236,7 +236,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>8000 - <i className="fa fa-inr" aria-hidden="true"></i>10000 </label>
+                                        <label htmlFor="price"> ₹8000 - ₹10000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="10000-12000"
@@ -246,7 +246,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>10000 - <i className="fa fa-inr" aria-hidden="true"></i>12000 </label>
+                                        <label htmlFor="price"> ₹10000 - ₹12000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="12000-15000"
@@ -256,7 +256,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>12000 - <i className="fa fa-inr" aria-hidden="true"></i>15000 </label>
+                                        <label htmlFor="price"> ₹12000 - ₹15000 </label>
                                     </li>
                                     <li>
                                         <input type="radio" id="price" name="price" value="15000-1000000"
@@ -266,7 +266,7 @@ const Hotel = () => {
                                             });
                                          }}
                                         />
-                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>15000 - more</label>
+                                        <label htmlFor="price"> ₹15000 - more</label>
                                     </li>
                                     </ul>
                                 </div>
@@ -536,7 +536,7 @@ const Hotel = () => {
                                             <div className="col-md-3 hotel-box2-right">
                                                 <ul className="rating">
                                                 <li><span>4.5/5</span>185 Ratings</li>
-                                                <li><span className="cut-price"></span><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
+                                                <li><span className="cut-price"></span>₹{slide.starting_price}</li>
                                                  
                                             <li> <a href={'/hotel-details/'+ base64_encode(slide.hotel_id)} className="book-now-btn-destinationsearch">Book Now</a></li>
                                                 </ul>
