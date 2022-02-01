@@ -55,44 +55,7 @@ const Package = () => {
                     </div>
                     </div>
                 </div>
-                <div className="packages-by-destination">
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                        <div className="heading-group">
-                            <h3>Packages by destination</h3>
-                            <p>Make beautiful memories with your Soulmate</p>
-                            <a href="#">View All `&gt;``&gt;`</a> </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-3">
-                        <div className="p-by-box">
-                            <figure> <a href="package-detail"><img src="/Images/destinations/kolkata.jpg" alt="" title=""/></a> </figure>
-                            <h4><a href="#">Kolkata</a></h4>
-                        </div>
-                        </div>
-                        <div className="col-sm-3">
-                        <div className="p-by-box">
-                            <figure> <a href="package-detail"><img src="/Images/destinations/mumbai.jpg" alt="" title=""/></a> </figure>
-                            <h4><a href="#">Mumbai</a></h4>
-                        </div>
-                        </div>
-                        <div className="col-sm-3">
-                        <div className="p-by-box">
-                            <figure> <a href="#"><img src="/Images/destinations/banglore.jpg" alt="" title=""/></a> </figure>
-                            <h4><a href="#">Banglore</a></h4>
-                        </div>
-                        </div>
-                    <div className="col-sm-3">
-                        <div className="p-by-box">
-                            <figure> <a href="#"><img src="/Images/destinations/chennai.jpg" alt="" title=""/></a> </figure>
-                            <h4><a href="#">Chennai</a></h4>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+          
                 </div>
             </div>
             <Footer></Footer>

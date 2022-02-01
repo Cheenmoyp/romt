@@ -722,7 +722,7 @@ export default function Rooms(props) {
                                                         </Carousel>
                                                     </div>
                                                 </div>
-                                                <div  >{slide.allImages.length}    </div>
+                                                <div  >  </div>
                                             </div>
                                             <h4>{slide.room_type}</h4>
                                             <div className="room-content">
@@ -747,7 +747,7 @@ export default function Rooms(props) {
                                                                         <div className="col-4"><h5>{rateplan.plan_name}</h5></div>
                                                                         <div className="col-4">
                                                                             <div className="price">
-                                                                                <h6>₹ {rateplan.bar_price}</h6>
+                                                                                <h6> <i className="fa fa-inr" aria-hidden="true"></i> {rateplan.bar_price}</h6>
                                                                                 <p>Per room / Night</p>
                                                                                 <p>Excluding GST</p>
                                                                             </div>
@@ -883,13 +883,13 @@ export default function Rooms(props) {
                         </ul>
                         <ul>
                             {extraAdultMessage && <li>
-                                <p className="red-text text-darken-1"> * Extra Adult Price - ₹{extraAdultMessage}.</p>
+                                <p className="red-text text-darken-1"> * Extra Adult Price -  <i className="fa fa-inr" aria-hidden="true"></i>{extraAdultMessage}.</p>
                             </li>
                             }
 
                             {extraChildMessage &&
                                 <li>
-                                    <p className="red-text text-darken-1"> * Extra Child Price - ₹{extraChildMessage}.</p>
+                                    <p className="red-text text-darken-1"> * Extra Child Price -  <i className="fa fa-inr" aria-hidden="true"></i>{extraChildMessage}.</p>
                                 </li>
                             }
                         </ul>

@@ -9,10 +9,12 @@ import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import Modal from "react-bootstrap/Modal";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import axios from 'axios';
 
 const HotelDetails = (response) => {
   console.log(response);
 	const [lightboxmodal, setLightboxmodal] = useState(false);
+	const [faqList, setFaqList] = useState([]);
 	const handleLightBoxClick = () => {
         setLightboxmodal(!lightboxmodal);
     }
@@ -35,6 +37,23 @@ const HotelDetails = (response) => {
 		items: 1
 	  }
 	};
+	
+	useEffect(()=>{
+	  if(faqList.length == 0 ) {
+		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/hotel-faqs/${response.hoteldata.hotel_id}`).then(response => {
+				return response.data
+			  })
+			  .catch(error => {
+				  console.log('error', error);
+			  });
+		fetcher.then(response => {
+			
+			 setFaqList(response.faqs)
+		})
+	 }
+	},[])
+	
+	
 	    var checkin = new Date();
 	    checkin = Date.parse(checkin);
 		var checkout_date = new Date();
@@ -305,13 +324,48 @@ const HotelDetails = (response) => {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <ul className="list-4">
-              <li>According to government regulation, a valid Photo ID has to be carried by every person above the age of staying 18 at the Signature inn. The identification proofs accepted are Drivers License, Voter card, Passport, ration Card. Without valid ID the guest will not be allowed to check in. </li>
-              <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-              <li>According to government regulation, a valid Photo ID has to be carried by every person above the age of staying 18 at the Signature inn. The identification proofs accepted are Drivers License, Voter card, Passport, ration Card. Without valid ID the guest will not be allowed to check in. </li>
-              <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-              <li>According to government regulation, a valid Photo ID has to be carried by every person above the age of staying 18 at the Signature inn. The identification proofs accepted are Drivers License, Voter card, Passport, ration Card. Without valid ID the guest will not be allowed to check in. </li>
-            </ul>
+		  <div className="list-4"
+			  dangerouslySetInnerHTML={{
+				__html: response.hoteldata && response.hoteldata.hotel_policy,
+			  }}
+			/>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+	<div className="hotel-police">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h3>Child Policies</h3>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+		  <div className="list-4"
+			  dangerouslySetInnerHTML={{
+				__html: response.hoteldata && response.hoteldata.child_policy,
+			  }}
+			/>
+          </div>
+        </div>
+      </div>
+    </div>
+	<div className="hotel-police">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h3>Cancel Policies</h3>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+		  <div className="list-4"
+			  dangerouslySetInnerHTML={{
+				__html: response.hoteldata && response.hoteldata.cancel_policy,
+			  }}
+			/>
           </div>
         </div>
       </div>
@@ -325,7 +379,15 @@ const HotelDetails = (response) => {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <ul className="hotel-faq-list">
+		  {faqList && faqList.map((slide,index)=>{
+			return (
+				<ul className="hotel-faq-list" key={index}>
+				  <li>{slide.question}</li>
+				  <li>{slide.answer}</li>
+				</ul>
+			)
+		  })}
+		  {/* <ul className="hotel-faq-list">
               <li>Does {response.hoteldata.hotel_name} offer any business services?</li>
               <li>No, it does not offer any business services</li>
             </ul>
@@ -344,7 +406,7 @@ const HotelDetails = (response) => {
             <ul className="hotel-faq-list">
               <li>Does {response.hoteldata.hotel_name} offer any business services?</li>
               <li>No, it does not offer any business services</li>
-            </ul>
+		  </ul> */}
           </div>
         </div>
       </div>

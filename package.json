@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@tabler/icons": "^1.48.0",
     "axios": "^0.24.0",
     "base-64": "^1.0.0",

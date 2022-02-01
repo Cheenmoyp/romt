@@ -5,11 +5,15 @@ import { Loginheader } from '../components/header/loginheader';
 import { Footer } from '../components/footer/footer';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Dashboard = () => {
     const router = useRouter();
 	const [dataList, setDataList] = useState([]);
 	const [tokenValue, setTokenValue] = useState('');
+	const [selectDate, setSelectDate] = useState(moment().toDate());
 	const [statusVal, setStatusVal] = useState('BOOKED');
 	React.useEffect(() => {
 		if (localStorage) {
@@ -96,18 +100,47 @@ const Dashboard = () => {
         <div className="col-md-9">
           <div className="booking-history-sec3-right">
             <div className="booking-history-sec3-right-heading row">
-              <div className="col-sm-9">
+              <div className="col-sm-6">
                 <h4>Booking History</h4>
               </div>
               <div className="col-sm-3">
-                <select onChange={(e) => changeStatus(e)} >
+                <DatePicker id="datepicker" dateFormat="MMM yyyy" maxDate={moment().toDate()} className="datepicker form-control" selected={selectDate} placeholder="Select Date" onChange={(date) => {
+                    setSelectDate(date)
+                }}  />
+              </div>
+              <div className="col-sm-3">
+                <select className="form-control" onChange={(e) => changeStatus(e)} >
                   <option value="BOOKED">Booked</option>
                   <option value="CANCELLED">Cancelled</option>
                 </select>
               </div>
             </div>
+			<div className="booking-history-box">
+				<ul className="row">
+					<li className="col-md-2">
+						<figure><img src="images/hotels/roo-square.jpg" alt="" /></figure>
+					</li>
+					<li className="col-md-4">
+						<h5>Romt Hotel Signature Inn111</h5>
+						<p>Oct 29, 2021 - Oct 30, 2021</p>
+						<p>2 Guests, 1Room</p>
+					</li>
+					<li className="col-md-3">
+						<h4>UTYS75</h4>
+					</li>
+					<li className="col-md-3">
+						<p><strong>Checked Out</strong></p>
+						<p>Pending Amount:<span>₹ 0</span></p>
+						<p><a href="#" >View Details</a></p>
+						{/* <p><a href="#" >Need Help</a></p> */}
+						<p><a href="#" >Cancel Booking</a></p>
+						<p><a href="#" >Modify Booking</a></p>
+					</li>
+				</ul>
+			</div>	
 			{dataList && dataList.length != 0 ?
 				<div>
+						
 				{dataList && dataList.map((data, index) => {				
 					return (
 						<div className="booking-history-box" key={index}>
@@ -127,7 +160,8 @@ const Dashboard = () => {
 									<p><strong>Checked Out</strong></p>
 									<p>Pending Amount:<span>₹ 0</span></p>
 									<p><a href="#" >View Details</a></p>
-									<p><a href="#" >Need Help</a></p>
+									<p><a href="#" >Cancel Booking</a></p>
+									<p><a href="#" >Modify Booking</a></p>
 								</li>
 							</ul>
 						</div>				   

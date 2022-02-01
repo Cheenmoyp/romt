@@ -8,24 +8,29 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import ReactPaginate from 'react-paginate';
+import Slider from '@material-ui/core/Slider';
 
 const Destination = (response) => {
 
+    const [value, setValue] =  React.useState([0,15000]);
     const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState();
     const [expanded, setExpanded] = useState(false);
     const [amenities, setAmenities] = useState([]);
-    const [maxPrice, setMaxPrice] = useState('');
-    const [minPrice, setMinprice] = useState('');
+    const [maxPrice, setMaxPrice] = useState(15000);
+    const [minPrice, setMinprice] = useState(0);
     const [destinationBanner, setDestinationBanner] = useState('');
     const [category, setCategory] = useState('');
+    const [property, setProperty] = useState('');
+    const [city, setCity] = useState('');
     let hotel_name = [];
     
 	function loadHotels() {
 	if (hotelList.length == 0) {
         //console.log('aminities',amenities);return;
 		//const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter2?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price&max_price`).then(response => {
-		const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
+		//const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
+        const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter4?group_id=2565&city_name=${response.city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities && amenities.join()}&category=${category}&property_type=${property}`).then(response => {
 			return response.data
 		})
 		.catch(error => {
@@ -58,8 +63,24 @@ const Destination = (response) => {
         if(event.category) {
             setCategory(event.category ? event.category : '');
         }
+        if(event.property) {
+            setProperty(event.property ? event.property : '');
+        }
+        if(event.city) {
+            setCity(event.city ? event.city : '');
+        }
         setHotelList([]);
         
+    };
+	// Changing State when volume increases/decreases
+    const rangeSelector = (event, newValue) => {
+        setValue(newValue);
+        /* setMinprice(newValue[0]);
+        setMaxPrice(newValue[1]) */;
+		handleFormChange({
+			price: newValue[0]+'-'+newValue[1],
+		});
+        console.log(newValue[0], newValue[1])
     };
     
     //const [aminityFilter, setAminityFilter] = useState([]);
@@ -108,9 +129,9 @@ const Destination = (response) => {
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % hotelList.length;
+    const newOffset = (event.selected * itemsPerPage) % hotelList.hotels_data.length;
     console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
+      `User requested page number ${event.selected},${itemsPerPage} , ${hotelList.hotels_data.length} which is offset ${newOffset}`
     );
     setItemOffset(newOffset);
   };
@@ -148,8 +169,8 @@ const handleFilterBar = () => {
     
     <div className="inner-page-wrapper">
         <div className="d-page-sec1">
-            <div className="container">
-            <div className="row">
+            <div className="container  ">
+            <div className="row  ">
                 <div className="col-md-8 offset-md-2">
                 <h2>{response.city}</h2>
                 <h3>{hotelList.hotels_data ? (hotelList.hotels_data.length == 1? '1 Hotel': hotelList.hotels_data.length+' Hotels'):'No Notels'} </h3>
@@ -170,9 +191,9 @@ const handleFilterBar = () => {
             </div>
         </div>
         <div className="destination-page-banner">
-            <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-12">
+            <div className="container-fluid nopad">
+            <div className="row nopad">
+                <div className="col-md-12 nopad">
                 <img src={destinationBanner?destinationBanner:""} alt="" title=""/> 
                 </div>
             </div>
@@ -201,8 +222,17 @@ const handleFilterBar = () => {
                                 <div id="menu-content" className={'menu-content '+showFilterbar}>
                                 <div className="filter-list-con">
                                     <h4>Price Range</h4>
-                                    
-                                    <ul>
+                                       
+                                    <Slider
+                                        min={0}
+                                        max={15000}
+                                        value={value}
+                                        onChange={rangeSelector}
+                                        valueLabelDisplay="auto"
+                                    />
+									<span><i className="fa fa-inr" aria-hidden="true"></i> {minPrice}</span>
+									<span><i className="fa fa-inr" aria-hidden="true"></i> {maxPrice}</span>
+                                    {/* <ul>
                                     <li>
                                         <input type="radio" id="price" name="price" value="1000-2000"
                                         onChange={(event) => { 
@@ -293,7 +323,7 @@ const handleFilterBar = () => {
                                         />
                                         <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>15000 - more</label>
                                     </li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                                 <div className="filter-list-con">
                                     <h4>Star Ratings</h4>
@@ -350,18 +380,18 @@ const handleFilterBar = () => {
                                             <label htmlFor="category">Luxury</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="TOP" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="Delux" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">TOP</label>
+                                            <label htmlFor="category">Delux</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="Boutique" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="Budget" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">Boutique</label>
+                                            <label htmlFor="category">Budget</label>
                                         </li>
                                         <li>
                                             <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
@@ -369,6 +399,39 @@ const handleFilterBar = () => {
                                             });}}
                                             />
                                             <label htmlFor="category">Business</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="filter-list-con">
+                                    <h4>Property Type</h4>
+                                    <ul>
+										<li>
+                                            <input type="radio" id="property" name="property" value="Resort" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Resort</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Hotel" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Hotel</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Homestay" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Homestay</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Apartment Hotel" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Apartment Hotel</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -564,7 +627,7 @@ const handleFilterBar = () => {
                                         <div className="col-md-3 hotel-box2-right">
                                             <ul className="rating">
                                             <li> </li>
-                                            <li><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
+                                            <li className='pricee'><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
                                             
                                             <li> <a href={"../hotel-details/"+ base64_encode(slide.hotel_id+'/'+(response.url_param[2] ? response.url_param[2]:'')+'/'+(response.url_param[3] ? response.url_param[3]:'')+'/'+(response.url_param[4] ? response.url_param[4]:1)+'/'+(response.url_param[5] ? response.url_param[5]:0))} className="book-now-btn-destinationsearch">Book Now</a>
                                             </li>
@@ -584,6 +647,7 @@ const handleFilterBar = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-12 text-center">
+					{ pageCount>1 ?
 					<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"
@@ -597,6 +661,7 @@ const handleFilterBar = () => {
 							previousLabel=""
 							renderOnZeroPageCount={null}
 						 />
+						 : '' }
 						{/* <div className="pegination"> <a href="#"><i className="fa fa-angle-left" aria-hidden="true"></i></a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#"><i className="fa fa-angle-right" aria-hidden="true"></i></a> </div> */}
                     </div>
                 </div>

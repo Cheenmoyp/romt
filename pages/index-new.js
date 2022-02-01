@@ -15,6 +15,7 @@ import ReactPlayer from 'react-player'
 export default function Home() {
   const router = useRouter();
   const [ourHotelData, setOurHotelData] = useState([])
+  const [packageData, setPackageData] = useState([])
   const [searchData, setSearchData] = useState()
   useEffect(()=>{
 	  if(ourHotelData.length == 0 ) {
@@ -29,6 +30,21 @@ export default function Home() {
 		fetcher.then(response => {
 			
 			 setOurHotelData(response)
+		})
+	 }
+	  if(packageData.length == 0 ) {
+		const fetcher2  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/package-banners/2565`).then(response => {
+				return response.data
+			  })
+			  .catch(error => {
+				  console.log('error', error);
+			  });
+		  
+
+		fetcher2.then(response => {
+			console.log('packageData', response.package_banners);
+			console.log('packageData2', response);
+			setPackageData(response.package_banners)
 		})
 	 }
 	},[])
@@ -133,7 +149,38 @@ const destinationResponsive = {
           height='100%'
         />
 		</div>
-      <div className={`search-con ${scrollval}`}>
+      <div className={`search-con web-view ${scrollval}`}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1>Find your perfect hotels </h1>
+              <h3>Get the best prices on 20,000+ properties</h3>
+              <Search props={1}/>
+              <div className="search-categories">
+                <ul>
+                  <li> <a href="#" className="category"> <i className="fa fa-ravelry" aria-hidden="true"></i>
+                    <p>24,000+</p>
+                    <p className="det">Travel Experiences</p>
+                    </a> </li>
+                  <li> <a href="#" className="category"> <i className="fa fa-globe" aria-hidden="true"></i>
+                    <p>55+</p>
+                    <p className="det">Countries</p>
+                    </a> </li>
+                  <li> <a href="#" className="category"> <i className="fa fa-money" aria-hidden="true"></i>
+                    <p>Best Price</p>
+                    <p className="det">Guaranteed</p>
+                    </a> </li>
+                  <li> <a href="#" className="category"> <i className="fa fa-users" aria-hidden="true"></i>
+                    <p>84 Million+</p>
+                    <p className="det">Users Per Year</p>
+                    </a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div className={`search-con mobile-view`}>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -251,41 +298,30 @@ const destinationResponsive = {
 				  draggable={true}
 				  infinite={true}
 				  responsive={responsive}>
-		        <div className="">
-		            <div className="col-md-12 row">
-		              <div className="col-md-5">
-		                <div className="welcome-sectio-left">
-		                  <h2>ROMT Special Winter Package </h2>
-		                  <div className="content">
-		                    <p> Get best prices on winter holiday packages just for you on best locations</p>
-		                  </div>
-		                  <a href="package" className="exmore">Explore the Package </a><a  href={'/package-detail/MjU2NS9ST01UIFNwZWNpYWwgV2ludGVyIFBhY2thZ2U='} className="exmore blue-bg">Book the package</a> </div>
-		              </div>
-		              <div className="col-md-7 no-padding">
-		                <div className="box-welcome">
-		                  <figure><img src="/Images/kashmir.png" alt="" title="" /></figure>
-		                </div>
-		              </div>
-		            </div>
-		        </div>
-		        <div className="">
-		            <div className="col-md-12 row">
-		              <div className="col-md-5">
-		                <div className="welcome-sectio-left">
-		                  <h2>Honeymoon Package</h2>
-		                  <div className="content">
-		                    <p> Get best prices on hotels located in most romantic South Indian locations </p>
-		                  </div>
-		                  <a href="package" className="exmore">Explore the Package </a><a href={'/package-detail/MjU2NS9Ib25leW1vb24gUGFja2FnZQ=='} className="exmore blue-bg">Book the package</a> </div>
-		              </div>
-		              <div className="col-md-7 no-padding">
-		                <div className="box-welcome">
-		                  <figure><img src="/Images/honeymoon.png" alt="package" title="" /></figure>
-		                </div>
-		              </div>
-		            </div>
-		        </div>
-		      
+				  
+				{packageData && packageData.map((slide, index)=>{
+					let url = base64_encode(2565 + '/' + slide.package_name);
+					return (
+					<div className="" key={index}>
+						<div className="col-md-12 row">
+						  <div className="col-md-5">
+							<div className="welcome-sectio-left">
+							  <h2>{slide.package_name} </h2>
+							  <div className="content">
+								<p> {slide.package_banner_description}</p>
+							  </div>
+							  <a href="package" className="exmore">Explore Package  </a><a  href={"/package-detail/"+url} className="exmore blue-bg">Book Package </a> </div>
+						  </div>
+						  <div className="col-md-7 no-padding">
+							<div className="box-welcome">
+							  <figure><img src={slide.banner_image} alt={slide.package_name} title={slide.package_name} /></figure>
+							</div>
+						  </div>
+						</div>
+					</div>
+					)
+				})}
+		        		      
             </Carousel>
             
           </div>

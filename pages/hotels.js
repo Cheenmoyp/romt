@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import Image from 'next/image';
 import { Header } from '../components/header/header';
 import { Footer } from '../components/footer/footer';
@@ -8,20 +9,28 @@ import axios from 'axios';
 import Seacrch from '../components/search/search';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import ReactPaginate from 'react-paginate';
+import Slider from '@material-ui/core/Slider';
+
 
 const Hotel = () => {
-
+    const [value, setValue] =  React.useState([0,15000]);
     const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState('');
     const [amenities, setAmenities] = useState([]);
-    const [maxPrice, setMaxPrice] = useState('');
-    const [minPrice, setMinprice] = useState('');
+    const [maxPrice, setMaxPrice] = useState(15000);
+    const [minPrice, setMinprice] = useState(0);
     const [category, setCategory] = useState('');
+    const [property, setProperty] = useState('');
+    const [city, setCity] = useState('');
     var categories = [];
+
+   
+
 	function loadHotels() {
         if (hotelList.length == 0) {
-            const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
-                return response.data
+            //const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
+			const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter4?group_id=2565&city_name=${city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities && amenities.join()}&category=${category}&property_type=${property}`).then(response => {
+				return response.data
             })
             .catch(error => {
                 console.log('error', error);
@@ -51,10 +60,27 @@ const Hotel = () => {
         if(event.category) {
             setCategory(event.category ? event.category : '');
         }
-        setHotelList([]); console.log(starRating+'/'+amenities);
+        if(event.property) {
+            setProperty(event.property ? event.property : '');
+        }
+        if(event.city) {
+            setCity(event.city ? event.city : '');
+        }
+        setHotelList([]); //console.log(starRating+'/'+amenities);
 		//loadHotels()
 		 
     };
+	 // Changing State when price increases/decreases
+     const rangeSelector = (event, newValue) => {
+        setValue(newValue);
+        /* setMinprice(newValue[0]);
+        setMaxPrice(newValue[1]) */;
+		handleFormChange({
+			price: newValue[0]+'-'+newValue[1],
+		});
+        console.log(newValue[0], newValue[1])
+    };
+	
 	/* const filterData = (event) => {
 		loadHotels()
 	} */
@@ -105,7 +131,7 @@ const Hotel = () => {
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % hotelList.length;
+    const newOffset = (event.selected * itemsPerPage) % hotelList.hotels_data.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -176,8 +202,18 @@ const Hotel = () => {
                                 <div id="menu-content" className={'menu-content '+showFilterbar}>
                                 <div className="filter-list-con">
                                     <h4>Price Range</h4>
-                                    
-                                    <ul>
+                                      
+                                        
+                                    <Slider
+                                        min={0}
+                                        max={15000}
+                                        value={value}
+                                        onChange={rangeSelector}
+                                        valueLabelDisplay="auto"
+                                    />
+									<span className="pull-left"><i className="fa fa-inr" aria-hidden="true"></i> {minPrice}</span>
+									<span className="pull-right"><i className="fa fa-inr" aria-hidden="true"></i> {maxPrice}</span>
+                                    {/* <ul>
                                     <li>
                                         <input type="radio" id="price" name="price" value="1000-2000"
                                         onChange={(event) => { 
@@ -268,7 +304,7 @@ const Hotel = () => {
                                         />
                                         <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>15000 - more</label>
                                     </li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                                 <div className="filter-list-con">
                                     <h4>Star Ratings</h4>
@@ -325,18 +361,18 @@ const Hotel = () => {
                                             <label htmlFor="category">Luxury</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="TOP" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="Delux" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">TOP</label>
+                                            <label htmlFor="category">Delux</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="Boutique" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="Budget" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">Boutique</label>
+                                            <label htmlFor="category">Budget</label>
                                         </li>
                                         <li>
                                             <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
@@ -344,6 +380,39 @@ const Hotel = () => {
                                             });}}
                                             />
                                             <label htmlFor="category">Business</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="filter-list-con">
+                                    <h4>Property Type</h4>
+                                    <ul>
+										<li>
+                                            <input type="radio" id="property" name="property" value="Resort" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Resort</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Hotel" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Hotel</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Homestay" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Homestay</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="property" name="property" value="Apartment Hotel" onChange={(event) => { handleFormChange({
+                                                property: event.target.value,
+                                            });}}
+                                            />
+                                            <label htmlFor="property">Apartment Hotel</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -554,6 +623,7 @@ const Hotel = () => {
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
+						{ pageCount>1 ?
 						<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"
@@ -567,6 +637,7 @@ const Hotel = () => {
 							previousLabel=""
 							renderOnZeroPageCount={null}
 						 />
+						: '' }
                         </div>
                     </div>
                     </div>

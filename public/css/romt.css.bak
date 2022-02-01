@@ -361,7 +361,7 @@ span.menu-heading:before {
   padding-right: 20px;
 }
 .nav-side-menu li input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 0px;
     margin-top: 2px;
 }
 .nav-side-menu li  span {
@@ -799,14 +799,18 @@ a.l-moere {
     background: #f16b23;
     border: 1px solid #f16b23;
     padding: 10px 24px;
+    width:180px;
+    margin:5px;
     color: #fff;
     border-radius: 30px;
+    text-align:center;
 }
 .exmore:hover{ text-decoration:none; background:none; color:#daa520; }
 .exmore.blue-bg {
     border-color: #899e52;
     background: #899e52;
-    margin: 0 5px;
+    margin: 5px;
+    text-align:center;
 }
 .exmore.blue-bg:hover{color:#899e52; background:none;}
 .welcome-sectio-left {
@@ -2980,6 +2984,10 @@ ul.rating-progress-bar li span {
     width: 100%;
     float: left;
 }
+
+.list-4 li { list-style-type:disc; margin:0px 0px 0px 21px;}
+
+
 ul.hotel-faq-list {
     border-bottom: 1px solid #f4f4f4;
     padding-bottom: 10px;
@@ -4994,8 +5002,97 @@ footer h5.text-white {
 }
 
 }
+.mobile-view {
+	display:none;
+}
 @media (max-width: 450px){
+	 
+	.search-con{position:absolute; top:160px;}
+	.slider-con{height:auto;}
 	
+	.web-view {
+		display:none !important;
+	}
+	.mobile-view {
+		display:block !important;
+	}
+	.w-100 {
+        min-width: 100%!important;
+        width: 100%!important;
+        height: auto!important;
+    } 
+
+    .p-by-box{padding:5px;}
+
+    .packages-filter {
+        width: 100%;
+        float: left;
+        padding: 0px 0 0;
+        position: relative;
+    }
+
+
+
+    .pricee{font-size:21px;}
+
+    .col-md-3.hotel-box2-right{
+        padding-bottom: 10px;
+
+
+    }
+    
+.book-now-btn-destinationsearch {
+    color: #fff;
+    background: #ff8a34;
+    border: 1px solid #ff8a34;
+    position: relative;
+    bottom: 0px!important;
+    left: 78px!important;
+    right: 0;
+    text-align: center;
+    padding: 12px;
+    width: 147px;
+    margin: auto;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+    .welcome-sectio-left {
+        width: 100%;
+        float: left;
+        padding-top:10px;
+    }
+
+
+    .search-con.shrink {
+        background: #fff;
+        position: relative!important;
+        z-index: 999;
+        margin: 0 auto;
+        border: none;
+        padding: 0;
+        top: 0!important;
+        left: 0;
+        right: 0;
+        width: 100%;
+        -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+        box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+        
+        
+        -webkit-animation-name: none;
+        animation-name: none;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        height: 71px;
+        padding-top: 5px!important;
+    }
+
+
+
+
+
 	
 a.addroom-btn {
     padding: 3px 8px;
@@ -6367,4 +6464,15 @@ display: inline-block;
 .nopad{padding:0px; margin:0px;}
 .fullhead{width:100%; float:left; box-shadow: -1px 2px 7px 0px #ddd;}
 
-.loginbutton{background:#ff8318; color:#fff;}
+.loginbutton-sign{background:#ff8318; color:#fff;}
+
+.package-home .react-multiple-carousel__arrow--right{
+right:0px!important;
+
+}
+
+
+
+.hotel-box2-right .pricee{font-size:21px!important;}
+
+.MuiSlider-root{color:#cf7519!important;}

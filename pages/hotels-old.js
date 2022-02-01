@@ -1,29 +1,26 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Header } from '../../components/header/header';
-import { Footer } from '../../components/footer/footer';
+import { Header } from '../components/header/header';
+import { Footer } from '../components/footer/footer';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
-import Seacrch from '../../components/search/search';
+import Seacrch from '../components/search/search';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import ReactPaginate from 'react-paginate';
-import Slider from '@material-ui/core/Slider';
 
-const HotelCategory = (props) => {
-    const [category, setCategory] = useState(props.category);
-    const [value, setValue] =  React.useState([0,15000]);
-	 const [hotelList, setHotelList] = useState([])
+const Hotel = () => {
+
+    const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState('');
     const [amenities, setAmenities] = useState([]);
-    const [maxPrice, setMaxPrice] = useState(15000);
-    const [minPrice, setMinprice] = useState(0);
-    const [property, setProperty] = useState('');
-    const [city, setCity] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [minPrice, setMinprice] = useState('');
+    const [category, setCategory] = useState('');
     var categories = [];
 	function loadHotels() {
         if (hotelList.length == 0) {
-			const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter4?group_id=2565&city_name=${city}&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities && amenities.join()}&category=${category}&property_type=${property}`).then(response => {
+            const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/filter3?group_id=2565&city_name&star_rating=${starRating}&min_price=${minPrice}&max_price=${maxPrice}&amenities=${amenities.join()}&category=${category}`).then(response => {
                 return response.data
             })
             .catch(error => {
@@ -54,26 +51,9 @@ const HotelCategory = (props) => {
         if(event.category) {
             setCategory(event.category ? event.category : '');
         }
-        if(event.property) {
-            setProperty(event.property ? event.property : '');
-        }
-        if(event.city) {
-            setCity(event.city ? event.city : '');
-        }
         setHotelList([]); console.log(starRating+'/'+amenities);
 		//loadHotels()
 		 
-    };
-	
-	 // Changing State when price increases/decreases
-     const rangeSelector = (event, newValue) => {
-        setValue(newValue);
-        /* setMinprice(newValue[0]);
-        setMaxPrice(newValue[1]) */;
-		handleFormChange({
-			price: newValue[0]+'-'+newValue[1],
-		});
-        console.log(newValue[0], newValue[1])
     };
 	/* const filterData = (event) => {
 		loadHotels()
@@ -125,7 +105,7 @@ const HotelCategory = (props) => {
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % hotelList.hotels_data.length;
+    const newOffset = (event.selected * itemsPerPage) % hotelList.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -196,16 +176,99 @@ const HotelCategory = (props) => {
                                 <div id="menu-content" className={'menu-content '+showFilterbar}>
                                 <div className="filter-list-con">
                                     <h4>Price Range</h4>
-									
-                                    <Slider
-                                        min={0}
-                                        max={15000}
-                                        value={value}
-                                        onChange={rangeSelector}
-                                        valueLabelDisplay="auto"
-                                    />
-									<span className="pull-left"><i className="fa fa-inr" aria-hidden="true"></i> {minPrice}</span>
-									<span className="pull-right"><i className="fa fa-inr" aria-hidden="true"></i> {maxPrice}</span>
+                                    
+                                    <ul>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="1000-2000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>1000 - <i className="fa fa-inr" aria-hidden="true"></i>2000</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="2000-3000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>2000 - <i className="fa fa-inr" aria-hidden="true"></i>3000</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="3000-4000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>3000 - <i className="fa fa-inr" aria-hidden="true"></i>4000</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="4000-5000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>4000 - <i className="fa fa-inr" aria-hidden="true"></i>5000 </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="5000-8000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>5000 - <i className="fa fa-inr" aria-hidden="true"></i>8000 </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="8000-10000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>8000 - <i className="fa fa-inr" aria-hidden="true"></i>10000 </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="10000-12000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>10000 - <i className="fa fa-inr" aria-hidden="true"></i>12000 </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="12000-15000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>12000 - <i className="fa fa-inr" aria-hidden="true"></i>15000 </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="price" name="price" value="15000-1000000"
+                                        onChange={(event) => { 
+                                            handleFormChange({
+                                                price: event.target.value,
+                                            });
+                                         }}
+                                        />
+                                        <label htmlFor="price"> <i className="fa fa-inr" aria-hidden="true"></i>15000 - more</label>
+                                    </li>
+                                    </ul>
                                 </div>
                                 <div className="filter-list-con">
                                     <h4>Star Ratings</h4>
@@ -258,64 +321,29 @@ const HotelCategory = (props) => {
                                             <input type="radio" id="category" name="category" value="Luxury" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
-                                            checked={category === "Luxury"}
                                             />
                                             <label htmlFor="category">Luxury</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="Delux" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="TOP" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">Delux</label>
+                                            <label htmlFor="category">TOP</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="category" name="category" value="Budget" onChange={(event) => { handleFormChange({
+                                            <input type="radio" id="category" name="category" value="Boutique" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
                                             />
-                                            <label htmlFor="category">Budget</label>
+                                            <label htmlFor="category">Boutique</label>
                                         </li>
                                         <li>
                                             <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
                                                 category: event.target.value,
                                             });}}
-                                            checked={category === "Business"}
                                             />
                                             <label htmlFor="category">Business</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="filter-list-con">
-                                    <h4>Property Type</h4>
-                                    <ul>
-										<li>
-                                            <input type="radio" id="property" name="property" value="Resort" onChange={(event) => { handleFormChange({
-                                                property: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="property">Resort</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="property" name="property" value="Hotel" onChange={(event) => { handleFormChange({
-                                                property: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="property">Hotel</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="property" name="property" value="Homestay" onChange={(event) => { handleFormChange({
-                                                property: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="property">Homestay</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="property" name="property" value="Apartment Hotel" onChange={(event) => { handleFormChange({
-                                                property: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="property">Apartment Hotel</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -519,17 +547,13 @@ const HotelCategory = (props) => {
                                 })}
                             </div>
                             :
-
                             <div className="col-md-9">
                                 <h1 style={{textAlign: 'center'}}>No Hotels Found</h1>
                             </div>
                         }
-						
-						
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
-						{ pageCount>1 ?
 						<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"
@@ -543,7 +567,6 @@ const HotelCategory = (props) => {
 							previousLabel=""
 							renderOnZeroPageCount={null}
 						 />
-						: '' }
                         </div>
                     </div>
                     </div>
@@ -554,10 +577,6 @@ const HotelCategory = (props) => {
     )
 }
 
-export async function getServerSideProps(context) {
-    let url_param = base64_decode(context.params.url);
-    
-    return { props:  { category: url_param ? url_param : ''} };
-  }
+export default Hotel;
 
-export default HotelCategory;
+
