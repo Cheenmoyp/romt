@@ -190,8 +190,7 @@ const HotelDetails = (response) => {
                     <div className="col-7">
                       <h6>Price starts at</h6>
                       <h4><i className="fa fa-inr" aria-hidden="true"></i> {response.hoteldata.starting_price}</h4>
-                      <p>+19 taxes & fees<br/>
-                        1 room per night</p>
+                      
                     </div>
                     <div className="col-5">
                       <p>{response.hoteldata.max_guest} * Guests<br/>

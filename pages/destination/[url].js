@@ -11,7 +11,7 @@ import ReactPaginate from 'react-paginate';
 import Slider from '@material-ui/core/Slider';
 
 const Destination = (response) => {
-
+	//console.log('response.',response)
     const [value, setValue] =  React.useState([0,15000]);
     const [hotelList, setHotelList] = useState([])
     const [starRating, setStarRating] = useState();
@@ -647,7 +647,7 @@ const handleFilterBar = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-12 text-center">
-					{ pageCount>1 ?
+					{ pageCount>1 && hotelList.hotels_data && hotelList.hotels_data.length>3 ?
 					<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"
@@ -679,7 +679,7 @@ export async function getServerSideProps(context) {
     
     //console.log(base64_decode(context.params.url));
     let url_param = base64_decode(context.params.url).split("/");
-	console.log('url_param',url_param);
+	console.log('url_param2',url_param);
     // Fetch data from external API
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_HOST_BE}/query/2565/${url_param[0]}`

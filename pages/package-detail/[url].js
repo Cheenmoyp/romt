@@ -20,7 +20,7 @@ import {
 import moment from 'moment';
 
 const PackageDetail = (response) => {
-    //console.log('response', response);
+    console.log('response',response.package_name[1]);
     const router = useRouter()
     const [checkAvailability, setCheckAvailability] = useState(true);
     const [location, setLocation] = useState([]);
@@ -28,7 +28,7 @@ const PackageDetail = (response) => {
     const [formData, setFormData] = useState({});
     const [hotelId, setHotelId] = useState();
     const [hotelName, setHotelName] = useState('');
-
+    const [hotels, setHotels] = useState([]);
     const [cart, setCart] = useState({});
     const [extraAdultMessage, setExtraAdultmessage] = useState("");
     const [extraChildMessage, setExtraChildmessage] = useState("");
@@ -38,21 +38,24 @@ const PackageDetail = (response) => {
     const [packageInventory, setPackageInventory] = useState([]);
     const [packageAvailability, setPackageAvailability] = useState(false);
 
-
-    const fetcher = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/TOP`).then(response => {
-        return response.data.destinations;
-    })
-        .catch(error => {
-            console.log('error', error);
-        });
-    fetcher.then(response => {
-        if (location.length == 0) {
-            setLocation(response)
-        }
-    })
+    function destinationList() {
+		const fetcher = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/TOP`).then(response => {
+			return response.data.destinations;
+		})
+			.catch(error => {
+				console.log('error', error);
+			});
+		fetcher.then(response => {
+			if (location.length == 0) {
+				setLocation(response)
+			}
+		})
+	}
 
     useEffect(()=>{
         sessionStorage.removeItem("package_cart");
+        setHotels(response.packagehotels);
+		destinationList();
     },[])
 
     const handleBookClick = (data, hotel_id) => {
@@ -211,9 +214,6 @@ const PackageDetail = (response) => {
         }
     };
 
-
-
-
     var obj = [{}];
     const handleFormChange = (params) => {
         setPackageAvailability(false);
@@ -222,9 +222,6 @@ const PackageDetail = (response) => {
         obj.push(params);
         setFormData(obj);
     }
-
-
-
 
     const handleAdultChange = (e, package_id, packNo) => {
         let invData = getAllInv(package_id);
@@ -263,8 +260,6 @@ const PackageDetail = (response) => {
             extra_adult_price = 0;
             update_price = getPackagePrice(package_id);
         }
-
-
 
         updateExtraAdultPrice(extra_adult_price);
         setCart({...cart});
@@ -305,10 +300,7 @@ const PackageDetail = (response) => {
 
         updateExtraChildPrice(package_id, extra_child_price, packNo);
         setCart({...cart});
-
-
     };
-
 
 
     const getAllInv = (package_id) => {
@@ -466,6 +458,24 @@ const PackageDetail = (response) => {
 
     }
 
+    const getPackageCityHotels = (city) => {
+        const fetch_package_city_hotels = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-package-hotel-list-by-destination?group_id=2565&package_name=${response.package_name[1]}&city_id=${city}`).then(responses => {
+            return responses.data;
+        })
+        .catch(error => {
+            console.log('error', error);
+        });
+        fetch_package_city_hotels.then(response => {
+            console
+            // if (hotels.length  0) {
+                setHotels(response.package_hotel_list)
+                console.log('mmmmmm',hotels);
+            // }
+        })
+
+        
+    }
+
     return (
         <>
             <Header></Header>
@@ -480,15 +490,20 @@ const PackageDetail = (response) => {
                                 <div className="package-page-left">
                                     <div className="package-detail-box-left">
                                         <div className="package-info">
-                                            <h2>{response.packages ? response.packages[0].package_name : ''} </h2>
+                                            <h2>{response.package_name[1] ? response.package_name[1] : ''} </h2>
                                             <div className="row">
                                                 <div className="col-md-12">
                                                     <div className="select-hotel-d">
-                                                        <select>
+                                                        <select onChange={(event) => {
+                                                            getPackageCityHotels(
+                                                                event.target.value);}} 
+                                                        >
                                                             <option>Select hotel by location</option>
-                                                            {location.map((locate, index) => {
+                                                            {response.packages.map((locate, index) => {
                                                                 return (
-                                                                    <option key={index}>{locate}</option>
+                                                                    <option key={index} value={locate.city_id}
+                                                                    
+                                                                    >{locate.city_name}</option>
                                                                 )
                                                             })}
                                                         </select>
@@ -503,7 +518,7 @@ const PackageDetail = (response) => {
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    {response.packages.map((slide, index) => {
+                                                    {hotels.length > 0 && hotels.map((slide, index) => {
                                                         return (
                                                             <div className="col-md-4 col-sm-6" key={index}>
                                                                 <div className="box-6">
@@ -771,11 +786,11 @@ export async function getServerSideProps(context) {
     let url_param = base64_decode(context.params.url).split("/");
     // Fetch data from external API
     const res = await fetch(
+        
         `${process.env.NEXT_PUBLIC_HOST_BE}/group-package-hotel-list?group_id=${url_param[0]}&package_name=${url_param[1]}`
     );
-
-    const response = await res.json()
-    return { props: { packages: response.package_hotel_list } };
+    const response = await res.json();
+    return { props: { packages: response.package_destinations, packagehotels:response.package_hotel_list,package_name: url_param } };
 }
 
 export default PackageDetail;

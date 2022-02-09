@@ -529,7 +529,7 @@ const HotelCategory = (props) => {
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
-						{ pageCount>1 ?
+						{ pageCount>1 && hotelList.hotels_data && hotelList.hotels_data.length>3 ?
 						<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"

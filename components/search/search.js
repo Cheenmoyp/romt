@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-dropdown-select";
 
 export default function Search(props) {
-	console.log('pp', props);
+	
 	const [city, setCity] = useState(props ? props.cityid : '');
 	const [val, setVal] = useState();
     const [searchData, setSearchData] = useState({})
@@ -19,8 +19,10 @@ export default function Search(props) {
 	const [hotelList, setHotelList] = useState([]);
 	const suggestClass = suggestBox ? 'display-block' : 'display-none';
 	const [cityList, setCityList] = useState([]);
-	const [adult, setAdult] = useState(props.adult ? props.adult : 1);
-	const [kid, setKid] = useState(props.kid ? props.kid : 0);
+	const [cityValue, setCityValue] = useState('');
+	const [dropdownStatus, setDropdownStatus] = useState('');
+	const [adult, setAdult] = useState(props.adult && props.adult!='undefined' ? props.adult : 1);
+	const [kid, setKid] = useState(props.kid && props.kid!='undefined' ? props.kid : 0);
     const router = useRouter();
 	var tomorow_date = new Date();
 	var today_date = new Date();
@@ -98,6 +100,7 @@ export default function Search(props) {
 		if(textData.cityid) {
 			console.log('city', textData.cityid);
 			setCity('');
+			cityValueSet(cityList,textData.cityid);
 			//loadHotel(textData.cityid);
 		}
 		if(textData.adult) {
@@ -141,37 +144,57 @@ export default function Search(props) {
 							"label": city.name,
 							"type": city.type
 						})
-					});//console.log('cityOption',cityOption);
-					setCityList(cityOption)
+					});
+					setCityList(cityOption);
+					cityValueSet(cityOption,formData.cityid ? formData.cityid : props.cityid)
 				}
 			})
 		}
 	}
-	//console.log('hello', cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid)));
+	function loadTextChange(value) {
+		setCityValue(value);
+	}
+	function cityValueSet(cityListValue, cityidVal) {
+		var citySelected = cityListValue.filter(option => option.value == (cityidVal))?cityListValue.filter(option => option.value == (cityidVal))[0]:'';
+		setCityValue(citySelected?citySelected.label:'');
+	}
+	//var citySelected = cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))?cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))[0]:'';
+	//console.log('hello', JSON.parse(citySelected).label);
+	console.log('hello', cityValue);
     return (
 		<>
         <form>
-            <div className="form-control">
-				{/* <select className="hotelfield" onChange={(event) => {
-                handleTextChange({
-                    cityid: event.target.value,
-                });}} 
-				value={city ? city : val}
-				>
-					<option value="">Select Destination</option>
+            <div className="form-control" tabIndex={0}
+			
+				onFocus={()=> { setDropdownStatus('show-dropdown') }}
+				onBlur={()=> { setDropdownStatus('') }}
+			
+			>
+				<input type="search" placeholder="What are you looking for?" 
+                value={cityValue ? cityValue:''}
+                onChange={(event) => {
+					loadTextChange(event.target.value);
+                }}
+                />
+				
+				<ul className={`dropdown-content `+ dropdownStatus} >
 					{cityList.map((city,index) => {
-						if (city == city.city_id) {
+						
+						if (city.label.toLowerCase().includes(cityValue.toLowerCase())){
 							return (
-								<option value={city.city_id} key={index} selected>{city.city_name}</option>
+								<li onClick={(e) => {
+									setDropdownStatus('');
+									setCityValue('');								
+									handleTextChange({
+										cityid: city.value
+									});}} 
+									key={index}>{city.label}</li>
 							);
-						} else { 
-							return (
-								<option value={city.city_id} key={index} >{city.city_name}</option>
-							);
-							} 
- 					})}
-				</select> */}
-				<Select options={cityList} clearOnSelect={true} malti={false} className="hotelfield" placeholder="Select Destination"  clearable={true} onChange={(values) => {
+						}
+						
+					})}
+				 </ul>
+				{/* <Select options={cityList} clearOnSelect={true} malti={false} className="hotelfield" placeholder="Select Destination"  clearable={true} onChange={(values) => {
 					
                 handleTextChange({
                     cityid: values.length?values[0].value:'',
@@ -180,30 +203,10 @@ export default function Search(props) {
 					cityList.filter(option => 
 					   option.value == (formData.cityid ? formData.cityid : props.cityid))
 				 }
-				/>
+				/> */}
 				
             </div>
 			<div className="form-control">
-				{/* <select className="hotelfield" placeholder="Select Hotels"
-				onChange={(event) => {
-					handleTextChange({
-						hotelid: event.target.value,
-					});}} 
-				value={props.hotelid}>
-					<option value="">Select Hotel</option>
-					{hotelList && hotelList.map((hotel,index) => {
-						if (props.hotelid == hotel.hotel_id) {
-							return (
-								<option value={hotel.hotel_id} key={index} selected>{hotel.hotel_name}</option>
-							);
-						} else {
-							return (
-								<option value={hotel.hotel_id} key={index}>{hotel.hotel_name}</option>
-							);
-						} 
-						
-					})}
-				</select> */}
 				
             </div>
             <div className="form-control">
