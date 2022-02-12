@@ -71,6 +71,7 @@ const PackageDetail = (response) => {
             });
 
         fetch_package_details_prepare_cart.then(response => {
+            console.log('hello',response);
             if (response.status === 1) {
                 setPackageInventory(response.package_inventory);
                 let packageData = response.package_inventory[0]
@@ -475,7 +476,7 @@ const PackageDetail = (response) => {
 
         
     }
-
+    
     return (
         <>
             <Header></Header>
@@ -623,10 +624,11 @@ const PackageDetail = (response) => {
                     </Button>
                     <div className="chek-availability-form">
                         <form className="row">
-                            <div className="col-sm-3">
+                            <div className="col-sm-12">
                                 <label><i className="fa fa-map-marker" aria-hidden="true"></i> {hotelName}</label>
                             </div>
                             <div className="col-sm-2">
+                                <label>Date</label>
                                 {/* <input id="datepicker" type="text" className="datepicker" data-zdp_readonly_element="false" placeholder="Check In"/> */}
                                 <DatePicker
                                     className="form-control"
@@ -651,6 +653,7 @@ const PackageDetail = (response) => {
 
                             {cart && cart.packages && cart.packages.length > 0 &&
                                 <div className="col-sm-2">
+                                    <label>Adult</label>
                                     <select value={cart.packages[0].selected_adult}
                                         // onChange={(event) => {
                                         //     handleFormChange(
@@ -668,7 +671,7 @@ const PackageDetail = (response) => {
 
                                     >
 
-                                        <option value={0}>Adults</option>
+                                        <option value={0}>0</option>
 
                                         {cart.packages[0].adults &&
                                             cart.packages[0].adults.map(
@@ -689,6 +692,7 @@ const PackageDetail = (response) => {
 
                             {cart && cart.packages && cart.packages.length > 0 &&
                                 <div className="col-sm-2">
+                                    <label>Child</label>
                                     <select
                                         value={cart.packages[0].selected_child}
 
@@ -706,7 +710,7 @@ const PackageDetail = (response) => {
                                             )
                                         }
                                     >
-                                        <option value={0}>Child</option>
+                                        <option value={0}>0</option>
                                         {cart.packages[0].childs &&
                                             cart.packages[0].childs.map(
                                                 (child, child_index) => (
@@ -745,7 +749,7 @@ const PackageDetail = (response) => {
 
 
                                     <div className="check-availability-btn">
-                                        <input type="button" id="CheckAvailability" onClick={checkPackageAvailability} name="" value="" />
+                                        <input type="button" id="CheckAvailability" onClick={()=>checkPackageAvailability()} name="" value="" />
                                     </div>
 
                                     {packageAvailability && <div className="proceed-to-payment available">

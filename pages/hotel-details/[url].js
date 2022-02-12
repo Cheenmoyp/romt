@@ -65,15 +65,24 @@ const HotelDetails = (response) => {
 	    var be_url = url+'/property/?q='+q;
 
    //for sticky scroll
-   const [scrollval, setScrollval] = useState('')
+   const [scrollval, setScrollval] = useState('');
+   const [scrollPrice, setScrollPrice] = useState('');
    useEffect(() => {
         document.addEventListener("scroll", () => {
-            const scrollCheck = window.scrollY > 150
+            const scrollCheck = window.scrollY > 150;
+            const scrollCheck2 = window.scrollY > 900;
             console.log('scroll', window.scrollY);
             if (scrollCheck) {
-                setScrollval('shrink')
+                setScrollval('shrink');
+				if (scrollCheck2) {
+					setScrollPrice('')
+				} else {
+					setScrollPrice('shrink')
+				}
+                
             } else {
-                setScrollval('')
+                setScrollval('');
+                setScrollPrice('');
             }
         })
     })
@@ -117,8 +126,8 @@ const HotelDetails = (response) => {
             <div className="col-md-3">
               <div className="hotel-sharing">
                 <ul>
-                  <li><a href="#"><i className="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i className="fa fa-share-alt" aria-hidden="true"></i></a></li>
+                  
+                  
                   <li className="h-rating"><a href="#"><i className="fa fa-star-o" aria-hidden="true"></i> {response.hoteldata.star}/5</a></li>
                 </ul>
               </div>
@@ -127,65 +136,177 @@ const HotelDetails = (response) => {
         </div>
       </div>
       <div className="hotel-details-banner">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9">
-              <div className="row">
-                <div className="col-md-8">
-                  <div className="hotel-detail-bannerbox">
-                    <figure > 
-						<Carousel swipeable={true}
-						  draggable={true}
-						  infinite={true}
-						  responsive={responsive}>
-							{response.hoteldata.images && response.hoteldata.images.map((slide, index)=>{
-								return (
-									<img className="hotel-banner-img" src={slide} alt="" title="" key={index}  />
-								)
-							
+	  	<div className="hotel-details-left">
+			<div className="container">
+			  <div className="row">
+				<div className="col-md-9">
+				  <div className="row">
+					<div className="col-md-8">
+					  <div className="hotel-detail-bannerbox">
+						<figure > 
+							<Carousel swipeable={true}
+							  draggable={true}
+							  infinite={true}
+							  responsive={responsive}>
+								{response.hoteldata.images && response.hoteldata.images.map((slide, index)=>{
+									return (
+										<img className="hotel-banner-img" src={slide} alt="" title="" key={index}  />
+									)
+								
+								})}
+							</Carousel>
+						
+						 </figure>
+					  </div>
+					</div>
+					<div className="col-md-4">
+					  <div className="hotel-detail-bannerbox hotel-gallery">
+						<figure> <a href="#"  data-target="#hotelphotos" ><img src={response.hoteldata.image} alt="" title=""/></a>
+						  <h3> </h3>
+						</figure>
+					  </div>
+					  <div className="hotel-detail-bannerbox hotel-video">
+						<figure> <a href="#" className="v-button"   ><img src={response.hoteldata.image} alt="" title=""/></a>
+						  <h4 className="video"><a href="#" className="v-button"  > 
+							<span> </span> </a></h4>
+						</figure>
+					  </div>
+					</div>
+					<div className="col-md-12">
+					  {/* <p> */}
+						  <div
+						  dangerouslySetInnerHTML={{
+							__html: response.hoteldata && response.hoteldata.hotel_description,
+						  }}
+						/>
+					  {/* </p> */}
+					</div>
+				  </div>
+				  <div className="hotel-facilities">
+					  <div className="row">
+						<div className="col-md-8">
+						  <div className="heading-group-2">
+							<h4>Facilities at the {response.hoteldata.hotel_name}</h4>
+							<p>Facilities here have been <span>rated {response.hoteldata.star} by 1652 guest</span></p>
+						  </div>
+						</div>
+						
+					  </div>
+					  <div className="facilitis-with-icon">
+						<ul className="row">
+						  <li className="col"><span className="icon"><img src="/Images/hotels/icons/Free-Parking.png" alt="" title="Free Parking" /></span>Free Parking</li>
+						  <li className="col"><span className="icon"><img src="/Images/hotels/icons/Wi-Fi.png" alt="" title="Free Wi-Fi" /></span>Free Wi-Fi</li>
+						  <li className="col"><span className="icon"><img src="/Images/hotels/icons/AirConditioning.png" alt="" title="Air Conditioning" /></span>Air Conditioning</li>
+						  <li className="col"><span className="icon"><img src="/Images/hotels/icons/RoomServices.png" alt="" title="Room Services" /></span>Room Services</li>
+						</ul>
+					  </div>
+					  <div className="row amenities">
+						<div className="col">
+						  <div className="amenities-box">
+							<h4>Facilities</h4>
+							<ul>
+							{response.hoteldata.facility.map((slide, index)=>{
+								if (index < 4) {
+												return (
+													// <>
+														<li key={index} >{slide}</li>
+													// </>
+												)
+								}
 							})}
-						</Carousel>
-					
-					 </figure>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="hotel-detail-bannerbox hotel-gallery">
-                    <figure> <a href="#"  data-target="#hotelphotos" ><img src={response.hoteldata.image} alt="" title=""/></a>
-                      <h3> </h3>
-                    </figure>
-                  </div>
-                  <div className="hotel-detail-bannerbox hotel-video">
-                    <figure> <a href="#" className="v-button"   ><img src={response.hoteldata.image} alt="" title=""/></a>
-                      <h4 className="video"><a href="#" className="v-button"  > 
-                        <span> </span> </a></h4>
-                    </figure>
-                  </div>
-                </div>
-                <div className="col-md-12">
-                  {/* <p> */}
-                      <div
-                      dangerouslySetInnerHTML={{
-                        __html: response.hoteldata && response.hoteldata.hotel_description,
-                      }}
-                    />
-                  {/* </p> */}
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="h-detail-banner-right">
-                <div className="hd1">
-                  <h3>Login & Get
-                    The Best Deals & Price</h3>
-                </div>
-                <ul>
-                  <li>Safe and hygienic places</li>
-                  <li>Active Social Distance</li>
-                  <li>Guest & Staff Temperature check</li>
-                  <li>Safe kitchen practices</li>
-                </ul>
-                <div className="price">
+							</ul>
+						  </div>
+						</div>
+						<div className="col">
+						  <div className="amenities-box">
+							<h4>   </h4>
+							<ul>
+							{response.hoteldata.facility.map((slide, index)=>{
+								if (4 <= index && index < 8) {
+												return (
+													// <>
+														<li key={index} >{slide}</li>
+													// </>
+												)
+								}
+							})}
+							</ul>
+						  </div>
+						</div>
+						<div className="col">
+						  <div className="amenities-box">
+							<h4>  </h4>
+							<ul>
+								{response.hoteldata.facility.map((slide, index)=>{
+									if (8 <= index && index < 12) {
+													return (
+														// <>
+															<li key={index} >{slide}</li>
+														// </>
+													)
+									}
+								})}
+							</ul>
+						  </div>
+						</div>
+						<div className="col">
+						  <div className="amenities-box">
+							<h4>  </h4>
+							<ul>
+								{response.hoteldata.facility.map((slide, index)=>{
+									if (12 <= index && index < 16) {
+													return (
+														// <>
+															<li key={index} >{slide}</li>
+														// </>
+													)
+									}
+								})}
+							</ul>
+						  </div>
+						</div>
+						<div className="col">
+						  <div className="amenities-box">
+							<h4>   </h4>
+							<ul>
+								{response.hoteldata.facility.map((slide, index)=>{
+									if (16 <= index && index < 20) {
+													return (
+														// <>
+															<li key={index} >{slide}</li>
+														// </>
+													)
+									}
+								})}
+							</ul>
+						  </div>
+						</div>
+					   
+					  </div>
+				</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<div className={`hotel-details-right ` +scrollPrice}>
+			<div className="container">
+				<div className="row">
+				   <div className="col-md-3 offset-md-9">
+				   
+				   
+					  <div className="h-detail-banner-right hoteldetail_right">
+							
+							
+							
+							
+							<ul>
+							  <li>Safe and hygienic places</li>
+							  <li>Active Social Distance</li>
+							  <li>Guest & Staff Temperature check</li>
+							  <li>Safe kitchen practices</li>
+							</ul> 
+							
+							     <div className="price">
                   <div className="row">
                     <div className="col-7">
                       <h6>Price starts at</h6>
@@ -193,121 +314,63 @@ const HotelDetails = (response) => {
                       
                     </div>
                     <div className="col-5">
-                      <p>{response.hoteldata.max_guest} * Guests<br/>
+                      <p>{response.hoteldata.max_guest} Max. Guests<br/>
                         1 * Room</p>
                     </div>
                   </div>
                    {/* <a href={be_url}>Book Now</a>  */}
                   </div>
-              </div>
-            </div>
-          </div>
-        </div>
+							
+							
+							
+						</div> 
+					  
+				   
+				   
+					  <div className="h-detail-banner-right">
+					
+					  
+						<div className="price-hd">
+							<ul>
+								<li>
+									<h3><i className="fa fa-inr" aria-hidden="true"></i> 1,254<span> / night</span></h3>
+								</li>
+								<li><i className="fa fa-star" aria-hidden="true"></i><span>4.75 </span><span>·53 reviews</span></li>
+							</ul>
+							<h6>Deluxe Room</h6>
+						</div>
+						<div className="added-rooms">
+							<ul>
+								<li>
+									<p><strong>Room-1</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+								<li>
+									<p><strong>Room-2</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+								<li>
+									<p><strong>Room-3</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+							</ul>
+						</div>
+						<div className="prceed-to-payment">
+							<button>Proceed to payment</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
       </div>
-      <div className="hotel-facilities">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="heading-group-2">
-                <h4>Facilities at the {response.hoteldata.hotel_name}</h4>
-                <p>Facilities here have been <span>rated {response.hoteldata.star} by 1652 guest</span></p>
-              </div>
-            </div>
-          </div>
-          <div className="facilitis-with-icon">
-            <ul className="row">
-              <li className="col"><span className="icon"><img src="/Images/hotels/icons/Free-Parking.png" alt="" title="Free Parking" /></span>Free Parking</li>
-              <li className="col"><span className="icon"><img src="/Images/hotels/icons/Wi-Fi.png" alt="" title="Free Wi-Fi" /></span>Free Wi-Fi</li>
-              <li className="col"><span className="icon"><img src="/Images/hotels/icons/ElevatorLift.png" alt="" title="Elevator/Lift" /></span>Elevator/Lift</li>
-              <li className="col"><span className="icon"><img src="/Images/hotels/icons/AirConditioning.png" alt="" title="Air Conditioning" /></span>Air Conditioning</li>
-              <li className="col"><span className="icon"><img src="/Images/hotels/icons/RoomServices.png" alt="" title="Room Services" /></span>Room Services</li>
-            </ul>
-          </div>
-          <div className="row amenities">
-            <div className="col">
-              <div className="amenities-box">
-                <h4>Facilities</h4>
-                <ul>
-                {response.hoteldata.facility.map((slide, index)=>{
-					if (index < 4) {
-                                    return (
-										// <>
-											<li key={index} >{slide}</li>
-										// </>
-                                    )
-					}
-				})}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <div className="amenities-box">
-                <h4>   </h4>
-                <ul>
-                {response.hoteldata.facility.map((slide, index)=>{
-                  	if (4 <= index && index < 8) {
-                                    return (
-										// <>
-											<li key={index} >{slide}</li>
-										// </>
-                                    )
-					}
-				})}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <div className="amenities-box">
-                <h4>  </h4>
-                <ul>
-					{response.hoteldata.facility.map((slide, index)=>{
-						if (8 <= index && index < 12) {
-										return (
-											// <>
-												<li key={index} >{slide}</li>
-											// </>
-										)
-						}
-					})}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <div className="amenities-box">
-                <h4>  </h4>
-                <ul>
-					{response.hoteldata.facility.map((slide, index)=>{
-						if (12 <= index && index < 16) {
-										return (
-											// <>
-												<li key={index} >{slide}</li>
-											// </>
-										)
-						}
-					})}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <div className="amenities-box">
-                <h4>   </h4>
-                <ul>
-					{response.hoteldata.facility.map((slide, index)=>{
-						if (16 <= index && index < 20) {
-										return (
-											// <>
-												<li key={index} >{slide}</li>
-											// </>
-										)
-						}
-					})}
-                </ul>
-              </div>
-            </div>
-           
-          </div>
-        </div>
-      </div>
+      
       <div  id="view-available-rooms"></div>
       <Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search} hotel_data={response.hoteldata}/>
     </div>

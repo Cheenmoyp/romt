@@ -178,7 +178,7 @@ const handleFilterBar = () => {
 					<p className={`desti-content ${toggledClass}`}>
 						<div
 						dangerouslySetInnerHTML={{
-							__html: currentItems.length>0 ? currentItems[0].hotel_description:'',
+							__html: hotelList.destination_description ? hotelList.destination_description:'',
 						}}
 						/>
 					</p>
@@ -216,7 +216,7 @@ const handleFilterBar = () => {
                     <div className="col-md-3">
                         <div className="filter-box">
                             <div className="nav-side-menu">
-                            <div className="brand">Filters</div>
+                            <div className="brand">Filters  <span className="text-right"><img src="/Images/packages/icons/reset.png"/></span></div>
                             <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" onClick={() => handleFilterBar()}></i>
                             <div className="menu-list">
                                 <div id="menu-content" className={'menu-content '+showFilterbar}>

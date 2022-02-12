@@ -417,8 +417,7 @@ export const Header = () => {
 								   </div>
 								   <div className="signin-form">
 									 <h4>Welcome back, please login to your account</h4>
-									 <div className="login-with"><h5>Log in with</h5><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i>
-									</a><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></div>
+									 
 									 <form>
 										<span className="text-danger">{error}</span>
 									   <input type="text" placeholder="Registered Mobile" onChange={(e) => setMobile(e.target.value)}/>

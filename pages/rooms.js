@@ -724,7 +724,7 @@ export default function Rooms(props) {
                                                 </div>
                                                 <div  >  </div>
                                             </div>
-                                            <h4>{slide.room_type}</h4>
+                                            <h4>{slide.room_type} <span className="pull-right">(Max Capacity: {slide.max_people})</span></h4>
                                             <div className="room-content">
                                                 <div className="room-dertails">
                                                     <h6>Amenities</h6>
