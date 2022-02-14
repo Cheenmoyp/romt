@@ -329,7 +329,7 @@ const HotelDetails = (response) => {
 										<h5>Check In</h5>
 									</li>
 									<li>
-										<div class="time">
+										<div className="time">
 											<h3>1<span>Night</span></h3>
 										</div>
 									</li>
@@ -356,11 +356,11 @@ const HotelDetails = (response) => {
 								<a className="edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
 							</div>
 							<div className="view-bu public-coupon">
-								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Public coupon</li><li> <i class="fa fa-inr"></i>200</li></ul></div>
+								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Public coupon</li><li> <i className="fa fa-inr"></i>200</li></ul></div>
 							</div>
 							<div className="view-bu">
 								<h4>View Breakup</h4>
-								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i class="fa fa-inr"></i>4,233.6</li></ul></div>
+								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i className="fa fa-inr"></i>4,233.6</li></ul></div>
 							</div>
 							<div>
 								<button className="prceed-to-payment">
