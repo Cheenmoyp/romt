@@ -292,8 +292,14 @@ const HotelDetails = (response) => {
 			<div className="container">
 				<div className="row">
 				   <div className="col-md-3 offset-md-9">
+				   
+				   
 					  <div className="h-detail-banner-right hoteldetail_right">
-						<ul>
+							
+							
+							
+							
+							<ul>
 							  <li>Safe and hygienic places</li>
 							  <li>Active Social Distance</li>
 							  <li>Guest & Staff Temperature check</li>
@@ -322,51 +328,42 @@ const HotelDetails = (response) => {
 				   
 				   
 					  <div className="h-detail-banner-right">
-							<div className="chkin-chkout">
-								<ul>
-									<li>
-										<h4>14th Feb</h4>
-										<h5>Check In</h5>
-									</li>
-									<li>
-										<div class="time">
-											<h3>1<span>Night</span></h3>
-										</div>
-									</li>
-									<li>
-										<h4>15th Feb</h4>
-										<h5>Check Out</h5>
-									</li>									
-								</ul>
-							</div>
-							<div className="booking-details">
-								<h6>Deluxe Room</h6>
-								<h6>Rooms: <span>1</span>, Adults: <span>2</span>, Child:<span> 0</span>,kids: <span>0</span></h6>
-								<div className="b-price">
-									<h6>Room Price:  6,000</h6>
-								</div>
-								<a className="edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
-							</div>
-							<div className="booking-details">
-								<h6>Suite Room</h6>
-								<h6>Rooms: <span>1</span>, Adults: <span>2</span>, Child:<span> 0</span>,kids: <span>0</span></h6>
-								<div className="b-price">
-									<h6>Room Price:  6,000</h6>
-								</div>
-								<a className="edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
-							</div>
-							<div className="view-bu public-coupon">
-								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Public coupon</li><li> <i class="fa fa-inr"></i>200</li></ul></div>
-							</div>
-							<div className="view-bu">
-								<h4>View Breakup</h4>
-								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i class="fa fa-inr"></i>4,233.6</li></ul></div>
-							</div>
-							<div>
-								<button className="prceed-to-payment">
-									Continue
-								</button>
-							</div>
+					
+					  
+						<div className="price-hd">
+							<ul>
+								<li>
+									<h3><i className="fa fa-inr" aria-hidden="true"></i> 1,254<span> / night</span></h3>
+								</li>
+								<li><i className="fa fa-star" aria-hidden="true"></i><span>4.75 </span><span>·53 reviews</span></li>
+							</ul>
+							<h6>Deluxe Room</h6>
+						</div>
+						<div className="added-rooms">
+							<ul>
+								<li>
+									<p><strong>Room-1</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+								<li>
+									<p><strong>Room-2</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+								<li>
+									<p><strong>Room-3</strong></p>
+									<p>Adult : <span>2</span></p>
+									<p>Child : <span>2</span></p>
+									<div className="dselect-room"><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+								</li>
+							</ul>
+						</div>
+						<div className="prceed-to-payment">
+							<button>Proceed to payment</button>
+						</div>
 					  </div>
 					</div>
 				</div>
