@@ -29,7 +29,10 @@ export default function Rooms(props) {
     const [extraAdultMessage, setExtraAdultmessage] = useState("");
     const [extraChildMessage, setExtraChildmessage] = useState("");
 
-    const [dateRange,setDateRange]=useState({startDate:'',endDate:''});
+    const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
+
+    const [publicCoupons, setPublicCoupons] = useState([]);
+
 
     // api-key - 644406a7918f871f3a8568c58e56e77b
     // 1993 - hotel_id
@@ -39,10 +42,10 @@ export default function Rooms(props) {
     // `${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/${props.search[0]}/${props.search[2]}/${props.search[3]/INR`
     // const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/1993/17-11-2021/18-11-2021/INR`).then(response => {
 
-    useEffect(()=>{
+    useEffect(() => {
         sessionStorage.removeItem("be_cart");
         sessionStorage.removeItem("be_hotel_data");
-    },[])
+    }, [])
 
 
 
@@ -50,17 +53,17 @@ export default function Rooms(props) {
         if (props && props.hotel_data) {
 
             let checkin_checkout_date = JSON.parse(sessionStorage.getItem('be_checkin_checkout'))
-            let checkin_date=moment(checkin_checkout_date.checkin).format("DD-MM-YYYY");
-            let checkout_date=moment(checkin_checkout_date.checkout).format("DD-MM-YYYY");
+            let checkin_date = moment(checkin_checkout_date.checkin).format("DD-MM-YYYY");
+            let checkout_date = moment(checkin_checkout_date.checkout).format("DD-MM-YYYY");
 
-            dateRange.startDate=checkin_checkout_date.checkin;
-            dateRange.endDate=checkin_checkout_date.checkout;
+            dateRange.startDate = checkin_checkout_date.checkin;
+            dateRange.endDate = checkin_checkout_date.checkout;
 
-            setDateRange({...dateRange});            
+            setDateRange({ ...dateRange });
 
 
             const fetcher = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/${props.hotel_data.api_key}/${props.hotel_data.hotel_id}/${checkin_date}/${checkout_date}/INR`).then(response => {
-                
+
                 return response.data.data
             })
                 .catch(error => {
@@ -86,7 +89,33 @@ export default function Rooms(props) {
             })
         }
     }, [props.room_id])
-    
+
+
+    // for public coupons
+    useEffect(() => {
+
+        if (props && props.hotel_data) {
+
+            let checkin_checkout_date = JSON.parse(sessionStorage.getItem('be_checkin_checkout'))
+            let checkin_date = moment(checkin_checkout_date.checkin).format("DD-MM-YYYY");
+            let checkout_date = moment(checkin_checkout_date.checkout).format("DD-MM-YYYY");
+
+
+            const get_public_coupons = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/be_coupons/public/${props.hotel_data.hotel_id}/${checkin_date}/${checkout_date}`).then(response => {
+
+                return response.data.data
+            })
+                .catch(error => {
+                    console.log('error', error);
+                });
+
+            get_public_coupons.then(response => {
+                setPublicCoupons(response);
+            })
+        }
+
+    }, [])
+    // for public coupons
 
 
     // const handleClick = (id, max_people, rack_price, room_type) => {
@@ -167,6 +196,7 @@ export default function Rooms(props) {
             extra_adult_price: 0,
             extra_child_price: 0,
             bar_price: parseFloat(rateplan_data.bar_price),
+            day_wise_rates: rateplan_data.rates
 
         };
         cartItem["rates_for_coupons"] = rateplan_data.rates;
@@ -200,6 +230,8 @@ export default function Rooms(props) {
 
         cart.display_price = cart.price + extra_adult_price + extra_child_price;
 
+        applyPublicCoupon(cart);
+
         cart.tax = [];
         let total_gst_amount = calculateGstAmount(cart.rooms);
 
@@ -212,9 +244,8 @@ export default function Rooms(props) {
         cart.paid_amount_per = 100;
 
         setCart({ ...cart });
-
         sessionStorage.setItem("be_cart", JSON.stringify(cart));
-        sessionStorage.setItem("be_hotel_data",JSON.stringify(props.hotel_data));
+        sessionStorage.setItem("be_hotel_data", JSON.stringify(props.hotel_data));
 
 
     }
@@ -312,19 +343,19 @@ export default function Rooms(props) {
 
     const noOfNights = () => {
 
-        let checkin_date= dateRange && moment(dateRange.startDate).format("YYYY-MM-DD");
-        let checkout_date=dateRange && moment(dateRange.endDate).format("YYYY-MM-DD");
+        let checkin_date = dateRange && moment(dateRange.startDate).format("YYYY-MM-DD");
+        let checkout_date = dateRange && moment(dateRange.endDate).format("YYYY-MM-DD");
 
 
         let dt1 = new Date(checkin_date);
         let dt2 = new Date(checkout_date);
         let diffDays = Math.floor(
-          (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
-            Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
-          (1000 * 60 * 60 * 24)
-        );    
+            (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
+                Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
+            (1000 * 60 * 60 * 24)
+        );
         return diffDays;
-      };
+    };
 
     let no_nights = noOfNights();
 
@@ -373,7 +404,7 @@ export default function Rooms(props) {
                     occupancy[adult] = invData["bar_price"];
                 }
                 if (adult > 0) {
-                      update_price += parseFloat(occupancy[adult] / no_nights);
+                    update_price += parseFloat(occupancy[adult] / no_nights);
                 }
                 else {
                     update_price += parseFloat(occupancy[adult]);
@@ -385,7 +416,7 @@ export default function Rooms(props) {
             update_price = getRoomPrice(cart.room_type_id, cart.rate_plan_id);
             no_of_extra_adults = selected_adults - invData["max_people"];
             extra_adult_price = no_of_extra_adults * invData["extra_adult_price"];
-              setExtraAdultmessage((invData["extra_adult_price"] / no_nights).toFixed());
+            setExtraAdultmessage((invData["extra_adult_price"] / no_nights).toFixed());
         }
         if (selected_adults === invData["max_people"]) {
             if (invData["max_occupancy"] !== 0) {
@@ -642,17 +673,72 @@ export default function Rooms(props) {
         let dateArray = getDateArray(from_date, end_date);
         let gstAmount = 0;
 
+        // dateArray &&
+        //     dateArray.map((value, index) => {
+        //         rooms.map((rates_for_discount) => {
+        //             let gst_price = 0;
+        //             let total_bar_price = 1;
+        //             total_bar_price = (rates_for_discount.bar_price + rates_for_discount.extra_adult_price + rates_for_discount.extra_child_price) / no_of_days
+        //             gst_price += total_bar_price
+
+
+        //             const gstPercent = checkGSTPercent(gst_price);
+        //             gstAmount += gst_price * gstPercent / 100;
+        //         });
+        //     })
+
         dateArray &&
             dateArray.map((value, index) => {
                 rooms.map((rates_for_discount) => {
                     let gst_price = 0;
                     let total_bar_price = 1;
-                    total_bar_price = (rates_for_discount.bar_price + rates_for_discount.extra_adult_price + rates_for_discount.extra_child_price) / no_of_days
-                    gst_price += total_bar_price
+                    let total_pay_price;
+
+                    rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
+                        if (value === day_rate.date) {
+                            if (rates_for_discount.selected_adult < cart.max_people) {
+
+                                if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+                                    total_bar_price = day_rate.bar_price
+
+                                }
+                                else {
+                                    total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+
+                                }
+                            }
+                            else {
+                                total_bar_price = day_rate.bar_price
+                            }
+
+                            if (rates_for_discount.extra_adult_price > 0 && rates_for_discount.no_of_extra_adult && rates_for_discount.no_of_extra_adult > 0) {
+                                total_bar_price = total_bar_price + (day_rate.extra_adult_price) * rates_for_discount.no_of_extra_adult;
+                            }
 
 
-                    const gstPercent = checkGSTPercent(gst_price);
-                    gstAmount += gst_price * gstPercent / 100;
+                            if (rates_for_discount.extra_child_price > 0 && rates_for_discount.no_of_extra_child && rates_for_discount.no_of_extra_child > 0) {
+                                total_bar_price = total_bar_price + (day_rate.extra_child_price) * rates_for_discount.no_of_extra_child;
+                            }
+
+
+                            if (rates_for_discount.public_coupon_discount_price_array && rates_for_discount.public_coupon_discount_price_array.length > 0) {
+                                rates_for_discount.public_coupon_discount_price_array.map((pb_coupon_price) => {
+                                    if (day_rate.date === pb_coupon_price.date && pb_coupon_price.room === rates_for_discount.room) {
+                                        total_pay_price = total_bar_price - pb_coupon_price.public_coupon_discount_price
+                                    }
+                                })
+                            }
+                            else {
+                                total_pay_price = total_bar_price
+                            }
+
+                            gst_price += total_pay_price;
+                            const gstPercent = checkGSTPercent(gst_price);
+                            gstAmount += gst_price * gstPercent / 100;
+
+                        }
+                    })
                 });
             })
         return gstAmount;
@@ -665,28 +751,171 @@ export default function Rooms(props) {
         var currentDate = moment(startDate);
         var stopDate = moment(stopDate);
         while (currentDate <= stopDate) {
-          dateArray.push(moment(currentDate).format("YYYY-MM-DD"));
-          currentDate = moment(currentDate).add(1, "days");
+            dateArray.push(moment(currentDate).format("YYYY-MM-DD"));
+            currentDate = moment(currentDate).add(1, "days");
         }
         return dateArray;
-      };
+    };
 
 
-      const checkGSTPercent = (price) => {
+    const checkGSTPercent = (price) => {
         if (price <= 1000) {
-          return 0;
+            return 0;
         } else if (price > 1000 && price <= 7500) {
-          return 12;
+            return 12;
         } else if (price > 7500) {
-          return 18;
+            return 18;
         }
-      };
+    };
 
 
-      const handleCancel = ()=>{
-        setModal(!modal) 
+    const handleCancel = () => {
+        setModal(!modal)
         setCart({})
-      }
+    }
+
+
+    // for public coupon
+    const applyPublicCoupon = (cart) => {
+
+
+
+
+
+        let from_date = moment(dateRange.startDate).format("YYYY-MM-DD");
+        let to_date = moment(dateRange.endDate).format("YYYY-MM-DD");
+        let end_date = moment(to_date)
+            .subtract(1, "days")
+            .format("YYYY-MM-DD");
+        let dateArray = getDateArray(from_date, end_date);
+
+
+
+        let discountPrice = 0;
+        const appliedDates = [];
+        const applied_coupons = [];
+        let public_coupon_discount_price_array = [];
+
+
+
+        cart && dateArray &&
+            dateArray.map((value, index) => {
+                publicCoupons &&
+                    publicCoupons.length > 0 &&
+                    publicCoupons.map((coupon, index) => {
+                        if (
+                            value == coupon.date &&
+                            cart.room_type_id === coupon.room_type_id
+                        ) {
+
+                            cart.rooms.map((rates_for_discount) => {
+
+
+                                let total_bar_price = 1;
+                                rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
+                                    if (value === day_rate.date) {
+
+
+                                        if (rates_for_discount.selected_adult < cart.max_people) {
+
+                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+                                                total_bar_price = day_rate.bar_price
+
+                                            }
+                                            else {
+                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+                                            }
+
+
+                                        }
+                                        else {
+                                            total_bar_price = day_rate.bar_price
+                                        }
+
+                                        discountPrice += (total_bar_price / 100) * coupon.discount;
+
+                                        public_coupon_discount_price_array.push({ room: rates_for_discount.room, date: value, public_coupon_discount_price: (total_bar_price / 100) * coupon.discount })
+                                    }
+                                })
+
+                                rates_for_discount.public_coupon_discount_price_array = public_coupon_discount_price_array
+
+
+                            });
+
+
+                            applied_coupons.push(coupon);
+                            cart.discounted_price = discountPrice;
+
+                            cart.appliedCoupons = applied_coupons;
+                            appliedDates.push(value);
+                        }
+                    });
+
+            });
+
+
+        cart && dateArray &&
+            dateArray.map((value, index) => {
+                publicCoupons &&
+                    publicCoupons.length > 0 &&
+                    publicCoupons.map((coupon, index) => {
+                        if (
+                            value == coupon.date &&
+                            coupon.room_type_id === 0 &&
+                            !appliedDates.includes(coupon.date)
+                        ) {
+
+                            cart.rooms.map((rates_for_discount) => {
+
+
+                                let total_bar_price = 1;
+                                rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
+                                    if (value === day_rate.date) {
+
+                                        if (rates_for_discount.selected_adult < cart.max_people) {
+
+                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+                                                total_bar_price = day_rate.bar_price
+
+                                            }
+                                            else {
+                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+                                            }
+
+
+                                        }
+                                        else {
+                                            total_bar_price = day_rate.bar_price
+                                        }
+
+                                        discountPrice += (total_bar_price / 100) * coupon.discount;
+
+                                        public_coupon_discount_price_array.push({ room: rates_for_discount.room, date: value, public_coupon_discount_price: (total_bar_price / 100) * coupon.discount })
+
+                                    }
+                                })
+
+                                rates_for_discount.public_coupon_discount_price_array = public_coupon_discount_price_array
+
+                            });
+
+
+                            applied_coupons.push(coupon);
+                            cart.discounted_price = discountPrice;
+
+                            cart.appliedCoupons = applied_coupons;
+                            appliedDates.push(value);
+                        }
+                    });
+            });
+
+        setCart({ ...cart });
+
+    };
+    // for public coupon
 
     return (
         <>
@@ -701,7 +930,7 @@ export default function Rooms(props) {
                         <div className="row">
                             {Rooms.map((slide, index1) => {
                                 let amenities = slide.allImages;
-                                let rateplans = (slide.rate_plans)?slide.rate_plans:[];
+                                let rateplans = (slide.rate_plans) ? slide.rate_plans : [];
                                 return (
                                     <div className="col-md-4" key={index1}>
                                         <div className="rooms-box">
@@ -780,7 +1009,7 @@ export default function Rooms(props) {
                                 )
                             })}
                         </div>
- 
+
                     </div>
                 </div>
             </div>
