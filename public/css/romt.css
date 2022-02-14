@@ -6658,3 +6658,9 @@ right:0px!important;
 
 .hoteldetail_right{margin:0px 0px 10px 0px;}
 .hoteldetail_right li{font-size:14px; padding:0px 0px 0px 10px;}
+
+.btn-is-disabled {
+    pointer-events: none;
+    opacity:0.7;
+    cursor: not-allowed;
+}

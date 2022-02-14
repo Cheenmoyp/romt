@@ -25,6 +25,11 @@ export default function Rooms(props) {
     const [addRoom, setAddRoom] = useState();
     const [selectedNoOfRooms, setSelectedNoOfRooms] = useState(1);
     const [cart, setCart] = useState({});
+
+    const [totalCartItems, setTotalCartItems] = useState([]);
+    const [selectedRoomTypeId, setSelectedRoomTypeId] = useState([]);
+
+
     const [selectedAdults, setselectedAdults] = useState("");
     const [extraAdultMessage, setExtraAdultmessage] = useState("");
     const [extraChildMessage, setExtraChildmessage] = useState("");
@@ -244,12 +249,21 @@ export default function Rooms(props) {
         cart.paid_amount_per = 100;
 
         setCart({ ...cart });
+
+        selectedRoomTypeId.push(cart.room_type_id);
+        setSelectedRoomTypeId([...selectedRoomTypeId]);
+
+        totalCartItems.push(cart);
+        setTotalCartItems([...totalCartItems]);
+
         sessionStorage.setItem("be_cart", JSON.stringify(cart));
+
+        sessionStorage.setItem("be_all_cart_items", JSON.stringify(totalCartItems));
+
         sessionStorage.setItem("be_hotel_data", JSON.stringify(props.hotel_data));
-
-
     }
 
+    
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -982,7 +996,7 @@ export default function Rooms(props) {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-4">
-                                                                            <a href="#" className="addroom-btn" data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
+                                                                            <a href="#" className={selectedRoomTypeId.includes(slide.room_type_id) ? "addroom-btn btn-is-disabled":"addroom-btn"} data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
                                                                             <div>
 
                                                                             </div>
@@ -1130,6 +1144,8 @@ export default function Rooms(props) {
                         {/* <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setModal(!modal) ,setCart({})}>Cancel</button> */}
                         <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleCancel}>Cancel</button>
                         <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}><a href="../hotel-booking">Confirm</a></button>
+                        {/* <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}>Confirm</button> */}
+
                     </div>
                 </Modal.Footer>
             </Modal>
