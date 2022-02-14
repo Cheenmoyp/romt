@@ -487,7 +487,7 @@ const PackageDetail = (response) => {
                 <div className="packaage-detail-page-con">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-12">
+                            <div className="col-md-8">
                                 <div className="package-page-left">
                                     <div className="package-detail-box-left">
                                         <div className="package-info">
@@ -521,7 +521,7 @@ const PackageDetail = (response) => {
                                                 <div className="row">
                                                     {hotels.length > 0 && hotels.map((slide, index) => {
                                                         return (
-                                                            <div className="col-md-3 col-sm-6" key={index}>
+                                                            <div className="col-md-4 col-sm-6" key={index}>
                                                                 <div className="box-6">
                                                                     <figure>
                                                                         <a href="#" data-toggle="modal" data-target="#RoomDetails" onClick={() => handleBookClick(slide, slide.hotel_id)}>
@@ -533,7 +533,7 @@ const PackageDetail = (response) => {
                                                                         </h4>
                                                                         {/* <h5>14,999</h5> */}
                                                                     </div>
-                                                                    <div className="boo-now-btn"> <a data-toggle="modal" data-target="#RoomDetails"
+                                                                    <div className="boo-now-btn"> <a href="#" data-toggle="modal" data-target="#RoomDetails"
                                                                         onClick={() => handleBookClick(slide, slide.hotel_id)}>Book Now</a> </div>
                                                                 </div>
                                                             </div>
@@ -627,7 +627,7 @@ const PackageDetail = (response) => {
                             <div className="col-sm-12">
                                 <label><i className="fa fa-map-marker" aria-hidden="true"></i> {hotelName}</label>
                             </div>
-                            <div className="col-sm-3">
+                            <div className="col-sm-2">
                                 <label>Date</label>
                                 {/* <input id="datepicker" type="text" className="datepicker" data-zdp_readonly_element="false" placeholder="Check In"/> */}
                                 <DatePicker
@@ -652,7 +652,7 @@ const PackageDetail = (response) => {
                             </div>
 
                             {cart && cart.packages && cart.packages.length > 0 &&
-                                <div className="col-sm-3">
+                                <div className="col-sm-2">
                                     <label>Adult</label>
                                     <select value={cart.packages[0].selected_adult}
                                         // onChange={(event) => {
@@ -691,7 +691,7 @@ const PackageDetail = (response) => {
 
 
                             {cart && cart.packages && cart.packages.length > 0 &&
-                                <div className="col-sm-3">
+                                <div className="col-sm-2">
                                     <label>Child</label>
                                     <select
                                         value={cart.packages[0].selected_child}

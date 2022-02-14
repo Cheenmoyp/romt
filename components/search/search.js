@@ -229,12 +229,12 @@ export default function Search(props) {
 			 <div className="btn-group show-on-hover kids-adult  guestbar">
 				  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Guests <span className="caret"></span><br />
-					<small>{formData.kid || formData.kid == 0 ? formData.kid: kid} Kid, {formData.adult ? formData.adult:adult} Adult</small>
+					<small> {formData.adult ? formData.adult:adult} Adult, {formData.kid || formData.kid == 0 ? formData.kid: kid} Kid</small>
 				  </button>
 					  <ul className="dropdown-menu" role="menu">
 						<li> 
 							  <div className="form-control ">
-							  <span className="label-control">ADULTS (12y +)</span>
+							  <span className="label-control">ADULTS  </span>
 							  
 								<span className="btn btn-default bgd-count"  onClick={(event) => {
 									if (adult > 1) {
@@ -258,7 +258,7 @@ export default function Search(props) {
 							 
 							<div className="form-control" >
 							
-								<span className="label-control">CHILDREN (Age 12y and below)</span>
+								<span className="label-control">CHILDREN  </span>
 								<span className="btn btn-default bgd-count  " onClick={(event) => {
 									if (kid >= 0) {
 										handleTextChange({

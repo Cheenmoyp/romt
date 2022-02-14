@@ -528,7 +528,7 @@ div#register-form-modal {
 .search-con.shrink {
     background: #fff;
     position: fixed!important;
-    z-index: 999;
+    z-index: 10000!important;
     margin: 0 auto;
     border: none;
     padding: 0;
@@ -539,15 +539,20 @@ div#register-form-modal {
     -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
     box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
     -webkit-animation-duration: .5s;
+    -moz-animation-duration: .5s;
     animation-duration: .5s;
     -webkit-animation-name: sticky-animation;
+    -moz-animation-name: sticky-animation;
     animation-name: sticky-animation;
     -webkit-animation-timing-function: ease-out;
+    -moz-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
     -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
     animation-fill-mode: both;
     height: 71px;
     padding-top: 5px!important;
+    padding-bottom: 5px;
 }
 .search-con.shrink h1, .search-con.shrink h3, .search-con.shrink .search-categories {
     display: none!important;
@@ -2190,8 +2195,57 @@ input:checked + .slider:before {
     border: 1px solid #e8efd3;
 }
 .h-detail-banner-right {
-    border: 1px solid #e8efd3;
-    border-radius: 10px;
+    border: 1px solid #e8e8e8;
+    height: auto;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    padding: 12px;
+}
+.booking-details, .full-room-pay{
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 4px;
+    background: #fff;
+    border: 1px solid #98be3b;
+    padding: 15px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.booking-details .edit {
+    display: inline-block;
+    background: #98be3b;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+.booking-details  h6 {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.full-room-pay {
+    margin-bottom: 15px;
+}
+.view-bu h4 {
+    font-size: 16px;
+    margin-top: 10px;
+    color:#98be3b;
+}
+.view-bu ul li {
+    width: 50%;
+    display: inline-block;
+}
+.view-bu ul li:last-child {
+    text-align: right;
 }
 .modal.fade.videomodal.show .modal-dialog {
     max-width: 800px;
@@ -2499,58 +2553,56 @@ Hotel Photo Gallery End
     padding-top: 7px;
     margin: 0;
 }
-.price-hd {
-    padding: 15px;
+.chkin-chkout ul {
+    margin-bottom: 15px;
+    text-align: center;
 }
-.price-hd ul li {
+.chkin-chkout ul li {
     display: inline-block;
-    width: 50%;
+	margin:0 5px;
 }
-.price-hd ul li:last-child {
-    font-size: 12px;
+.chkin-chkout ul li {
+    display: inline-block;
+    vertical-align: middle;
 }
-.price-hd ul li:last-child i {
-    color: #f16b23;
-    margin-right: 6px;
-}
-
-.price-hd ul li h3 {
-    font-size: 20px;
-}
-.price-hd ul li h3 span {
-    font-size: 13px;
+.chkin-chkout ul li h4,  .chkin-chkout ul li h5{
+    font-size: 16px;
+    text-align: center;
     font-weight: normal;
 }
-.price-hd h6 {
-    margin: 10px 0 0;
-    color: #000;
-}
-.added-rooms {
-    padding: 0 15px;
-}
-.added-rooms ul li {
-    position: relative;
-    border: 1px solid #ededed;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-.dselect-room {
+.chkin-chkout ul li h5{
+font-size: 12px;}
+.chkin-chkout .time {
     display: inline-block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    right: 5px;
-    height: max-content;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    padding-top: 2px;
+    background-color: #98be3b;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 22%);
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 110%;
+    text-align: center;
+    color: #fff;
+    font-weight: 400;
+    vertical-align: middle;
+    z-index: 1000;
 }
-.prceed-to-payment{padding:15px;}
-.prceed-to-payment button {
+.chkin-chkout .time h3 {
+    font-size: 17px;
+    padding-top: 10px;
+}
+
+.chkin-chkout .time h3 span{ display:inline-block; width:100%; }
+.prceed-to-payment {
     border-radius: 0;
     padding: 10px;
     font-weight: 400;
     font-size: 16px;
-    background-color: #f16b23;
-    border: 1px solid #f16b23;
+    background-color: #98be3b;
+    border: 1px solid #98be3b;
     stroke: none;
     outline: none;
     color: #fff;
@@ -2781,10 +2833,10 @@ margin-bottom:15px;
     font-size: 12px;
 }
 .rooms-box h4 {
-    font-size: 20px;
+    font-size: 17px;
     padding: 0;
     margin: 12px 0 5px;
-    font-weight: 700;
+    font-weight: 500;
     padding: 0 10px;
 }
 .room-dertails ul li {
@@ -3065,30 +3117,21 @@ ul.rating-progress-bar li span {
     background: #46484d;
 
 }
-.hotel-police h3, .hotel-faq h3 {
+.hotel-police h3, .hotel-faq h3, .roomes-at-section h3, .hotel-facilities h4 {
     font-size: 22px;
     position: relative;
     padding-bottom: 5px;
     margin-bottom: 13px;
 }
-.hotel-police h3:before, .hotel-faq h3:before {
+.hotel-police h3:before, .hotel-faq h3:before, .roomes-at-section h3:before, .hotel-facilities h4:before {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 53px;
-    height: 3px;
-    background: #f16b23;
+    width: 100%;
+    height: 1px;
+    background: #ebebeb;
     border-radius: 10px;
-}
-.hotel-police h3:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 5px;
-    background: #000;
 }
 .hotel-police ul.list-4 li {
     font-size: 14px;
@@ -3461,6 +3504,7 @@ ul.hotel-faq-list li:nth-child(2) {
     border-radius: 10px;
     overflow: hidden;
 }
+.package_booking_modal .modal-content {overflow: visible;}
 .sign-in-right {
     text-align: center;
     width: 100%;
@@ -3909,17 +3953,7 @@ ul.terms-conditions li:before {
     width: 100%;
     padding: 4px 0;
 }
-.chek-availability-form button, .chek-availability-form input[type="button"] {
-    background: #ff8a34;
-    color: #fff;
-    border: 1px solid #ff8a34;
-    padding: 5px 15px;
-    border-radius: 7px;
-    float: right;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    cursor: pointer;
-}
+
 .chek-availability-form .button-con input#proceed-to-payment-btn {
     display: none;
 }
@@ -5988,11 +6022,12 @@ ul.terms-conditions li:before {
     text-decoration: none;
 }
 .box-6 .content h4 a {
-    color: #0071c2;
+    color: #000000;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 16px;
     height: 22px;
     display: inline-block;
+    margin: 10px 0 0;
 }
 .box-6 .content h5 {
     font-weight: bold;
@@ -6006,12 +6041,13 @@ ul.terms-conditions li:before {
 }
 .boo-now-btn a {
     background: #ff5e00;
-    color: #fff;
+    color: #fff!important;
     text-transform: uppercase;
     border: 1px solid #ff5e00;
     padding: 6px 11px;
     border-radius: 7px;
     font-size: 12px;
+	cursor: pointer;
 }
 .boo-now-btn a:hover{ background:#e75500; border-color:#e75500; text-decoration: none;  }
 .sec-heading h3 {
@@ -6034,7 +6070,7 @@ ul.terms-conditions li:before {
     width: 100%;
     padding: 4px 0;
 }
-.chek-availability-form button, .chek-availability-form input[type="button"] {
+.chek-availability-form input#proceed-to-payment-btn {
     background: #ff8a34;
     color: #fff;
     border: 1px solid #ff8a34;
@@ -6082,6 +6118,7 @@ ul.terms-conditions li:before {
     background: none;
     position: relative;
     z-index: 1;
+    border: none;
 }
 
 .write-review-sec {
@@ -6329,8 +6366,8 @@ h3.heding-btmborder:before {
     color: inherit;
 }
 
-.package_booking_modal .modal-body{
-    height: 300px;
+.package_booking_modal .modal-body {
+    height: auto;
 }
 
  
@@ -6370,6 +6407,45 @@ h3.heding-btmborder:before {
 
 
 .kids-adult .dropdown-menu{width:210px; }
+/*M I L A N 14022022*/
+.show-on-hover:hover>ul.dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    padding: 5px;
+    text-align: center;
+    left: -50%;
+    width: 183px;
+}
+.bgd-count {
+    background: #d5d5d5;
+    color: #fff;
+    border-radius: 40px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    line-height: 29px;
+}
+
+.kids-adult .dropdown-menu .form-control {
+    margin: 30px 0 0;
+    text-align: center;
+    position: relative;
+    border: 1px solid #ababab;
+    border-radius: 30px;
+    width: 123px;
+    padding: 5px;
+}
+.kids-adult .label-control {
+    position: absolute;
+    top: -21px;
+    width: 176px;
+    left: -28px;
+    right: 0;
+    margin: auto;
+}
+/*M I L A N 14022022 End*/
 .kids-adult .label-control{font-size:11px; width:100%; float:left;}
 .contact-us-box {
     visibility: hidden;
