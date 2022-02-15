@@ -10,11 +10,14 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from 'axios';
+import Button from "react-bootstrap/Button";
 
 const HotelDetails = (response) => {
   console.log(response);
 	const [lightboxmodal, setLightboxmodal] = useState(false);
 	const [faqList, setFaqList] = useState([]);
+	const [modal1, setModal1] = useState(false);
+	const [modal2, setModal2] = useState(false);
 	const handleLightBoxClick = () => {
         setLightboxmodal(!lightboxmodal);
     }
@@ -86,6 +89,15 @@ const HotelDetails = (response) => {
             }
         })
     })
+
+	const openModal1 = () => {
+		setModal1(true)
+	}
+
+	const openModal2 = () => {
+		setModal2(true)
+	}
+
   return (
     <>
     <Header></Header>
@@ -356,7 +368,18 @@ const HotelDetails = (response) => {
 								<a className="edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
 							</div>
 							<div className="view-bu public-coupon">
-								<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Public coupon</li><li> <i className="fa fa-inr"></i>200</li></ul></div>
+								<div id="full-room-pay" className="full-room-pay">
+									<ul className="clearfix">
+										<li>Public coupon</li>
+										<li> <i className="fa fa-inr"></i>200</li>
+									</ul>
+								</div>
+							</div>
+							<div className="cupon-click">
+								<ul>
+									<li>Have a coupon code ?<br/><span onClick={openModal1}>Click Here</span></li>
+									<li><span onClick={openModal2}>Click Here</span>for addon services</li>
+								</ul>
 							</div>
 							<div className="view-bu">
 								<h4>View Breakup</h4>
@@ -503,9 +526,6 @@ const HotelDetails = (response) => {
 	   </Modal.Body>
 	</Modal>
 	
-	
-	
-	
     <div className="modal fade videomodal" id="videoModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
@@ -519,6 +539,87 @@ const HotelDetails = (response) => {
         </div>
       </div>
     </div>
+
+	<Modal className="modal fade cupon-modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="true" show={modal1}>
+	   <Modal.Body>
+	   		<Button variant="close" onClick={() => setModal1(false)}>
+			</Button>
+			<h3>Apply Coupon Here</h3>
+			<div className="modal-cupons">
+				<div className="row">
+					<div className="col-md-6">
+						<div className="coupon-card text-center">
+							<p className="coupon-message text-center">Applicable For: <span>ALL</span></p>
+							<h3 className="text-center">Save Upto</h3>
+							<div className="coupon-discount green"><span>37<div>%</div></span></div>
+							<div className="coupon-code"><span>testpublic37</span></div>
+							<div className="coupon-apply-button"><a>Applied <i className="material-icons icon"></i></a></div>
+							<p className="coupon-message center-align"><span className="coupon-border">Valid From:22-Jan</span><span className="coupon-border">Valid To:01-Mar</span></p>
+						</div>
+					</div>
+					<div className="col-md-6">
+						<div className="coupon-card text-center">
+							<p className="coupon-message text-center">Applicable For: <span>ALL</span></p>
+							<h3 className="text-center">Save Upto</h3>
+							<div className="coupon-discount green"><span>37<div>%</div></span></div>
+							<div className="coupon-code"><span>testpublic37</span></div>
+							<div className="coupon-apply-button"><a>Applied <i className="material-icons icon"></i></a></div>
+							<p className="coupon-message center-align"><span className="coupon-border">Valid From:22-Jan</span><span className="coupon-border">Valid To:01-Mar</span></p>
+						</div>
+					</div>
+					<div className="col-md-12">
+						<div className="cupon-apply-form">
+							<form>
+								<input type="text" placeholder="Have a coupon code type here" value=""/>
+								<a className="coupon-btn">Apply </a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	   </Modal.Body>
+	</Modal>
+
+	<Modal className="modal fade cupon-modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="true" show={modal2}>
+	   <Modal.Body>
+	   		<Button variant="close" onClick={() => setModal2(false)}>
+			</Button>
+		<h3>Get The Extra Paid Services</h3>
+			<div className="modal-cupons">
+				<div className="row">
+					<div className="col-md-12 text-center">
+						<div className="extra-paid">
+							<ul className="row">
+								<li className="col-md-3"><h4>Service Name</h4></li>
+								<li className="col-md-3"><h4>Service Amount</h4></li>
+								<li className="col-md-3"><h4>GST</h4></li>
+								<li className="col-md-3"></li>
+							</ul>
+							<ul className="row">
+								<li className="col-md-3">Airport Pickup</li>
+								<li className="col-md-3">2,000</li>
+								<li className="col-md-3">-</li>
+								<li className="col-md-3"><a className="service-btn">Add Service</a></li>
+							</ul>
+							<ul className="row">
+								<li className="col-md-3">Airport Pickup</li>
+								<li className="col-md-3">2,000</li>
+								<li className="col-md-3">-</li>
+								<li className="col-md-3"><a className="service-btn">Add Service</a></li>
+							</ul>
+							<ul className="row">
+								<li className="col-md-3">Airport Pickup</li>
+								<li className="col-md-3">2,000</li>
+								<li className="col-md-3">-</li>
+								<li className="col-md-3"><a className="service-btn">Add Service</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+	   </Modal.Body>
+	</Modal>
   
   <script>
   {/* //Packages */}
