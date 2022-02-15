@@ -10,10 +10,13 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from 'axios';
+import Button from "react-bootstrap/Button";
 
 const HotelDetails = (response) => {
 	const [lightboxmodal, setLightboxmodal] = useState(false);
 	const [faqList, setFaqList] = useState([]);
+	const [modal1, setModal1] = useState(false);
+	const [modal2, setModal2] = useState(false);
 	const handleLightBoxClick = () => {
 		setLightboxmodal(!lightboxmodal);
 	}
@@ -86,6 +89,13 @@ const HotelDetails = (response) => {
 		})
 	})
 
+	const openModal1 = () => {
+		setModal1(true)
+	}
+
+	const openModal2 = () => {
+		setModal2(true)
+	}
 
 	const [totalCartItems, setTotalCartItems] = useState([]);
 	const [totalDisplayPrice, setTotalDisplayPrice] = useState(0);
@@ -95,9 +105,11 @@ const HotelDetails = (response) => {
 	const [checkoutDate, setCheckoutDate] = useState();
 	const [noOfNight, setNoOfNight] = useState();
 
-	const [editCartItem,setEditCartItem] = useState({})
-	const [allowEditCart,setAllowEditCart] = useState(false)
-	const [cartIndex,setCartIndex] = useState();
+	const [editCartItem, setEditCartItem] = useState({})
+	const [allowEditCart, setAllowEditCart] = useState(false)
+	const [cartIndex, setCartIndex] = useState();
+
+    const [paidServices, setPaidServices] = useState([]);
 
 
 
@@ -125,13 +137,44 @@ const HotelDetails = (response) => {
 	}, [totalCartItems])
 
 
-	const functionEditCart = (cartItem,index)=>{
+	const functionEditCart = (cartItem, index) => {
 		setEditCartItem(cartItem);
 		setAllowEditCart(true);
 		setCartIndex(index)
 	}
 
 
+	useEffect(() => {
+		if (response && response.hoteldata) {
+			const get_paid_services = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/paidServices/${response.hoteldata.hotel_id}`).then(resp => {
+				return resp.data
+			})
+				.catch(error => {
+					console.log('error', error);
+				});
+
+			get_paid_services.then(res => {
+				if (res.status === 1) {
+					res.paidServices.map((item) => {
+						let gst_price = 0;
+						if (item.service_tax !== 0) {
+							gst_price = item.service_amount * item.service_tax / 100
+							item.service_tax_price = gst_price;
+						}
+						else {
+							item.service_tax_price = '-'
+						}
+					})
+					setPaidServices(res.paidServices)
+				}
+				else {
+					setPaidServices([])
+				}
+
+			})
+		}
+
+	}, [response])
 	return (
 		<>
 			<Header></Header>
@@ -406,7 +449,7 @@ const HotelDetails = (response) => {
 												<div className="b-price">
 													<h6>Room Price:  <i className="fa fa-inr"></i>{(cartItem.display_price.toFixed(2))}</h6>
 												</div>
-												<a className="edit" onClick={() =>functionEditCart(cartItem,id)}><i className="fa fa-pencil" aria-hidden="true"></i></a>
+												<a className="edit" onClick={() => functionEditCart(cartItem, id)}><i className="fa fa-pencil" aria-hidden="true"></i></a>
 											</div>
 										))}
 
@@ -417,6 +460,13 @@ const HotelDetails = (response) => {
 										{totalPublicCouponPrice > 0 && <div className="view-bu public-coupon">
 											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Discount</li><li> <i className="fa fa-inr"></i>{totalPublicCouponPrice.toFixed(2)}</li></ul></div>
 										</div>}
+
+										<div className="cupon-click">
+											<ul>
+												<li>Have a coupon code ?<br /><span onClick={openModal1}>Click Here</span></li>
+												<li><span onClick={openModal2}>Click Here</span>for addon services</li>
+											</ul>
+										</div>
 
 										<div>
 											<a href="../hotel-booking">
@@ -435,8 +485,7 @@ const HotelDetails = (response) => {
 
 				<div id="view-available-rooms"></div>
 				<Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search} hotel_data={response.hoteldata}
-					checkinDate={setCheckinDate} checkoutDate={setCheckoutDate} noOfNight={setNoOfNight} totalCartItems={setTotalCartItems}  editCartItem={editCartItem} allowEditCart={allowEditCart} removeEditAccess={setAllowEditCart} cartIndex={cartIndex}/>
-
+					checkinDate={setCheckinDate} checkoutDate={setCheckoutDate} noOfNight={setNoOfNight} totalCartItems={setTotalCartItems} editCartItem={editCartItem} allowEditCart={allowEditCart} removeEditAccess={setAllowEditCart} cartIndex={cartIndex} />
 			</div>
 
 
@@ -564,9 +613,6 @@ const HotelDetails = (response) => {
 				</Modal.Body>
 			</Modal>
 
-
-
-
 			<div className="modal fade videomodal" id="videoModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
@@ -580,6 +626,87 @@ const HotelDetails = (response) => {
 					</div>
 				</div>
 			</div>
+
+			<Modal className="modal fade cupon-modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="true" show={modal1}>
+				<Modal.Body>
+					<Button variant="close" onClick={() => setModal1(false)}>
+					</Button>
+					<h3>Apply Coupon Here</h3>
+					<div className="modal-cupons">
+						<div className="row">
+							{/* <div className="col-md-6">
+								<div className="coupon-card text-center">
+									<p className="coupon-message text-center">Applicable For: <span>ALL</span></p>
+									<h3 className="text-center">Save Upto</h3>
+									<div className="coupon-discount green"><span>37<div>%</div></span></div>
+									<div className="coupon-code"><span>testpublic37</span></div>
+									<div className="coupon-apply-button"><a>Applied <i className="material-icons icon"></i></a></div>
+									<p className="coupon-message center-align"><span className="coupon-border">Valid From:22-Jan</span><span className="coupon-border">Valid To:01-Mar</span></p>
+								</div>
+							</div>
+							<div className="col-md-6">
+								<div className="coupon-card text-center">
+									<p className="coupon-message text-center">Applicable For: <span>ALL</span></p>
+									<h3 className="text-center">Save Upto</h3>
+									<div className="coupon-discount green"><span>37<div>%</div></span></div>
+									<div className="coupon-code"><span>testpublic37</span></div>
+									<div className="coupon-apply-button"><a>Applied <i className="material-icons icon"></i></a></div>
+									<p className="coupon-message center-align"><span className="coupon-border">Valid From:22-Jan</span><span className="coupon-border">Valid To:01-Mar</span></p>
+								</div>
+							</div> */}
+							<div className="col-md-12">
+								<div className="cupon-apply-form">
+									<form>
+										<input type="text" placeholder="Have a coupon code type here" value="" />
+										<a className="coupon-btn">Apply </a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</Modal.Body>
+			</Modal>
+
+			<Modal className="modal fade cupon-modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="true" show={modal2}>
+				<Modal.Body>
+					<Button variant="close" onClick={() => setModal2(false)}>
+					</Button>
+					<h3>Get The Extra Paid Services</h3>
+					<div className="modal-cupons">
+						<div className="row">
+							<div className="col-md-12 text-center">
+								<div className="extra-paid">
+									<ul className="row">
+										<li className="col-md-3"><h4>Service Name</h4></li>
+										<li className="col-md-3"><h4>Service Amount</h4></li>
+										<li className="col-md-3"><h4>GST</h4></li>
+										<li className="col-md-3"></li>
+									</ul>
+
+									{paidServices &&
+										paidServices.length > 0 &&
+										paidServices.map((paidService, id) => {
+											return (
+												<ul className="row">
+													<li className="col-md-3">{paidService.service_name}</li>
+													<li className="col-md-3"><i className="fa fa-inr" aria-hidden="true"></i>{paidService.service_amount}</li>
+
+													{paidService.service_tax_price !== "-" ?
+														<li className="col-md-3"><i className="fa fa-inr" aria-hidden="true"></i>{paidService.service_tax_price}({paidService.service_tax}%)</li>
+														:
+														<li className="col-md-3">-</li>
+													}
+													<li className="col-md-3"><a className="service-btn">Add Service</a></li>
+												</ul>
+											)
+										})}
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</Modal.Body>
+			</Modal>
 
 			<script>
 				{/* //Packages */}
