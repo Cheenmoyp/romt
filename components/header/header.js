@@ -5,6 +5,8 @@ import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { NextSeo } from "next-seo";
+import SEO from "../../utilities/next-seo.config";
 
 export const Header = () => {
     const [loginmodal, setLoginmodal] = useState(false);
@@ -226,7 +228,13 @@ export const Header = () => {
         < >
 		
 	    <div className="fullhead">
-		
+			<NextSeo
+				title={SEO.defaultTitle}
+				description={SEO.description}
+				keywords={SEO.keywords}
+			/>
+			
+  			<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <div className="container">
             <div className="row">
             <div className="col-md-2">
@@ -280,7 +288,7 @@ export const Header = () => {
 										</div>
 									</div>
 								</li>
-								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" onClick={() => handleHotelNav()} href={"/hotels"} > Hotels </a> 
+								<li className="nav-item dropdown">  <a className="nav-link dropdown-toggle" onClick={() => handleHotelNav()} href={"#"} > Hotels </a> 
 								
 										<div className={'dropdown-menu '+showHotelNav} aria-labelledby="navbarDropdown">
 										<div className="container">

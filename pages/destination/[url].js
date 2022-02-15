@@ -626,9 +626,7 @@ const handleFilterBar = () => {
                                         </div>
                                         <div className="col-md-3 hotel-box2-right">
                                             <ul className="rating">
-                                            <li> </li>
                                             <li className='pricee'><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
-                                            
                                             <li> <a href={"../hotel-details/"+ base64_encode(slide.hotel_id+'/'+(response.url_param[2] ? response.url_param[2]:'')+'/'+(response.url_param[3] ? response.url_param[3]:'')+'/'+(response.url_param[4] ? response.url_param[4]:1)+'/'+(response.url_param[5] ? response.url_param[5]:0))} className="book-now-btn-destinationsearch">Book Now</a>
                                             </li>
                                             </ul>

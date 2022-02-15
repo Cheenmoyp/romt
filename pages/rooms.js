@@ -1008,7 +1008,10 @@ export default function Rooms(props) {
                                                         </Carousel>
                                                     </div>
                                                 </div>
-                                                <div  >  </div>
+                                                <div>  </div>
+												<div className="room-offer">
+													20<span>%</span><span>Off</span>
+												</div>
                                             </div>
                                             <h4>{slide.room_type} <span className="pull-right">(Max Capacity: {slide.max_people})</span></h4>
                                             <div className="room-content">
@@ -1079,9 +1082,6 @@ export default function Rooms(props) {
                         <ul className="add-room">
                             <li>
                                 <label className="text-left">No. Of Rooms</label>
-
-
-
                                 <select name="rooms"
                                     value={selectedNoOfRooms}
                                     onChange={(e) =>
