@@ -13,14 +13,12 @@ export default function Rooms(props) {
     let checkin = (props && props.search && props.search[2] && props.search[2]) ? props.search[2] : null;
     let checkout = (props && props.search && props.search[3] && props.search[3]) ? props.search[3] : null;
 
-
     const [Rooms, setRooms] = useState([]);
     const [roomDetailsId, setRoomDetailsId] = useState();
     const [modal, setModal] = useState(false);
     const [roomDetails, setRoomDetails] = useState();
 
     const [roomModal, setRoomModal] = useState(true);
-
 
     const [addRoom, setAddRoom] = useState();
     const [selectedNoOfRooms, setSelectedNoOfRooms] = useState(1);
@@ -47,12 +45,39 @@ export default function Rooms(props) {
     // `${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/${props.search[0]}/${props.search[2]}/${props.search[3]/INR`
     // const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/1993/17-11-2021/18-11-2021/INR`).then(response => {
 
+    useEffect(()=>{
+        if (props.allowEditCart === true) {
+            Rooms && Rooms.map((room_data)=>{
+                if(room_data.room_type_id === props.editCartItem.room_type_id){
+                    setAddRoom(room_data);
+                }
+            })
+            setCart(props.editCartItem);
+            setModal(true)
+        }
+    },[props.allowEditCart])
+
+
     useEffect(() => {
         sessionStorage.removeItem("be_cart");
         sessionStorage.removeItem("be_hotel_data");
+        sessionStorage.removeItem("be_all_cart_items");
     }, [])
 
+    useEffect(()=>{
+        setCart({})
+        setTotalCartItems([]);
 
+        props.checkinDate();
+        props.checkoutDate();
+        props.totalCartItems([]);
+        props.noOfNight();
+        
+        sessionStorage.removeItem("be_cart");
+        sessionStorage.removeItem("be_hotel_data");
+        sessionStorage.removeItem("be_all_cart_items");
+
+    },[props.search[1],props.search[2]])
 
     useEffect(() => {
         if (props && props.hotel_data) {
@@ -66,6 +91,9 @@ export default function Rooms(props) {
 
             setDateRange({ ...dateRange });
 
+
+            props.checkinDate(moment(checkin_checkout_date.checkin).format("Do MMM"));
+            props.checkoutDate(moment(checkin_checkout_date.checkout).format("Do MMM"));
 
             const fetcher = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/${props.hotel_data.api_key}/${props.hotel_data.hotel_id}/${checkin_date}/${checkout_date}/INR`).then(response => {
 
@@ -93,9 +121,9 @@ export default function Rooms(props) {
                 }
             })
         }
-    }, [props.room_id])
+    }, [props.room_id,props.search[1],props.search[2]])
 
-
+    
     // for public coupons
     useEffect(() => {
 
@@ -119,7 +147,7 @@ export default function Rooms(props) {
             })
         }
 
-    }, [])
+    }, [props.search[1],props.search[2]])
     // for public coupons
 
 
@@ -250,17 +278,28 @@ export default function Rooms(props) {
 
         setCart({ ...cart });
 
-        selectedRoomTypeId.push(cart.room_type_id);
-        setSelectedRoomTypeId([...selectedRoomTypeId]);
+        if (props.allowEditCart === false) {
+            selectedRoomTypeId.push(cart.room_type_id);
+            setSelectedRoomTypeId([...selectedRoomTypeId]);
 
-        totalCartItems.push(cart);
-        setTotalCartItems([...totalCartItems]);
+            totalCartItems.push(cart);
+            setTotalCartItems([...totalCartItems]);
+        }
+        else {
+            totalCartItems[props.cartIndex] = cart;
+            setTotalCartItems([...totalCartItems]);
+        }
+
+
+
+
 
         sessionStorage.setItem("be_cart", JSON.stringify(cart));
-
         sessionStorage.setItem("be_all_cart_items", JSON.stringify(totalCartItems));
-
+		props.totalCartItems(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
         sessionStorage.setItem("be_hotel_data", JSON.stringify(props.hotel_data));
+
+        props.removeEditAccess(false);
     }
 
     
@@ -368,6 +407,9 @@ export default function Rooms(props) {
                 Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
             (1000 * 60 * 60 * 24)
         );
+
+        props.noOfNight(diffDays);
+
         return diffDays;
     };
 
@@ -786,6 +828,7 @@ export default function Rooms(props) {
     const handleCancel = () => {
         setModal(!modal)
         setCart({})
+        props.removeEditAccess(false);
     }
 
 
@@ -1143,8 +1186,8 @@ export default function Rooms(props) {
                     <div className="modal-footer">
                         {/* <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setModal(!modal) ,setCart({})}>Cancel</button> */}
                         <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleCancel}>Cancel</button>
-                        <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}><a href="../hotel-booking">Confirm</a></button>
-                        {/* <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}>Confirm</button> */}
+                        {/* <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}><a href="../hotel-booking">Confirm</a></button> */}
+                        <button type="button" className="btn btn-primary confirm" data-dismiss="modal" onClick={handleConfirm}>Confirm</button>
 
                     </div>
                 </Modal.Footer>

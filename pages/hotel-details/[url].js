@@ -91,16 +91,16 @@ const HotelDetails = (response) => {
 	const [totalDisplayPrice, setTotalDisplayPrice] = useState(0);
 	const [totalPublicCouponPrice, setTotalPublicCouponPrice] = useState(0);
 
+	const [checkinDate, setCheckinDate] = useState();
+	const [checkoutDate, setCheckoutDate] = useState();
+	const [noOfNight, setNoOfNight] = useState();
 
-	useEffect(() => {
+	const [editCartItem,setEditCartItem] = useState({})
+	const [allowEditCart,setAllowEditCart] = useState(false)
+	const [cartIndex,setCartIndex] = useState();
 
-		// let checkin_checkout_date = JSON.parse(sessionStorage.getItem('be_checkin_checkout'))
-		// let checkin_date = moment(checkin_checkout_date.checkin).format("DD-MM-YYYY");
-		// let checkout_date = moment(checkin_checkout_date.checkout).format("DD-MM-YYYY");
 
-		setTotalCartItems(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
 
-	}, [])
 
 	useEffect(() => {
 		let totalPrice = 0;
@@ -108,9 +108,6 @@ const HotelDetails = (response) => {
 		totalCartItems &&
 			totalCartItems.length > 0 &&
 			totalCartItems.map((cartItem) => {
-
-				console.log(cartItem);
-
 				let extra_adult_price = 0;
 				let extra_child_price = 0;
 				cartItem.rooms.map((room) => {
@@ -127,6 +124,12 @@ const HotelDetails = (response) => {
 
 	}, [totalCartItems])
 
+
+	const functionEditCart = (cartItem,index)=>{
+		setEditCartItem(cartItem);
+		setAllowEditCart(true);
+		setCartIndex(index)
+	}
 
 
 	return (
@@ -364,26 +367,26 @@ const HotelDetails = (response) => {
 
 
 
-									<div className="h-detail-banner-right">
+									{totalCartItems && totalCartItems.length > 0 && <div className="h-detail-banner-right">
 										<div className="chkin-chkout">
 											<ul>
 												<li>
-													<h4>14th Feb</h4>
+													{checkinDate && <h4>{checkinDate}</h4>}
 													<h5>Check In</h5>
 												</li>
 												<li>
-													<div className="time">
-														<h3>1<span>Night</span></h3>
-													</div>
+													{noOfNight && <div className="time">
+														<h3>{noOfNight}<span>Night</span></h3>
+													</div>}
 												</li>
 												<li>
-													<h4>15th Feb</h4>
+													{checkoutDate && <h4>{checkoutDate}</h4>}
 													<h5>Check Out</h5>
 												</li>
 											</ul>
 										</div>
 
-										{totalCartItems && totalCartItems.map((cartItem, id) => (
+										{totalCartItems.map((cartItem, id) => (
 
 											<div className="booking-details" key={id}>
 												<h6>{cartItem.room_type}({cartItem.plan_type})</h6>
@@ -403,7 +406,7 @@ const HotelDetails = (response) => {
 												<div className="b-price">
 													<h6>Room Price:  <i className="fa fa-inr"></i>{(cartItem.display_price.toFixed(2))}</h6>
 												</div>
-												<a className="edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+												<a className="edit" onClick={() =>functionEditCart(cartItem,id)}><i className="fa fa-pencil" aria-hidden="true"></i></a>
 											</div>
 										))}
 
@@ -412,15 +415,18 @@ const HotelDetails = (response) => {
 										</div>}
 
 										{totalPublicCouponPrice > 0 && <div className="view-bu public-coupon">
-											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Discount</li><li> <i className="fa fa-inr"></i>{totalPublicCouponPrice}</li></ul></div>
+											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Discount</li><li> <i className="fa fa-inr"></i>{totalPublicCouponPrice.toFixed(2)}</li></ul></div>
 										</div>}
 
 										<div>
-											<button className="prceed-to-payment">
-												Continue
-											</button>
+											<a href="../hotel-booking">
+												<button className="prceed-to-payment">
+													Continue
+												</button>
+											</a>
 										</div>
-									</div>
+									</div>}
+
 								</div>
 							</div>
 						</div>
@@ -428,7 +434,9 @@ const HotelDetails = (response) => {
 				</div>
 
 				<div id="view-available-rooms"></div>
-				<Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search} hotel_data={response.hoteldata} />
+				<Rooms name={response.hoteldata.hotel_name} room_id={response.hoteldata.hotel_id} search={response.search} hotel_data={response.hoteldata}
+					checkinDate={setCheckinDate} checkoutDate={setCheckoutDate} noOfNight={setNoOfNight} totalCartItems={setTotalCartItems}  editCartItem={editCartItem} allowEditCart={allowEditCart} removeEditAccess={setAllowEditCart} cartIndex={cartIndex}/>
+
 			</div>
 
 

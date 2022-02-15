@@ -44,7 +44,7 @@ const HotelBooking = () => {
         setUserState((prevState) => ({ ...prevState, [name]: e }));
     };
 
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState([]);
     const [hotelData, setHotelData] = useState({});
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
 
@@ -62,7 +62,8 @@ const HotelBooking = () => {
         setDateRange({ ...dateRange });
 
 
-        setCart(JSON.parse(sessionStorage.getItem('be_cart')));
+        // setCart(JSON.parse(sessionStorage.getItem('be_cart')));
+        setCart(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
         setHotelData(JSON.parse(sessionStorage.getItem('be_hotel_data')));
 
     }, [])
@@ -149,7 +150,7 @@ const HotelBooking = () => {
                         hotel_id: hotel_id,
                         from_date: from_date,
                         to_date: to_date,
-                        cart: [cart],
+                        cart: cart,
                         visitors_ip: "1.1.1.1",
                         coupon: [],
                         paid_service: [],
@@ -211,6 +212,20 @@ const HotelBooking = () => {
 
     };
 
+	const [totalDisplayPrice, setTotalDisplayPrice] = useState(0);
+
+    useEffect(() => {
+		let totalPrice = 0;
+		cart &&
+			cart.length > 0 &&
+			cart.map((cartItem) => {
+				totalPrice += cartItem.paid_amount;
+			});
+		setTotalDisplayPrice(totalPrice);
+
+
+	}, [cart])
+
     return (
         <>
             <Header></Header>
@@ -245,39 +260,47 @@ const HotelBooking = () => {
                                                 <p>Check Out</p>
                                                 {dateRange.endDate && <h5>{dateRange.endDate}</h5>}
                                             </div>
-                                            {/*<div className="col-md-3">
-                                        <p>Chek In</p>
-                                        <h5>Tue, 05 Oct 2021</h5>
-                                        <p>12:00PM</p>
-                                    </div> */}
                                         </div>
                                     }
 
                                 </div>
-                                {cart && <div className="booking-page-box-3">
-                                    <div className="booking-page-box-3-heading">
-                                        <h4>{`${cart.rooms && cart.rooms.length}Room for ${cart.rooms &&
-                                            cart.rooms.reduce((init, room) => {
-                                                return init + room.selected_adult;
-                                            }, 0)} Adults`}</h4>
-                                        {/* <h6>Great Choice! You are saving <i className="fa fa-inr" aria-hidden="true"></i> 383 with your booking</h6> */}
-                                    </div>
-                                    <div className="booking-page-box-3-content">
-                                        <ul>
-                                            <li>
-                                                <h5>{`${cart.rooms && cart.rooms.length} x ${cart.room_type}`}</h5>
-                                            </li>
-                                            <li><img src="/Images/hotels/icons/adult.png" title="" alt="" /><span>{`${cart.rooms &&
-                                                cart.rooms.reduce((init, room) => {
-                                                    return init + room.selected_adult;
-                                                }, 0)} Adults`}</span><br />
-                                                <span>{cart.plan_name}</span>
-                                                {/* | <span><a href="#">Free Cancellation</a></span> */}
-                                            </li>
-                                            {/* <li><a href="#">View Booking & Cancellation Policy</a></li> */}
-                                        </ul>
-                                    </div>
-                                </div>}
+                                {cart && cart.map((cartItems,id) => {
+                                    return(
+                                        <div className="booking-page-box-3" key={id}>
+                                            <div className="booking-page-box-3-heading">
+                                                <h4>{`${cartItems.rooms && cartItems.rooms.length}Room for ${cartItems.rooms &&
+                                                    cartItems.rooms.reduce((init, room) => {
+                                                        return init + room.selected_adult;
+                                                    }, 0)} Adults`}</h4>
+                                            </div>
+                                            <div className="booking-page-box-3-content">
+                                                <ul>
+                                                    <li>
+                                                        <h5>{`${cartItems.rooms && cartItems.rooms.length} x ${cartItems.room_type}`}</h5>
+                                                    </li>
+                                                    <li><img src="/Images/hotels/icons/adult.png" title="" alt="" /><span>{`${cartItems.rooms &&
+                                                        cartItems.rooms.reduce((init, room) => {
+                                                            return init + room.selected_adult;
+                                                        }, 0)} Adults`}</span>{' '}
+                                                        
+                                                        <span>
+                                                            {`${cartItems.rooms &&
+                                                                cartItems.rooms.reduce((init, room) => {
+                                                                    return init + room.selected_child;
+                                                                }, 0)} Child`}
+                                                            ,
+                                                        </span>
+                                                        
+                                                        
+                                                        <br />
+                                                        <span>{cartItems.plan_name}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                                }
                                 <div className="guest-detail">
                                     <h4>Guest Details</h4>
                                     <form className="row">
@@ -372,9 +395,9 @@ const HotelBooking = () => {
                                 </a><br/>
                                 Relief and other charity Initiatives T&Cs </h6>
                                 <span className="price">10</span></li> */}
-                                        <li>
+                                        {totalDisplayPrice > 0 && <li>
                                             <h6>Total Amount to be paid</h6>
-                                            <span className="price">{cart.paid_amount}</span></li>
+                                            <span className="price">{totalDisplayPrice.toFixed(2)}</span></li>}
                                     </ul>
                                 </div>}
                                 {/* <div className="booking-supperoffers">
