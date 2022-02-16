@@ -1151,7 +1151,7 @@ button.owl-next {left:unset; right: -50px;}
     top: unset;
     bottom: unset;
     margin: auto;
-    z-index: 1;
+    z-index: 100;
     text-align: center;
     padding-top: 0;
     width: 100%;
@@ -2265,6 +2265,7 @@ input:checked + .slider:before {
     color: #98be3b;
     font-weight: 500;
     margin-right: 10px;
+    cursor: pointer;
 }
 .modal.cupon-modal {
     z-index: 10550;
@@ -2292,10 +2293,16 @@ input:checked + .slider:before {
     letter-spacing: 1px;
     width: 100%;
     text-decoration: none;
+    cursor: pointer;
 }
 .extra-paid ul {
     margin-bottom: 30px;
 }
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 652px;
+    margin: 1.75rem auto;
+}}
 .modal.cupon-modal button.btn.btn-close {
     position: absolute;
     right: 6px;
@@ -3006,10 +3013,10 @@ margin-bottom:15px;
     position: absolute;
     top: 0;
     right: 0;
-    color: #fe3901;
-    background: #ffffffeb;
-    font-size: 26px;
-    padding: 3px 15px;
+    color: #fff;
+    background: #fe3901;
+    font-size: 15px;
+    padding: 9px 15px;
     font-weight: 600;
     text-transform: uppercase;
     border-radius: 0 0 0 10px;
@@ -3017,7 +3024,7 @@ margin-bottom:15px;
 }
 .room-offer span {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 14px;
 }
 /*Offer End*/
 .r-photo-counter {
