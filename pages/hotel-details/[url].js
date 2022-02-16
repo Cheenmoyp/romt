@@ -71,23 +71,22 @@ const HotelDetails = (response) => {
 	const [scrollval, setScrollval] = useState('');
 	const [scrollPrice, setScrollPrice] = useState('');
 	useEffect(() => {
-		document.addEventListener("scroll", () => {
-			const scrollCheck = window.scrollY > 150;
-			const scrollCheck2 = window.scrollY > 900;
-			console.log('scroll', window.scrollY);
-			if (scrollCheck) {
-				setScrollval('shrink');
-				if (scrollCheck2) {
-					setScrollPrice('')
-				} else {
-					setScrollPrice('shrink')
-				}
+		// document.addEventListener("scroll", () => {
+		// 	const scrollCheck = window.scrollY > 150;
+		// 	const scrollCheck2 = window.scrollY > 900;
+		// 	if (scrollCheck) {
+		// 		setScrollval('shrink');
+		// 		if (scrollCheck2) {
+		// 			setScrollPrice('')
+		// 		} else {
+		// 			setScrollPrice('shrink')
+		// 		}
 
-			} else {
-				setScrollval('');
-				setScrollPrice('');
-			}
-		})
+		// 	} else {
+		// 		setScrollval('');
+		// 		setScrollPrice('');
+		// 	}
+		// })
 	})
 
 	const openModal1 = () => {
@@ -99,8 +98,11 @@ const HotelDetails = (response) => {
 	}
 
 	const [totalCartItems, setTotalCartItems] = useState([]);
-	const [totalDisplayPrice, setTotalDisplayPrice] = useState(0);
+	const [totalPrice, setTotalPrice] = useState(0);
+	const [allTotalPriceDisplay, setAllTotalPriceDisplay] = useState(0);
 	const [totalCouponDiscountPrice, setTotalCouponDiscountPrice] = useState(0);
+	const [totalGst, setTotalGst] = useState(0);
+
 
 	const [checkinDate, setCheckinDate] = useState();
 	const [checkoutDate, setCheckoutDate] = useState();
@@ -110,7 +112,7 @@ const HotelDetails = (response) => {
 	const [allowEditCart, setAllowEditCart] = useState(false)
 	const [cartIndex, setCartIndex] = useState();
 
-    const [paidServices, setPaidServices] = useState([]);
+	const [paidServices, setPaidServices] = useState([]);
 
 	const [privateCoupon, setPrivateCoupon] = useState("");
 	const [privateCouponErr, setPrivateCouponErr] = useState("");
@@ -120,6 +122,8 @@ const HotelDetails = (response) => {
 
 
 	useEffect(() => {
+
+		let gst_total_price = 0;
 		let totalPrice = 0;
 		let totalDiscountPrice = 0;
 		totalCartItems &&
@@ -132,12 +136,13 @@ const HotelDetails = (response) => {
 					extra_child_price += room.extra_child_price;
 				});
 				totalDiscountPrice += cartItem.discounted_price;
-				totalPrice += cartItem.paid_amount;
+				gst_total_price += cartItem.tax[0] && cartItem.tax[0].gst_price;
+				totalPrice += cartItem.price + extra_adult_price + extra_child_price;
 
 			});
 		setTotalCouponDiscountPrice(totalDiscountPrice);
-		setTotalDisplayPrice(totalPrice);
-
+		setTotalPrice(totalPrice);
+		setTotalGst(gst_total_price);
 
 	}, [totalCartItems])
 
@@ -196,7 +201,7 @@ const HotelDetails = (response) => {
 		let end_date = moment(convert_to_date).subtract(1, 'days').format('YYYY-MM-DD');
 
 		let all_selected_room_type_id = [];
-		
+
 		totalCartItems &&
 			totalCartItems.map((items) => {
 				all_selected_room_type_id.push(items.room_type_id);
@@ -235,9 +240,9 @@ const HotelDetails = (response) => {
 					} else {
 						setPrivateCouponErr('Sorry, This Coupon Validity has expired!');
 					}
-				}else {
+				} else {
 					setPrivateCouponErr('Invalid coupon');
-				  }
+				}
 
 
 			})
@@ -252,8 +257,8 @@ const HotelDetails = (response) => {
 	useEffect(() => {
 		let totaldiscountprice = 0;
 		if (validCoupon[0]) {
-		  totaldiscountprice = checkForDates(validCoupon);
-		  setTotalCouponDiscountPrice(totaldiscountprice);
+			totaldiscountprice = checkForDates(validCoupon);
+			setTotalCouponDiscountPrice(totaldiscountprice);
 
 			totalCartItems.length > 0 &&
 				totalCartItems.map((cartItem) => {
@@ -265,113 +270,113 @@ const HotelDetails = (response) => {
 				});
 
 		}
-	  }, [validCoupon]);
+	}, [validCoupon]);
 
 
-	  const checkForDates = (coupon) => {
+	const checkForDates = (coupon) => {
 		let checkin_checkout_date = JSON.parse(sessionStorage.getItem('be_checkin_checkout'))
 
 		let from_date = moment(checkin_checkout_date.checkin).format("YYYY-MM-DD");
 		let to_date = moment(checkin_checkout_date.checkout).format("YYYY-MM-DD");
 		let end_date = moment(to_date).subtract(1, "days").format("YYYY-MM-DD");
-	
+
 
 		let dateArray = getDateArray(from_date, end_date);
-	
+
 		let coupon_start_date = moment(coupon[0].valid_from).format("YYYY-MM-DD");
 		let coupon_to_date = moment(coupon[0].valid_to).format("YYYY-MM-DD");
 		let coupon_end_date = moment(coupon_to_date).subtract(1, "days").format("YYYY-MM-DD");
-	
+
 		let couponArray = getDateArray(coupon_start_date, coupon_end_date);
-	
+
 		let discountPrice = 0;
 		totalCartItems &&
-		  totalCartItems.map((cartItem) => {
-			let private_discount_price = 0;
-			if (coupon[0].room_type_id === 0) {
-			  dateArray &&
-				dateArray.map((value, index) => {
-				  if (couponArray && couponArray.length > 0) {
-					if (couponArray.includes(value)) {
-						  cartItem.rooms.map((rates_for_discount) => {
-	
-						let total_bar_price = 1;
-						rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
-						  if (value === day_rate.date) {
-							if (rates_for_discount.selected_adult < cartItem.max_people) {
-							  if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-								total_bar_price = day_rate.bar_price
-							  }
-							  else {
-								total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
-							  }	
-							}
-							else {
-							  total_bar_price = day_rate.bar_price
-							}	
-	
-							discountPrice += (total_bar_price / 100) * coupon[0].discount;
-							private_discount_price += (total_bar_price / 100) * coupon[0].discount;
-						  }
-						})
-					  });	
-					}
-				  }
-				});
-			} else {
-			  if (coupon[0].room_type_id === cartItem.room_type_id) {
-				dateArray &&
-				  dateArray.map((value, index) => {
-					if (couponArray && couponArray.length > 0) {
-					  if (couponArray.includes(value)) {
-						cartItem.rooms.map((rates_for_discount) => {
-	
-						  let total_bar_price = 1;
-						  rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
-							if (value === day_rate.date) {	
-	
-							  if (rates_for_discount.selected_adult < cartItem.max_people) {
-								if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-								  total_bar_price = day_rate.bar_price
+			totalCartItems.map((cartItem) => {
+				let private_discount_price = 0;
+				if (coupon[0].room_type_id === 0) {
+					dateArray &&
+						dateArray.map((value, index) => {
+							if (couponArray && couponArray.length > 0) {
+								if (couponArray.includes(value)) {
+									cartItem.rooms.map((rates_for_discount) => {
+
+										let total_bar_price = 1;
+										rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
+											if (value === day_rate.date) {
+												if (rates_for_discount.selected_adult < cartItem.max_people) {
+													if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+														total_bar_price = day_rate.bar_price
+													}
+													else {
+														total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+													}
+												}
+												else {
+													total_bar_price = day_rate.bar_price
+												}
+
+												discountPrice += (total_bar_price / 100) * coupon[0].discount;
+												private_discount_price += (total_bar_price / 100) * coupon[0].discount;
+											}
+										})
+									});
 								}
-								else {
-								  total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
-								}
-							  }
-							  else {
-								total_bar_price = day_rate.bar_price
-							  }	
-	
-							  discountPrice += (total_bar_price / 100) * coupon[0].discount;
-							  private_discount_price += (total_bar_price / 100) * coupon[0].discount;
 							}
-						  })
-	
 						});
-					  }
+				} else {
+					if (coupon[0].room_type_id === cartItem.room_type_id) {
+						dateArray &&
+							dateArray.map((value, index) => {
+								if (couponArray && couponArray.length > 0) {
+									if (couponArray.includes(value)) {
+										cartItem.rooms.map((rates_for_discount) => {
+
+											let total_bar_price = 1;
+											rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
+												if (value === day_rate.date) {
+
+													if (rates_for_discount.selected_adult < cartItem.max_people) {
+														if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+															total_bar_price = day_rate.bar_price
+														}
+														else {
+															total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+														}
+													}
+													else {
+														total_bar_price = day_rate.bar_price
+													}
+
+													discountPrice += (total_bar_price / 100) * coupon[0].discount;
+													private_discount_price += (total_bar_price / 100) * coupon[0].discount;
+												}
+											})
+
+										});
+									}
+								}
+							});
+					} else {
+						discountPrice += cartItem.discounted_price;
+						private_discount_price += cartItem.discounted_price;
 					}
-				  });
-			  } else {
-				discountPrice += cartItem.discounted_price;
-				private_discount_price += cartItem.discounted_price;
-			  }
-			}
-			cartItem.private_discount_price = private_discount_price
-		  });
+				}
+				cartItem.private_discount_price = private_discount_price
+			});
 		return discountPrice;
-	  };
+	};
 
 
-	  const getDateArray = (startDate, stopDate) => {
+	const getDateArray = (startDate, stopDate) => {
 		var dateArray = [];
 		var currentDate = moment(startDate);
 		var stopDate = moment(stopDate);
 		while (currentDate <= stopDate) {
-		  dateArray.push(moment(currentDate).format("YYYY-MM-DD"));
-		  currentDate = moment(currentDate).add(1, "days");
+			dateArray.push(moment(currentDate).format("YYYY-MM-DD"));
+			currentDate = moment(currentDate).add(1, "days");
 		}
 		return dateArray;
-	  };
+	};
 
 
 	const calculateGstAmount = (rooms, max_people) => {
@@ -452,6 +457,119 @@ const HotelDetails = (response) => {
 	};
 
 
+	const [paidServiceCart, setPaidServiceCart] = useState([]);
+	const [limitMessage, setLimitMessage] = useState("");
+	const [serviceAddMessage, setServiceAddMessage] = useState("");
+	const addService = (service) => {
+		let noPaidServiceCart = true;
+		let newPaidserviceCart = [];
+		paidServiceCart &&
+			paidServiceCart.map((paidService) => {
+				if (paidService.service_no == service.paid_service_id) {
+					if (paidService.qty < 3) {
+						paidService.qty += 1;
+						noPaidServiceCart = false;
+						setLimitMessage("");
+					} else {
+						noPaidServiceCart = false;
+						setLimitMessage("You cannot add more than 3 add-on services!");
+					}
+				}
+			});
+		newPaidserviceCart = [...paidServiceCart];
+		if (noPaidServiceCart) {
+			let paidServiceObject = {
+				service_no: service.paid_service_id,
+				service_name: service.service_name,
+				price: service.service_amount,
+				display_price: service.service_amount,
+				qty: 1,
+				service_tax: service.service_tax
+			};
+			newPaidserviceCart = [...paidServiceCart];
+			newPaidserviceCart.push(paidServiceObject);
+		}
+		setPaidServiceCart(newPaidserviceCart);
+		setServiceAddMessage("A service has been added !");
+	};
+
+
+	const removeService = (paidService) => {
+		paidServiceCart &&
+			paidServiceCart.map((paidServiceIncart, index) => {
+				if (paidServiceIncart.service_no === paidService.service_no) {
+					paidServiceCart.splice(index, 1);
+				}
+			});
+		let newPaidserviceCart = [...paidServiceCart];
+		setPaidServiceCart(newPaidserviceCart);
+		setServiceAddMessage("");
+	};
+
+	//Set the Total Price  After the paid service
+	const [totalPaidService, setTotalPaidService] = useState(0);
+
+
+	const totalPaidServicePrice = () => {
+		let paid_service_total = 0;
+		let display_paid_service_total = 0;
+		let total_gst_price_for_paid_service = 0;
+		let total_paid_service_price = 0
+		setTotalPaidService(paid_service_total);
+		paidServiceCart &&
+			paidServiceCart.map((paidService) => {
+				paid_service_total += (paidService.price * paidService.qty);
+				display_paid_service_total +=
+					paidService.display_price * paidService.qty;
+				total_gst_price_for_paid_service += (paidService.price * paidService.service_tax / 100) * paidService.qty;
+			});
+		total_paid_service_price = paid_service_total + total_gst_price_for_paid_service
+		setTotalPaidService(total_paid_service_price);
+	};
+
+
+
+	useEffect(() => {
+		totalPaidServicePrice();
+	}, [paidServiceCart, totalCartItems]);
+
+
+	useEffect(() => {
+
+		setAllTotalPriceDisplay(
+			(
+				totalPrice +
+				totalGst -
+				totalCouponDiscountPrice +
+				totalPaidService
+			).toFixed(2)
+		);
+
+		totalCartItems.map((cartItem) => {
+			cartItem.paid_amount =
+				totalPrice +
+				totalGst -
+				totalCouponDiscountPrice +
+				totalPaidService
+			cartItem.paid_amount_per = 100;
+
+			if (cartItem.private_discount_price) {
+				cartItem.discounted_price = cartItem.private_discount_price
+			}
+		});
+
+	}, [
+		totalPrice,
+		totalCouponDiscountPrice,
+		totalGst,
+		totalPaidService,
+		totalCartItems,
+	]);
+
+	const sendUpdatedCartData = () =>{
+		sessionStorage.setItem("updated_cart", JSON.stringify(totalCartItems));
+		sessionStorage.setItem("paid_service_cart",JSON.stringify(paidServiceCart))
+	}
 
 	return (
 		<>
@@ -731,8 +849,26 @@ const HotelDetails = (response) => {
 											</div>
 										))}
 
-										{totalDisplayPrice > 0 && <div className="view-bu">
-											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i className="fa fa-inr"></i>{totalDisplayPrice.toFixed(2)}</li></ul></div>
+
+
+										{paidServiceCart && paidServiceCart.length > 0 && paidServiceCart.map((paidServiceIncart, i) => (
+
+											<div className="booking-details" key={i}>
+												<div className="b-price">
+													<h6>{paidServiceIncart.qty}&nbsp; x &nbsp;{paidServiceIncart.service_name}&nbsp;:  <i className="fa fa-inr"></i>{paidServiceIncart.price * paidServiceIncart.qty}</h6>
+												</div>
+												<div className="b-price">
+													<h6>GST:  <i className="fa fa-inr"></i>{(paidServiceIncart.price * paidServiceIncart.service_tax / 100) * paidServiceIncart.qty}</h6>
+												</div>
+
+												<a className="edit" onClick={() => removeService(paidServiceIncart)}><i className="fa fa-times" aria-hidden="true"></i></a>
+											</div>
+										))}
+
+
+
+										{allTotalPriceDisplay > 0 && <div className="view-bu">
+											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i className="fa fa-inr"></i>{allTotalPriceDisplay}</li></ul></div>
 										</div>}
 
 										{totalCouponDiscountPrice > 0 && <div className="view-bu public-coupon">
@@ -748,7 +884,7 @@ const HotelDetails = (response) => {
 
 										<div>
 											<a href="../hotel-booking">
-												<button className="prceed-to-payment">
+												<button className="prceed-to-payment" onClick={sendUpdatedCartData}>
 													Continue
 												</button>
 											</a>
@@ -935,7 +1071,7 @@ const HotelDetails = (response) => {
 							<div className="col-md-12">
 								<div className="cupon-apply-form">
 									<form>
-										<input type="text" placeholder="Have a coupon code type here" value={privateCoupon} onChange={(e) =>handlePrivateCoupon(e.target.value)}/>
+										<input type="text" placeholder="Have a coupon code type here" value={privateCoupon} onChange={(e) => handlePrivateCoupon(e.target.value)} />
 										<a className="coupon-btn" onClick={applyPrivateCoupon}>Apply </a>
 									</form>
 									{privateCouponErr && <p className='text-center text-danger'>{privateCouponErr}</p>}
@@ -975,10 +1111,13 @@ const HotelDetails = (response) => {
 														:
 														<li className="col-md-3">-</li>
 													}
-													<li className="col-md-3"><a className="service-btn">Add Service</a></li>
+													<li className="col-md-3"><a className="service-btn" onClick={() => addService(paidService)}>Add Service</a></li>
 												</ul>
 											)
 										})}
+									{serviceAddMessage && <p className="text-center text-danger">{serviceAddMessage}</p>}
+									{limitMessage && <p className="text-center text-danger">{limitMessage}</p>}
+
 								</div>
 							</div>
 

@@ -47,6 +47,7 @@ const HotelBooking = () => {
     const [cart, setCart] = useState([]);
     const [hotelData, setHotelData] = useState({});
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
+    const [paidServiceData, setPaidServiceData] = useState([]);
 
 
     useEffect(() => {
@@ -63,8 +64,9 @@ const HotelBooking = () => {
 
 
         // setCart(JSON.parse(sessionStorage.getItem('be_cart')));
-        setCart(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
+        setCart(JSON.parse(sessionStorage.getItem('updated_cart')));
         setHotelData(JSON.parse(sessionStorage.getItem('be_hotel_data')));
+        setPaidServiceData(JSON.parse(sessionStorage.getItem('paid_service_cart')))
 
     }, [])
 
@@ -153,7 +155,7 @@ const HotelBooking = () => {
                         cart: cart,
                         visitors_ip: "1.1.1.1",
                         coupon: [],
-                        paid_service: [],
+                        paid_service: paidServiceData,
                         reference: null,
 
 
@@ -357,7 +359,7 @@ const HotelBooking = () => {
                             </div>
                             <div className="col-md-4">
                                 {cart && <div className="booking-page-right">
-                                    <h4>Price Break-up</h4>
+                                    {/* <h4>Price Break-up</h4> */}
                                     <ul className="price-breakup">
                                         {/* <li>
                                 <h6>{`${cart.rooms && cart.rooms.length}Room * 1Night`}</h6>

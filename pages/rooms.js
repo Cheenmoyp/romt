@@ -45,17 +45,17 @@ export default function Rooms(props) {
     // `${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/${props.search[0]}/${props.search[2]}/${props.search[3]/INR`
     // const fetcher  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/get-inventory/644406a7918f871f3a8568c58e56e77b/1993/17-11-2021/18-11-2021/INR`).then(response => {
 
-    useEffect(()=>{
+    useEffect(() => {
         if (props.allowEditCart === true) {
-            Rooms && Rooms.map((room_data)=>{
-                if(room_data.room_type_id === props.editCartItem.room_type_id){
+            Rooms && Rooms.map((room_data) => {
+                if (room_data.room_type_id === props.editCartItem.room_type_id) {
                     setAddRoom(room_data);
                 }
             })
             setCart(props.editCartItem);
             setModal(true)
         }
-    },[props.allowEditCart])
+    }, [props.allowEditCart])
 
 
     useEffect(() => {
@@ -64,20 +64,21 @@ export default function Rooms(props) {
         sessionStorage.removeItem("be_all_cart_items");
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         setCart({})
         setTotalCartItems([]);
-
+        setTotalCartItems([])
+        setSelectedRoomTypeId([])
         props.checkinDate();
         props.checkoutDate();
         props.totalCartItems([]);
         props.noOfNight();
-        
+
         sessionStorage.removeItem("be_cart");
         sessionStorage.removeItem("be_hotel_data");
         sessionStorage.removeItem("be_all_cart_items");
 
-    },[props.search[1],props.search[2]])
+    }, [props.search[1], props.search[2]])
 
     useEffect(() => {
         if (props && props.hotel_data) {
@@ -103,9 +104,8 @@ export default function Rooms(props) {
                     console.log('error', error);
                 });
 
-            fetcher.then(response => {
-                if (Rooms.length == 0) {
-
+            fetcher.then(response => {                
+                // if (Rooms.length == 0) {
                     //Codes Added for Select No Of Rooms
                     response.map((inv_data) => {
                         let display_no_of_rooms = [];
@@ -118,12 +118,12 @@ export default function Rooms(props) {
 
 
                     setRooms(response)
-                }
+                // }
             })
         }
-    }, [props.room_id,props.search[1],props.search[2]])
+    }, [props.room_id, props.search[1], props.search[2]])
 
-    
+
     // for public coupons
     useEffect(() => {
 
@@ -147,7 +147,7 @@ export default function Rooms(props) {
             })
         }
 
-    }, [props.search[1],props.search[2]])
+    }, [props.search[1], props.search[2]])
     // for public coupons
 
 
@@ -234,6 +234,20 @@ export default function Rooms(props) {
         };
         cartItem["rates_for_coupons"] = rateplan_data.rates;
 
+
+
+        cartItem.rooms[0]["bar_price"] = getRoomPrice(data.room_type_id,rateplan_data.rate_plan_id);
+        cartItem.rooms[0]["bar_price"] = parseFloat(cartItem.rooms[0]["bar_price"]);
+          
+        cartItem.rate_plan_id = rateplan_data.rate_plan_id;
+
+
+
+
+
+
+
+
         setCart(cartItem);
 
         setAddRoom(data);
@@ -296,13 +310,13 @@ export default function Rooms(props) {
 
         sessionStorage.setItem("be_cart", JSON.stringify(cart));
         sessionStorage.setItem("be_all_cart_items", JSON.stringify(totalCartItems));
-		props.totalCartItems(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
+        props.totalCartItems(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
         sessionStorage.setItem("be_hotel_data", JSON.stringify(props.hotel_data));
 
         props.removeEditAccess(false);
     }
 
-    
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -853,8 +867,6 @@ export default function Rooms(props) {
         const applied_coupons = [];
         let public_coupon_discount_price_array = [];
 
-
-
         cart && dateArray &&
             dateArray.map((value, index) => {
                 publicCoupons &&
@@ -974,6 +986,31 @@ export default function Rooms(props) {
     };
     // for public coupon
 
+    const [couponArr, setCouponArr] = useState([]);
+    useEffect(() => {
+        let coupon_arr = [];
+        Rooms &&
+            Rooms.map((il) => {
+                const coupon_obj = { room_type: il.room_type, coupon_arr: [] };
+                publicCoupons.map((c) => {
+                    if (c.room_type_id === il.room_type_id || c.room_type_id === 0)
+                        coupon_obj.coupon_arr.push(c);
+                });
+                coupon_arr.push(coupon_obj);
+            });
+        coupon_arr.length > 0 &&
+            coupon_arr.map((ca) => {
+                let maxValue = Math.max.apply(
+                    Math,
+                    ca.coupon_arr.map((coup) => {
+                        return coup.discount;
+                    })
+                );
+                ca.max_discount = maxValue;
+
+            });
+        setCouponArr(coupon_arr);
+    }, [Rooms, publicCoupons]);
     return (
         <>
             <div className="roomes-at-section">
@@ -1009,9 +1046,24 @@ export default function Rooms(props) {
                                                     </div>
                                                 </div>
                                                 <div>  </div>
-												<div className="room-offer">
-													20<span>%</span><span>Off</span>
-												</div>
+
+                                                {couponArr &&
+                                                    couponArr.map((ca, i) => {
+                                                        if (
+                                                            ca &&
+                                                            ca.room_type === slide.room_type &&
+                                                            ca.max_discount > 0
+                                                        ) {
+                                                            return (
+
+                                                                <div className="room-offer" key={i}>
+                                                                    {ca.value ? <>{ca.value} <span>%</span><span>Off</span></> : ca.max_discount && <>{ca.max_discount} <span>%</span><span>Off</span></>}
+                                                                </div>
+
+                                                            );
+                                                        }
+                                                    })}
+
                                             </div>
                                             <h4>{slide.room_type} <span className="pull-right">(Max Capacity: {slide.max_people})</span></h4>
                                             <div className="room-content">
@@ -1042,7 +1094,7 @@ export default function Rooms(props) {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-4">
-                                                                            <a href="#" className={selectedRoomTypeId.includes(slide.room_type_id) ? "addroom-btn btn-is-disabled":"addroom-btn"} data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
+                                                                            <a href="#" className={selectedRoomTypeId.includes(slide.room_type_id) ? "addroom-btn btn-is-disabled" : "addroom-btn"} data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
                                                                             <div>
 
                                                                             </div>

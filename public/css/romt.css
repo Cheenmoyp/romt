@@ -2408,6 +2408,7 @@ input:checked + .slider:before {
     font-size: 14px;
     text-transform: uppercase;
     line-height: 27px;
+    cursor: pointer;
 }
 .coupon-card .coupon-discount span div {
     display: inline-block;
