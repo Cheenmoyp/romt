@@ -19,6 +19,11 @@ export const Loginheader = () => {
     const [otp, setOtp] = useState('');
     const [otpActual, setOtpActual] = useState('');
     const [error, setError] = useState('');
+
+	const [userLoginData,setUserLoginData] = useState({first_name:'',last_name:''})
+	const [userLoggedIn,setUserLoggedIn] = useState(false);
+
+
     const router = useRouter();
     var categories = [];
 	const handleLoginBoxClick = () => {
@@ -220,6 +225,26 @@ export const Loginheader = () => {
 		var jiniAssist_API=jiniAssist_API||{}, jini_LoadStart=new Date();let s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.id='jini-script-id';s.src = 'https://admin.bookingjini.com/v3/jiniAssist/index.js?api_key=ca3fcd53020d0702dd7c1d1b00de4324';var x = document.getElementsByTagName('script')[0];s.charset='UTF-8';s.setAttribute('Access-Control-Allow-Origin','*');x.parentNode.insertBefore(s, x);
 	},[])
 	
+
+	useEffect(() => {
+		if (sessionStorage.getItem('user_logged_in')) {
+			setUserLoggedIn(JSON.parse(sessionStorage.getItem('user_logged_in')));
+		}
+
+		if (sessionStorage.getItem('user_logged_in_data')) {
+			setUserLoginData(JSON.parse(sessionStorage.getItem('user_logged_in_data')))
+		}
+	}, [])
+
+	const userLogout = () => {
+		sessionStorage.removeItem("user_logged_in")
+		sessionStorage.removeItem("user_logged_in_data")
+		setUserLoginData({ first_name: '', last_name: ''});
+		setUserLoggedIn(false);
+		router.push(`/index-new`)
+	}
+
+
     return (
         <>
         <div className="container">
@@ -380,7 +405,7 @@ export const Loginheader = () => {
 				
 			
 					  <div className="top-btn-group" style={{paddingRight:'46px'}}> 
-			 <a href={'/index-new'} className="sign-in-btn"><i className="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>  
+			 {/* {userLoggedIn && <a href={'/index-new'} className="sign-in-btn" onClick={() => userLogout()}>{`${userLoginData.first_name} ${userLoginData.last_name}`}<i className="fa fa-sign-out" aria-hidden="true"></i></a>}   */}
 			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
 					 <h6>For Enquiry</h6>
@@ -388,6 +413,11 @@ export const Loginheader = () => {
 					<p><strong>Email:</strong> enquiry@roomsonmytravel.in</p>
 				</div>
 			 </a >
+			 {userLoggedIn && <a  href="#" className="join-us"><i className="fa fa-power-off" aria-hidden="true"></i>
+				<div className="contact-us-box">
+					 <h6 onClick={() => userLogout()}>Logout({`${userLoginData.first_name} ${userLoginData.last_name}`})</h6>
+				</div>
+			 </a >}
 		</div>
 				
 				

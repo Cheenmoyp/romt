@@ -21,6 +21,11 @@ export const Header = () => {
     const [otp, setOtp] = useState('');
     const [otpActual, setOtpActual] = useState('');
     const [error, setError] = useState('');
+
+	const [userLoginData,setUserLoginData] = useState({first_name:'',last_name:''})
+	const [userLoggedIn,setUserLoggedIn] = useState(false);
+
+
     const router = useRouter();
     var categories = [];
 	const handleLoginBoxClick = () => {
@@ -165,8 +170,8 @@ export const Header = () => {
 			check.then(response => {
 				//setTopCityList(response.destinations); 
 				if ( response.status ) {
+					sessionStorage.setItem('user_logged_in_data',JSON.stringify({first_name:response.user_details.first_name,last_name:response.user_details.last_name}));
 					const otpsend  = axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/bookingEngine/send-otp`, {'mobile': mobile}).then(response => {
-						console.log('response',response)
 						if(response.data.status){
 							setOtpActual(response.data.otp_value);
 						}
@@ -201,6 +206,8 @@ export const Header = () => {
 					if ( response.status ) {
 						if (otp == otpActual) {
 							localStorage.setItem('userToken', response.auth_token);
+							setUserLoggedIn(true);
+							sessionStorage.setItem('user_logged_in',true);
 							//router.push(`/dashboard/${response.auth_token}`)
 							router.push(`/dashboard`)
 						}
@@ -223,7 +230,25 @@ export const Header = () => {
 	useEffect(()=>{
 		var jiniAssist_API=jiniAssist_API||{}, jini_LoadStart=new Date();let s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.id='jini-script-id';s.src = 'https://admin.bookingjini.com/v3/jiniAssist/index.js?api_key=ca3fcd53020d0702dd7c1d1b00de4324';var x = document.getElementsByTagName('script')[0];s.charset='UTF-8';s.setAttribute('Access-Control-Allow-Origin','*');x.parentNode.insertBefore(s, x);
 	},[])
+
+	useEffect(() => {
+		if (sessionStorage.getItem('user_logged_in')) {
+			setUserLoggedIn(JSON.parse(sessionStorage.getItem('user_logged_in')));
+		}
+
+		if (sessionStorage.getItem('user_logged_in_data')) {
+			setUserLoginData(JSON.parse(sessionStorage.getItem('user_logged_in_data')))
+		}
+	}, [])
+
+	const userLogout = () => {
+		sessionStorage.removeItem("user_logged_in")
+		sessionStorage.removeItem("user_logged_in_data")
+		setUserLoginData({ first_name: '', last_name: ''});
+		setUserLoggedIn(false);
+	}
 	
+
     return (
         < >
 		
@@ -393,7 +418,12 @@ export const Header = () => {
 				
 			
 					  <div className="top-btn-group"> 
-			 <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>  
+
+			 {!userLoggedIn && <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>}  
+
+			 {/* {userLoggedIn && <a href="#" className="sign-in-btn" onClick={() => userLogout()}>{`${userLoginData.first_name} ${userLoginData.last_name}`}<i className="fa fa-sign-out" aria-hidden="true"></i></a>}     */}
+
+
 			 <a  href="#" className="join-us"><i className="fa fa-plus" aria-hidden="true"></i> Contact us
 				<div className="contact-us-box">
 					 <h6>For Enquiry</h6>
@@ -401,6 +431,15 @@ export const Header = () => {
 					<p><strong>Email:</strong> enquiry@roomsonmytravel.in</p>
 				</div>
 			 </a >
+
+
+			 {userLoggedIn && <a  href="#" className="join-us"><i className="fa fa-power-off" aria-hidden="true"></i>
+				<div className="contact-us-box">
+					 <h6 onClick={() => userLogout()}>Logout({`${userLoginData.first_name} ${userLoginData.last_name}`})</h6>
+				</div>
+			 </a >}
+
+
 		</div>
 				
 				
