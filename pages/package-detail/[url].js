@@ -20,7 +20,6 @@ import {
 import moment from 'moment';
 
 const PackageDetail = (response) => {
-    console.log('response',response.package_name[1]);
     const router = useRouter()
     const [checkAvailability, setCheckAvailability] = useState(true);
     const [location, setLocation] = useState([]);
@@ -36,7 +35,7 @@ const PackageDetail = (response) => {
     const [packageDate, setPackageDate] = useState({ date: new Date() });
     const [selectedPackage, setSelectedPackage] = useState({});
     const [packageInventory, setPackageInventory] = useState([]);
-    const [packageAvailability, setPackageAvailability] = useState(false);
+    const [packageAvailability, setPackageAvailability] = useState();
 
     function destinationList() {
 		const fetcher = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-destination-list/2565/TOP`).then(response => {
@@ -61,6 +60,8 @@ const PackageDetail = (response) => {
     const handleBookClick = (data, hotel_id) => {
 
         setCart({});
+        setPackageAvailability();
+
         let check_availablity_date = moment(packageDate.date).format("DD-MM-YYYY");
 
         const fetch_package_details_prepare_cart = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/package_booking/get_package_details_by_package_id/${hotel_id}/${data.package_id}/${check_availablity_date}/INR`).then(response => {
@@ -71,7 +72,6 @@ const PackageDetail = (response) => {
             });
 
         fetch_package_details_prepare_cart.then(response => {
-            console.log('hello',response);
             if (response.status === 1) {
                 setPackageInventory(response.package_inventory);
                 let packageData = response.package_inventory[0]
@@ -217,7 +217,7 @@ const PackageDetail = (response) => {
 
     var obj = [{}];
     const handleFormChange = (params) => {
-        setPackageAvailability(false);
+        setPackageAvailability();
         setPackageDate(params);
 
         obj.push(params);
@@ -470,7 +470,6 @@ const PackageDetail = (response) => {
             console
             // if (hotels.length  0) {
                 setHotels(response.package_hotel_list)
-                console.log('mmmmmm',hotels);
             // }
         })
 
@@ -752,14 +751,18 @@ const PackageDetail = (response) => {
                                         <input type="button" id="CheckAvailability" onClick={()=>checkPackageAvailability()} name="" value="" />
                                     </div>
 
-                                    {packageAvailability && <div className="proceed-to-payment available">
+                                    {packageAvailability === true && <div className="proceed-to-payment available">
                                         <input type="button" id="CheckAvailability" name="" value="Proceed Now" onClick={() => proceed()} />
                                     </div>
                                     }
 
+                                    {packageAvailability === false && <div className="proceed-to-payment available">
+                                        <input className='btn-danger' type="button" id="CheckAvailability" name="" value="Not Available" disabled/>
+                                    </div>}
+                                    
 
 
-                                    <input type="button" name="" id="proceed-to-payment-btn" value="Proceed to payment" onClick="location.href='payment-package.php'" />
+                                    {/* <input type="button" name="" id="proceed-to-payment-btn" value="Proceed to payment" onClick="location.href='payment-package.php'" /> */}
                                 </div>
                             </div>
                         </form>
