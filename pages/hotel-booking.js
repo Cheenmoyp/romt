@@ -217,17 +217,9 @@ const HotelBooking = () => {
 	const [totalDisplayPrice, setTotalDisplayPrice] = useState(0);
 
     useEffect(() => {
-		let totalPrice = 0;
-		cart &&
-			cart.length > 0 &&
-			cart.map((cartItem) => {
-				totalPrice += cartItem.paid_amount;
-			});
-		setTotalDisplayPrice(totalPrice);
-
-
+		cart && cart.length > 0 && setTotalDisplayPrice(cart[0].paid_amount);
 	}, [cart])
-
+    
     return (
         <>
             <Header></Header>

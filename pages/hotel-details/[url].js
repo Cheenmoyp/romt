@@ -122,7 +122,6 @@ const HotelDetails = (response) => {
 
 
 	useEffect(() => {
-
 		let gst_total_price = 0;
 		let totalPrice = 0;
 		let totalDiscountPrice = 0;
@@ -257,6 +256,7 @@ const HotelDetails = (response) => {
 	useEffect(() => {
 		let totaldiscountprice = 0;
 		if (validCoupon[0]) {
+			let gst_total_price = 0;
 			totaldiscountprice = checkForDates(validCoupon);
 			setTotalCouponDiscountPrice(totaldiscountprice);
 
@@ -267,8 +267,9 @@ const HotelDetails = (response) => {
 						cartItem.gst_price_after_coupon = parseFloat(gstAmount);
 						cartItem.tax[0].gst_price = parseFloat(gstAmount);
 					}
+					gst_total_price += cartItem.tax[0].gst_price;
 				});
-
+				setTotalGst(gst_total_price);
 		}
 	}, [validCoupon]);
 

@@ -29,8 +29,6 @@ export default function Rooms(props) {
 
 
     const [selectedAdults, setselectedAdults] = useState("");
-    const [extraAdultMessage, setExtraAdultmessage] = useState("");
-    const [extraChildMessage, setExtraChildmessage] = useState("");
 
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
 
@@ -287,9 +285,6 @@ export default function Rooms(props) {
             other_tax: [],
         });
 
-        cart.paid_amount = cart.display_price + cart.tax[0].gst_price;
-        cart.paid_amount_per = 100;
-
         setCart({ ...cart });
 
         if (props.allowEditCart === false) {
@@ -310,7 +305,7 @@ export default function Rooms(props) {
 
         sessionStorage.setItem("be_cart", JSON.stringify(cart));
         sessionStorage.setItem("be_all_cart_items", JSON.stringify(totalCartItems));
-        props.totalCartItems(JSON.parse(sessionStorage.getItem('be_all_cart_items')));
+        props.totalCartItems(totalCartItems);
         sessionStorage.setItem("be_hotel_data", JSON.stringify(props.hotel_data));
 
         props.removeEditAccess(false);
@@ -432,7 +427,8 @@ export default function Rooms(props) {
     const handleAdultChange = (
         e,
         max_occupancy,
-        room
+        room,
+        room_data
     ) => {
 
         let invData = getAllInv(cart.room_type_id, cart.rate_plan_id);
@@ -486,7 +482,7 @@ export default function Rooms(props) {
             update_price = getRoomPrice(cart.room_type_id, cart.rate_plan_id);
             no_of_extra_adults = selected_adults - invData["max_people"];
             extra_adult_price = no_of_extra_adults * invData["extra_adult_price"];
-            setExtraAdultmessage((invData["extra_adult_price"] / no_nights).toFixed());
+            cart.extraAdultMessage = (invData["extra_adult_price"] / no_nights).toFixed();
         }
         if (selected_adults === invData["max_people"]) {
             if (invData["max_occupancy"] !== 0) {
@@ -500,6 +496,8 @@ export default function Rooms(props) {
             update_price = getRoomPrice(cart.room_type_id, cart.rate_plan_id);
         }
 
+        room_data.no_of_extra_adult = no_of_extra_adults
+
         updateExtraAdultPrice(extra_adult_price, room);
 
         setCart({ ...cart });
@@ -511,7 +509,8 @@ export default function Rooms(props) {
     const handleChildChange = (
         e,
         max_occupancy,
-        room
+        room,
+        room_data
     ) => {
         let selected_child = parseInt(e.target.value); //Selected child
         let invData = getAllInv(cart.room_type_id, cart.rate_plan_id);
@@ -544,12 +543,16 @@ export default function Rooms(props) {
             no_of_extra_child = selected_child - invData["max_child"];
             extra_child_price = no_of_extra_child * invData["extra_child_price"];
             if (invData["extra_child_price"] > 0) {
-                setExtraChildmessage((invData["extra_child_price"] / no_nights).toFixed())
+                cart.extraChildMessage = (invData["extra_child_price"] / no_nights).toFixed();
             }
         }
         if (selected_child === invData["max_child"]) {
             extra_child_price = 0;
         }
+
+        room_data.no_of_extra_child = no_of_extra_child
+
+
         updateExtraChildPrice(extra_child_price, room);
 
         setCart({ ...cart });
@@ -701,6 +704,11 @@ export default function Rooms(props) {
             cart.rooms.map((roomObj) => {
                 if (roomObj.room == room) {
                     roomObj.extra_adult_price = extra_adult_price;
+
+                    if (extra_adult_price == 0) {
+                        roomObj.no_of_extra_adult = 0
+                      }
+
                 }
             });
 
@@ -718,6 +726,9 @@ export default function Rooms(props) {
             cart.rooms.map((roomObj) => {
                 if (roomObj.room == room) {
                     roomObj.extra_child_price = extra_child_price;
+                    if (extra_child_price == 0) {
+                        roomObj.no_of_extra_child = 0
+                      }
                 }
             });
         setCart({ ...cart });
@@ -1164,7 +1175,8 @@ export default function Rooms(props) {
                                                 handleAdultChange(
                                                     e,
                                                     addRoom.max_occupancy,
-                                                    room.room
+                                                    room.room,
+                                                    room
                                                 )} >
 
                                                 <option value={0}>0</option>
@@ -1181,7 +1193,8 @@ export default function Rooms(props) {
                                                 handleChildChange(
                                                     e,
                                                     addRoom.max_occupancy,
-                                                    room.room
+                                                    room.room,
+                                                    room
                                                 )
                                             }>
 
@@ -1220,14 +1233,14 @@ export default function Rooms(props) {
                             ))}
                         </ul>
                         <ul>
-                            {extraAdultMessage && <li>
-                                <p className="red-text text-darken-1"> * Extra Adult Price -  <i className="fa fa-inr" aria-hidden="true"></i>{extraAdultMessage}.</p>
+                            {cart.extraAdultMessage && <li>
+                                <p className="red-text text-darken-1"> * Extra Adult Price -  <i className="fa fa-inr" aria-hidden="true"></i>{cart.extraAdultMessage}.</p>
                             </li>
                             }
 
-                            {extraChildMessage &&
+                            {cart.extraChildMessage &&
                                 <li>
-                                    <p className="red-text text-darken-1"> * Extra Child Price -  <i className="fa fa-inr" aria-hidden="true"></i>{extraChildMessage}.</p>
+                                    <p className="red-text text-darken-1"> * Extra Child Price -  <i className="fa fa-inr" aria-hidden="true"></i>{cart.extraChildMessage}.</p>
                                 </li>
                             }
                         </ul>
