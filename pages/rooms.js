@@ -13,6 +13,9 @@ export default function Rooms(props) {
     let checkin = (props && props.search && props.search[2] && props.search[2]) ? props.search[2] : null;
     let checkout = (props && props.search && props.search[3] && props.search[3]) ? props.search[3] : null;
 
+    let check_in_param = props && props.search && props.search[1];
+    let check_out_param = props && props.search && props.search[2];
+
     const [Rooms, setRooms] = useState([]);
     const [roomDetailsId, setRoomDetailsId] = useState();
     const [modal, setModal] = useState(false);
@@ -76,7 +79,7 @@ export default function Rooms(props) {
         sessionStorage.removeItem("be_hotel_data");
         sessionStorage.removeItem("be_all_cart_items");
 
-    }, [props.search[1], props.search[2]])
+    }, [check_in_param,check_out_param])
 
     useEffect(() => {
         if (props && props.hotel_data) {
@@ -119,7 +122,7 @@ export default function Rooms(props) {
                 // }
             })
         }
-    }, [props.room_id, props.search[1], props.search[2]])
+    }, [props.room_id, check_in_param, check_out_param])
 
 
     // for public coupons
@@ -145,7 +148,7 @@ export default function Rooms(props) {
             })
         }
 
-    }, [props.search[1], props.search[2]])
+    }, [check_in_param,check_out_param])
     // for public coupons
 
 
@@ -417,8 +420,10 @@ export default function Rooms(props) {
             (1000 * 60 * 60 * 24)
         );
 
-        props.noOfNight(diffDays);
+        if(props && props.noOfNight){
+            props.noOfNight(diffDays);
 
+        }
         return diffDays;
     };
 
