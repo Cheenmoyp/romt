@@ -54,10 +54,10 @@ export default function Search(props) {
 			
 		//console.log(selected_data);return;
 			if (selected_data && selected_data[0].type == 'hotel') {
-				let url = base64_encode(formData.cityid+'/'+moment(formData.checkin).format("MM-DD-YYYY") +'/'+ moment(formData.checkout).format("MM-DD-YYYY") +'/'+formData.adult+'/'+formData.kid);
+				let url = base64_encode(formData.cityid + '/' + formData.checkin + '/' + formData.checkout + '/' + formData.adult + '/' + formData.kid);
 				router.push(`/hotel-details/${url}`)
 			} else {
-				let url = base64_encode(selected_data[0].label+'/'+formData.cityid+'/'+moment(formData.checkin).format("MM-DD-YYYY") +'/'+ moment(formData.checkout).format("MM-DD-YYYY") +'/'+(formData.adult ? formData.adult : adult)+'/'+(formData.kid ? formData.kid : kid));
+				let url = base64_encode(selected_data[0].label+'/'+formData.cityid+'/'+ formData.checkin +'/'+ formData.checkout +'/'+(formData.adult ? formData.adult : adult)+'/'+(formData.kid ? formData.kid : kid));
 				router.push(`/destination/${url}`)
 			}			
 		} else {
@@ -157,6 +157,20 @@ export default function Search(props) {
 	function cityValueSet(cityListValue, cityidVal) {
 		var citySelected = cityListValue.filter(option => option.value == (cityidVal))?cityListValue.filter(option => option.value == (cityidVal))[0]:'';
 		setCityValue(citySelected?citySelected.label:'');
+	}
+	
+	function dateformat(selectdate, dateformat) {
+		var d = new Date(selectdate);
+		var datevalue = d.getDate();
+		var monthvalue = d.getMonth()+1;
+		var yearvalue = d.getFullYear();
+		if (dateformat == 'd-m-y') {
+			return datevalue + '-' + monthvalue + '-' + yearvalue;
+		} else if (dateformat == 'm-d-y') {
+			return monthvalue + '-' + datevalue + '-' + yearvalue;
+		} else {
+			return datevalue + '/' + monthvalue + '/' + yearvalue;
+		} 
 	}
 	//var citySelected = cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))?cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))[0]:'';
 	//console.log('hello', JSON.parse(citySelected).label);

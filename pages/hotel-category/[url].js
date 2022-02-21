@@ -141,24 +141,16 @@ const HotelCategory = (props) => {
     }
   }
 
-  //category
-    // const fetcherCategory  = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/group-hotels-categories/2565`).then(response => {
-    //     return response.data.hotels_categories;
-    // })
-    // .catch(error => {
-    //     console.log('error', error);
-    // });
-    // fetcherCategory.then(response => {
-    //     if(categories.length == 0 ) {
-    //         //get category index values
-    //         for (const [key, value] of Object.entries(response)) {
-    //             if(key != 'NA'){
-    //                 categories.push(key);
-    //             }
-    //         }
-    //     }
-    // })
-    // console.log('mmm', categories);
+    const handleReset = () => {
+        setStarRating('');
+        setMinprice(0);
+        setMaxPrice(15000);
+        setAmenities([]);
+        setCategory('');
+        setProperty('');
+        setValue([0,15000]);
+        handleFormChange({});
+    }
     
     return (
         <>
@@ -190,7 +182,9 @@ const HotelCategory = (props) => {
                         <div className="col-md-3">
                         <div className="filter-box">
                             <div className="nav-side-menu">
-                            <div className="brand">Filters</div>
+                            <div className="brand">Filters
+                            <button className="text-right" onClick={() => handleReset()}><img src="/Images/packages/icons/reset.png" /></button>
+                            </div>
                             <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" onClick={() => handleFilterBar()}></i>
                             <div className="menu-list">
                                 <div id="menu-content" className={'menu-content '+showFilterbar}>
@@ -211,79 +205,54 @@ const HotelCategory = (props) => {
                                     <h4>Star Ratings</h4>
                                     <ul>
                                     <li>
-                                        <input type="radio" id="star_rating" name="star_rating" value="1" onChange={(event) => { handleFormChange({
+                                        <input type="radio" id="star_rating" name="star_rating" value="1"  onChange={(event) => { handleFormChange({
                                             star: event.target.value,
-                                        });}}
+                                        });} }
+                                        checked={starRating == 1 ? true : false}
                                         />
-                                        <label htmlFor="star_rating">1 Star</label>
+                                        <label htmlFor="star_rating"> 1 Star</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="star_rating" name="star_rating" value="2" onChange={(event) => { 
                                             handleFormChange({
                                                 star: event.target.value,
                                             });
-                                        }}/>
-                                        <label htmlFor="star_rating">2 Star</label>
+                                        }}
+                                        checked={starRating == 2 ? true : false}
+                                        />
+                                        <label htmlFor="star_rating"> 2 Star</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="star_rating" name="star_rating" value="3" onChange={(event) => { 
                                             handleFormChange({
                                                 star: event.target.value,
                                             });
-                                         }}/>
-                                        <label htmlFor="star_rating">3 Star</label>
+                                         }}
+                                         checked={starRating == 3 ? true : false}
+                                         />
+                                        <label htmlFor="star_rating"> 3 Star</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="star_rating" name="star_rating" value="4" onChange={(event) => { 
                                             handleFormChange({
                                                 star: event.target.value,
                                             });
-                                         }}/>
-                                        <label htmlFor="star_rating">4 Star</label>
+                                         }}
+                                         checked={starRating == 4 ? true : false}
+                                         />
+                                        <label htmlFor="star_rating"> 4 Star</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="star_rating" name="star_rating" value="5" onChange={(event) => { 
                                             handleFormChange({
                                                 star: event.target.value,
                                             });
-                                         }}/>
-                                        <label htmlFor="star_rating">5 Star</label>
+                                         }}
+                                         checked={starRating == 5 ? true : false}
+                                        />
+
+                                        <label htmlFor="star_rating"> 5 Star</label>
                                     </li>
-                                    </ul>
-                                </div>
-                                <div className="filter-list-con">
-                                    <h4>Categories</h4>
-                                    <ul>
-                                        <li>
-                                            <input type="radio" id="category" name="category" value="Luxury" onChange={(event) => { handleFormChange({
-                                                category: event.target.value,
-                                            });}}
-                                            checked={category === "Luxury"}
-                                            />
-                                            <label htmlFor="category">Luxury</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="category" name="category" value="Delux" onChange={(event) => { handleFormChange({
-                                                category: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="category">Delux</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="category" name="category" value="Budget" onChange={(event) => { handleFormChange({
-                                                category: event.target.value,
-                                            });}}
-                                            />
-                                            <label htmlFor="category">Budget</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="category" name="category" value="Business" onChange={(event) => { handleFormChange({
-                                                category: event.target.value,
-                                            });}}
-                                            checked={category === "Business"}
-                                            />
-                                            <label htmlFor="category">Business</label>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div className="filter-list-con">
@@ -293,6 +262,7 @@ const HotelCategory = (props) => {
                                             <input type="radio" id="property" name="property" value="Resort" onChange={(event) => { handleFormChange({
                                                 property: event.target.value,
                                             });}}
+                                            checked={property == "Resort" ? true : false}
                                             />
                                             <label htmlFor="property">Resort</label>
                                         </li>
@@ -300,6 +270,7 @@ const HotelCategory = (props) => {
                                             <input type="radio" id="property" name="property" value="Hotel" onChange={(event) => { handleFormChange({
                                                 property: event.target.value,
                                             });}}
+                                            checked={property == "Hotel" ? true : false}
                                             />
                                             <label htmlFor="property">Hotel</label>
                                         </li>
@@ -307,6 +278,7 @@ const HotelCategory = (props) => {
                                             <input type="radio" id="property" name="property" value="Homestay" onChange={(event) => { handleFormChange({
                                                 property: event.target.value,
                                             });}}
+                                            checked={property == "Homestay" ? true : false}
                                             />
                                             <label htmlFor="property">Homestay</label>
                                         </li>
@@ -314,6 +286,7 @@ const HotelCategory = (props) => {
                                             <input type="radio" id="property" name="property" value="Apartment Hotel" onChange={(event) => { handleFormChange({
                                                 property: event.target.value,
                                             });}}
+                                            checked={property == "Apartment Hotel" ? true : false}
                                             />
                                             <label htmlFor="property">Apartment Hotel</label>
                                         </li>
@@ -327,7 +300,8 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                    }}
+                                        }}
+                                        checked={amenities == "42" ? true : false}
                                         />
                                         <label htmlFor="amenities"> Free parking</label>
                                     </li>
@@ -336,7 +310,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                  event.target.value,event.target.checked
                                             );
-                                        }}/>
+                                        }}
+                                        checked={amenities == "2" ? true : false}
+                                        />
                                         <label htmlFor="amenities"> 24-hour room service</label>
                                     </li>
                                     <li>
@@ -344,7 +320,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "28" ? true : false}
+                                        />
                                         <label htmlFor="amenities"> Doctor on call</label>
                                     </li>
                                     <li>
@@ -352,7 +330,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "227" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Complimentary Breakfast</label>
                                     </li>
                                     <li>
@@ -360,7 +340,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "35" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Gym</label>
                                     </li>
                                     <li>
@@ -368,7 +350,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "55" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Jacuzzi</label>
                                     </li>
                                     <li>
@@ -376,7 +360,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "76" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Restaurant</label>
                                     </li>
                                     <li>
@@ -384,7 +370,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "84" ? true : false}
+                                        />
                                         <label htmlFor="amenities"> Spa</label>
                                     </li>
                                     <li>
@@ -392,7 +380,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "96" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Dry cleaning</label>
                                     </li>
                                     <li>
@@ -400,7 +390,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "165" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Bar</label>
                                     </li>
                                     <li>
@@ -408,7 +400,9 @@ const HotelCategory = (props) => {
                                             handleFormChange({
                                                 amenity: event.target.value,
                                             });
-                                         }}/>
+                                         }}
+                                         checked={amenities == "269" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Meeting rooms</label>
                                     </li>
                                     <li>
@@ -416,7 +410,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "365" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Pets Allowed</label>
                                     </li>
                                     <li>
@@ -424,7 +420,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "367" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Couple Friendly</label>
                                     </li>
                                     <li>
@@ -432,7 +430,9 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}
+                                         checked={amenities == "376" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Swimming Pool</label>
                                     </li>
                                     <li>
@@ -440,7 +440,8 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}/>
+                                         }}checked={amenities == "400" ? true : false}
+                                         />
                                         <label htmlFor="amenities"> Terrace</label>
                                     </li>
 									<li>
@@ -507,7 +508,7 @@ const HotelCategory = (props) => {
                                             </div>
                                             <div className="col-md-3 hotel-box2-right">
                                                 <ul className="rating">
-                                                <li><span>4.5/5</span>185 Ratings</li>
+                                                
                                                 <li><span className="cut-price"></span><i className="fa fa-inr" aria-hidden="true"></i>{slide.starting_price}</li>
                                                  
                                             <li> <a href={'/hotel-details/'+ base64_encode(slide.hotel_id)} className="book-now-btn-destinationsearch">Book Now</a></li>
@@ -520,8 +521,8 @@ const HotelCategory = (props) => {
                             </div>
                             :
 
-                            <div className="col-md-9">
-                                <h1 style={{textAlign: 'center'}}>No Hotels Found</h1>
+                            <div className="col-md-9 nohotel">
+                                <h1 >No Hotels Found</h1>
                             </div>
                         }
 						

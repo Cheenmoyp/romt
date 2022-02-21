@@ -40,6 +40,23 @@ header {
 .navbar-expand-lg .navbar-nav>li.nav-item {
     padding: 28px 10px;
 }
+li.nav-item.dropdown {
+    position: relative;
+}
+.navbar-expand-lg .navbar-nav>li.dropdown a.dropdown-toggle{position:relative;}
+.navbar-expand-lg .navbar-nav>li.dropdown:hover>a.dropdown-toggle:before {
+    content: "\f0d7";
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    bottom: -63px;
+    left: 50%;
+    font-size: 32px;
+    -webkit-transform: scaleY(-1);
+    -moz-transform: scaleY(-1);
+    transform: scaleY(-1);
+    color: #e7e7e7;
+    z-index: 1;
+}
 /*Css Slider*/
 
 ul.slides, ul.slides-2 {
@@ -182,11 +199,27 @@ input:checked + .slide-container .nav label, input:checked + .slide-container-2 
 }
 
 .nav-con .navbar-dark .navbar-nav .nav-link {
-    color:#363636;
+    color: #363636;
     text-transform: uppercase;
     font-size: 15px;
     font-weight: 400;
+    padding-right: 14px;
 }
+.nav-link.dropdown-toggle {
+    position: relative;
+}
+.nav-link.dropdown-toggle:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0d7";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: max-content;
+    margin: auto 0;
+}
+.nav-con .navbar-dark .navbar-nav .nav-link:hover{ text-decoration:none; }
+
 .nav-con .navbar-toggler {
     background: #f16b23;
 }
@@ -211,7 +244,7 @@ input:checked + .slide-container .nav label, input:checked + .slide-container-2 
    padding-top:0px;
    padding-bottom:0px;
  }
- 
+
  /* remove the padding from the nav-item and add some margin to give some breathing room on hovers */
 .nav-con .navbar .nav-item {
    padding:.5rem .5rem;
@@ -296,7 +329,7 @@ span.menu-heading:before {
     border-radius: 5px;
 }
 .nav-side-menu {
-    overflow: auto;
+    overflow: hidden;
     font-size: 12px;
     font-weight: 200;
     position: relative;
@@ -378,6 +411,11 @@ span.menu-heading:before {
     padding-bottom: 12px;
     margin-bottom: 15px;
 }
+.filter-list-con span.pull-right, .filter-list-con span.pull-left {
+    font-weight: 600;
+	font-size: 15px;
+}
+
 /*Milan End*/
 @media (max-width: 767px) {
   .nav-side-menu {
@@ -405,6 +443,8 @@ span.menu-heading:before {
 	line-height: 20px !important;
 	padding-top: 10px;
 }
+
+
 .hotel-box2 {
 	margin-top: 15px;
 }
@@ -588,9 +628,20 @@ width: auto;
     border: none;
     font-size: 13px;
 }
+/*Remove Arrow from input[type="number"]*/
+/* Chrome, Safari, Edge, Opera */
+.search-con form input[type="number"]::-webkit-outer-spin-button,
+.search-con form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-
-
+/* Firefox */
+.search-con form input[type="number"] {
+    -moz-appearance: textfield;
+    text-align: CENTER;
+}
+/*Remove Arrow from input[type="number"] End*/
 .search-con form  .datepicker {
     background: url('../Images/calendar-ic.png') no-repeat;
     background-size: 20px;
@@ -605,8 +656,8 @@ width: auto;
     outline: none;
 }
 .search-con input[placeholder="What are you looking for?"] {
-    max-width: 200px;
-    width: 100%;
+    min-width: 190px;
+    max-width: 100%;
 }
 .search-con form .form-control {
     padding: 0;
@@ -639,6 +690,7 @@ width: auto;
     font-size: 14px;
     font-weight: normal;
 }
+
 .search-con form button.site-button {
     border-radius: 0 50px 50px 0;
     padding: 13px 40px;
@@ -655,7 +707,11 @@ width: auto;
     top: -2px;
     /*right: -1px;*/
 }
-.search-con form button.site-button:hover{ background: #f25c0b; color:#fff; border-color: #f25c0b;}
+.search-con form button.site-button:hover {
+    background: #899e52;
+    color: #fff;
+    border-color: #899e52;
+}
 input#datepicker {
     max-width: 125px;
 }
@@ -725,6 +781,7 @@ input#datepicker {
 
 .book-direct-section ul li a.b-direct-box {
     display: inline-block;
+    text-decoration: none;
 }
 .book-direct-section ul li a.b-direct-box h4 {
     font-size: 14px;
@@ -780,6 +837,7 @@ input#datepicker {
 }
 .commitmenticons img {
     max-width: 100%;
+    width: 38px;
 }
 a.l-moere {
     display: inline-block;
@@ -811,7 +869,11 @@ a.l-moere {
     border-radius: 30px;
     text-align:center;
 }
-.exmore:hover{ text-decoration:none; background:none; color:#daa520; }
+.exmore:hover {
+    text-decoration: none;
+    background: none;
+    color: #f16b23;
+}
 .exmore.blue-bg {
     border-color: #899e52;
     background: #899e52;
@@ -931,8 +993,17 @@ button.owl-next {left:unset; right: -50px;}
     text-decoration: none;
 }
 .btn-bx {
-    background: #e5e5e5;
-    padding: 50px 0;
+    background: url(../images/ExploreallHotels.jpg);
+    background-size:cover;
+}
+.btn-bx:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
 }
 .btn-bx a {
     color: #fff;
@@ -943,6 +1014,10 @@ button.owl-next {left:unset; right: -50px;}
     text-decoration: none;
     position: relative;
     z-index: 10;
+}
+.btn-bx a:hover {
+    background: #fff;
+    color: #ff8a34;
 }
 .btn-bx.box-2:before{ display:none; }
 .our-hotel {
@@ -1182,6 +1257,9 @@ button.owl-next {left:unset; right: -50px;}
 .hotel-list {
     width: 100%;
     float: left;
+    padding: 20px 0 60px;
+}
+.hotel-list.hotels-page {
     padding: 60px 0;
 }
 .hotel-box {
@@ -1369,16 +1447,18 @@ transform: scale(1.5);}
     margin: 0 0 6px;
 }
 ul.rating li:first-child {
-    color: #0071c2;
+    color: #000000;
     margin-bottom: 10px;
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 19px;
 }
 ul.rating li:first-child span {
-    background: #98be3b;
-    color: #fff;
-    padding: 3px 16px;
-    position: relative;
-    border-radius: 5px;
-    margin-right: 5px;
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    color: #6e6e6e;
+    font-weight: 400;
 }
 ul.rating li:first-child span:before {
     content: '';
@@ -1386,7 +1466,7 @@ ul.rating li:first-child span:before {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 10px solid #98be3b;
+    /*border-top: 10px solid #98be3b;*/
     position: absolute;
     left: 0px;
     bottom: -4px;
@@ -1418,8 +1498,9 @@ ul.rating li.pricee span.cut-price {
 }
 .book-now-btn:hover{ color:#ff8a34; background: none; text-decoration: none;}
 .col-md-3.hotel-box2-right {
-    padding: 35px 0;
+    padding: 80px 0 0;
     text-align: center;
+    border-left: 1px solid #efefef;
 }
 .col-md-3.hotel-box2-right:before {
     content: '';
@@ -1429,6 +1510,9 @@ ul.rating li.pricee span.cut-price {
     top: 6%;
     position: absolute;
     left: -1px;
+}
+ul.rating li:first-child i {
+    font-size: 14px;
 }
 .hotel-box2 .col-md-4 {
     padding-left: 0;
@@ -1454,7 +1538,7 @@ ul.rating li.pricee span.cut-price {
 .destination-page-banner {
     width: 100%;
     float: left;
-    padding: 0 0 60px;
+    padding: 0 0 0;
     margin: 0;
 }
 .destination-page-banner img{ width:100%;}
@@ -2907,7 +2991,6 @@ li.h-rating a i {
 }
 
 .facilitis-with-icon {
-    border-bottom: 1px solid #e0e0e0;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
@@ -3045,6 +3128,9 @@ margin-bottom:15px;
     font-weight: 500;
     padding: 0 10px;
 }
+.rooms-box h4 span.pull-right {
+    font-size: 14px;
+}
 .room-dertails ul li {
     display: inline-block;
     padding-right: 12px;
@@ -3054,7 +3140,10 @@ margin-bottom:15px;
     margin-right: 5px;
 }
 .room-dertails {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+}
+.room-dertails h6 {
+    color: #8fb532;
 }
 .room-am ul li {
     display: inline-block;
@@ -5717,7 +5806,10 @@ li a {
     -webkit-text-decoration-skip: objects;
 }
 .dropdown-menu {
-	z-index: 2 !important;
+    z-index: 2 !important;
+    webkit-box-shadow: 0 2px 10px #00000040;
+    box-shadow: 0 2px 10px #00000040;
+    color: #000000a1;
 }
 .text-right {
     text-align: right !important;
@@ -5765,6 +5857,7 @@ button.close {
     color: #000;
     text-decoration: none;
     opacity: .75;
+    background: none;
 }
 .desti-content {
   overflow: hidden;
@@ -6075,16 +6168,17 @@ button#myBtn:before {
 .package-detail-block-body ul {
     display: inline-block;
     width: auto;
+	text-align:center;
 }
 .package-detail-block-body ul li {
     display: inline-block;
     padding: 0 5px;
     margin-bottom: 30px;
     text-align: center;
-    width: 20%;
-    float: left;
-    min-width: 142px;
+    width: 142px;
+    float: none;
     height: 90px;
+    max-width: 100%;
 }
 .package-detail-block-body ul li span {
     width: 100%;
@@ -6284,14 +6378,20 @@ ul.terms-conditions li:before {
 }
 .chek-availability-form label {
     font-size: 18px;
+    margin-bottom: 26px;
+}
+.chek-availability-form .col-sm-3 label {
+    margin-bottom: 0;
+    font-size: 14px;
 }
 .chek-availability-form input, .chek-availability-form  optgroup, .chek-availability-form select, .chek-availability-form textarea {
-    border: none;
+    border-radius: 5px;
     stroke: none;
     outline: none;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #e7e7e7;
     width: 100%;
-    padding: 4px 0;
+    padding: 5px 10px;
+    font-size: 12px;
 }
 .chek-availability-form input#proceed-to-payment-btn {
     background: #ff8a34;
@@ -6315,7 +6415,40 @@ ul.terms-conditions li:before {
     overflow: hidden;
     margin-bottom: 10px;
     position: relative;
+    margin-top: 20px;
 }
+/*Date Picker*/
+.react-datepicker {
+    border: 1px solid #899e52;
+}
+.react-datepicker__day--keyboard-selected {
+    border-radius: 0.3rem;
+    background-color: #899e52;
+    color: #fff;
+}
+.react-datepicker__navigation:hover *::before, .react-datepicker__navigation-icon::before{
+    border-color: #ffffff!important;
+}
+.react-datepicker__header {
+    background-color: #899e52!important;
+    border-bottom: 1px solid #899e52!important;
+}
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {
+    border-bottom-color: #899e52!important;
+}
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+    color: #fff!important;
+	}
+.react-datepicker__day-name, .react-datepicker__time-name {
+    color: #fff!important;
+}
+ .react-datepicker__day{ color:#000; }	
+.react-datepicker__day--selected{     background-color: #899e52!important; }
+.react-datepicker__day--disabled{
+    cursor: default;
+    color: #444!important;
+}
+/*Date Picker End*/
 .check-availability-btn:before {
     content: 'Check Availability';
     position: absolute;
@@ -6342,8 +6475,9 @@ ul.terms-conditions li:before {
     position: relative;
     z-index: 1;
     border: none;
+    padding: 0;
+    margin: 9px 0 0;
 }
-
 .write-review-sec {
     width: 100%;
     float: left;
@@ -6637,11 +6771,19 @@ h3.heding-btmborder:before {
     top: 100%;
     padding: 5px;
     text-align: center;
-    left: -50%;
-    width: 183px;
+    left: -18px;
+    width: auto;
+    min-width: unset;
+    border: 1px solid rgb(0 0 0 / 5%);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 8px 9px #00000021;
+}
+.show-on-hover:hover>ul.dropdown-menu li {
+    width: 113px;
+    display: inline-block;
 }
 .bgd-count {
-    background: #d5d5d5;
+    background:rgb(137 185 74);
     color: #fff;
     border-radius: 40px;
     width: 30px;
@@ -6663,17 +6805,14 @@ h3.heding-btmborder:before {
 .kids-adult .label-control {
     position: absolute;
     top: -21px;
-    width: 176px;
-    left: -36px;
+    width:auto;
+    left:0;
     right: 0;
     margin: auto;
+	font-size: 11px;
 }
 /*M I L A N 14022022 End*/
-.kids-adult .label-control {
-    font-size: 11px;
-    width: 183px;
-    float: left;
-}
+
 .contact-us-box {
     visibility: hidden;
     opacity: 0;
@@ -6691,8 +6830,8 @@ h3.heding-btmborder:before {
     background: #fff;
     text-align: left;
     padding: 19px 15px 15px;
-    -webkit-box-shadow: 0 11px 10px;
-    box-shadow: 0 11px 10px;
+    -webkit-box-shadow: 0 2px 10px #00000040;
+    box-shadow: 0 2px 10px #00000040;
     color: #000000a1;
     z-index: 99999999;
 }
@@ -6703,8 +6842,18 @@ h3.heding-btmborder:before {
     transform: translateY(0%);
     transition-delay: 0s, 0s, 0.3s;}
 
-
-
+.contact-us-box:before {
+    content: "\f0d7";
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: -21px;
+    right: 50px;
+    font-size: 32px;
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    color: #e7e7e7;
+    z-index: 1;
+}
 .navbar:hover div#navbarSupportedContent {
     display: inline-block!important;
 }
@@ -6739,6 +6888,11 @@ padding: 0;
 	overflow: hidden;
 	transition: max-height .25s ease-in-out;
 }	
+ .navbar-expand-lg .navbar-nav>li.dropdown:hover>a.dropdown-toggle:before {
+    bottom: -14px;
+    left: 25px;
+    font-size: 18px;
+}
 .nav-con .collapsible-content {
     max-height: 1000px;
     transition: max-height .25s ease-in-out;
@@ -6764,9 +6918,17 @@ label.lbl-toggle {
 
 
 
-
-
-
+@media (max-width:768px){
+.exmore {
+    padding: 4px 6px;
+    width: 143px;
+    margin-bottom: 10px;
+	font-size:12px;
+}
+.box-2.mtop-60 {
+    margin-top: 0;
+}
+}
 
 
 option {
@@ -6814,11 +6976,10 @@ select {
     text-overflow: ellipsis;
 }
 
-.bgd-count{
-	    background: #d5d5d5;
+.bgd-count {
+    background: rgb(137 185 74);
     color: #fff;
     border-radius: 40px;
-	
 }
 .counter-box-new{width:40px;}
 
@@ -6850,9 +7011,8 @@ display: inline-block;
     -webkit-box-shadow: -1px 2px 7px 0px #ddd;
     box-shadow: -1px 2px 7px 0px #ddd;
     position: relative;
-    z-index: 100;
+    z-index: 1000;
 }
-
 .loginbutton-sign{background:#ff8318; color:#fff;}
 
 .package-home .react-multiple-carousel__arrow--right{
@@ -6867,11 +7027,14 @@ right:0px!important;
 .MuiSlider-root{color:#cf7519!important;}
 
 
-.dropdown-content li{ 
-	text-align: left;
-	padding: 4%;
-	cursor: pointer;
+.dropdown-content li {
+    text-align: left;
+    padding: 4%;
+    cursor: pointer;
+    font-size: 12px;
+    border-bottom: 1px solid #cccccc30;
 }
+.dropdown-content li:last-child{ border:none; }
 .dropdown-content {
 	display: none;
 	position: absolute;
@@ -6884,6 +7047,27 @@ right:0px!important;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
 }
+/* Designing for scroll-bar */
+        .dropdown-content::-webkit-scrollbar {
+            width: 6px;
+        }
+      
+        /* Track */
+        .dropdown-content::-webkit-scrollbar-track {
+            background: gainsboro;
+            border-radius: 5px;
+        }
+      
+        /* Handle */
+        .dropdown-content::-webkit-scrollbar-thumb {
+            background: #f16b23;
+            border-radius: 5px;
+        }
+      
+        /* Handle on hover */
+        .dropdown-content::-webkit-scrollbar-thumb:hover {
+            background:#f16b23;
+        }
 .show-dropdown {
 	display: block;
 }
@@ -6898,3 +7082,11 @@ right:0px!important;
     opacity:0.7;
     cursor: not-allowed;
 }
+
+
+
+.brand button{border:none!important; background:none; float: right;}
+
+.nohotel h1{text-align: center; 
+    color: #98be3b;
+    font-size: 25px;}

@@ -670,7 +670,7 @@ const HotelDetails = (response) => {
 									</div>
 									<div className="hotel-facilities">
 										<div className="row">
-											<div className="col-md-8">
+											<div className="col-md-12">
 												<div className="heading-group-2">
 													<h4>Facilities at the {response.hoteldata.hotel_name}</h4>
 													<p>Facilities here have been <span>rated {response.hoteldata.star} by 1652 guest</span></p>
@@ -687,9 +687,11 @@ const HotelDetails = (response) => {
 											</ul>
 										</div>
 										<div className="row amenities">
+											<div class="col-md-12">
+												<h4>Facilities</h4>
+											</div>
 											<div className="col">
 												<div className="amenities-box">
-													<h4>Facilities</h4>
 													<ul>
 														{response.hoteldata.facility.map((slide, index) => {
 															if (index < 4) {
@@ -705,7 +707,6 @@ const HotelDetails = (response) => {
 											</div>
 											<div className="col">
 												<div className="amenities-box">
-													<h4>   </h4>
 													<ul>
 														{response.hoteldata.facility.map((slide, index) => {
 															if (4 <= index && index < 8) {
@@ -721,7 +722,6 @@ const HotelDetails = (response) => {
 											</div>
 											<div className="col">
 												<div className="amenities-box">
-													<h4>  </h4>
 													<ul>
 														{response.hoteldata.facility.map((slide, index) => {
 															if (8 <= index && index < 12) {
@@ -737,7 +737,6 @@ const HotelDetails = (response) => {
 											</div>
 											<div className="col">
 												<div className="amenities-box">
-													<h4>  </h4>
 													<ul>
 														{response.hoteldata.facility.map((slide, index) => {
 															if (12 <= index && index < 16) {
@@ -753,7 +752,6 @@ const HotelDetails = (response) => {
 											</div>
 											<div className="col">
 												<div className="amenities-box">
-													<h4>   </h4>
 													<ul>
 														{response.hoteldata.facility.map((slide, index) => {
 															if (16 <= index && index < 20) {

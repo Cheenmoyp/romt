@@ -400,7 +400,7 @@ export const Header = () => {
 										</div>
 									</div>
 							</li>
-							<li className="nav-item dropdown"> <a  className="nav-link dropdown-toggle" href="#" > Blog </a ></li>
+							<li className="nav-item dropdown"> <a  className="nav-link " href="#" > Blog </a ></li>
 						</ul>
 						</div>
 					</nav>	
