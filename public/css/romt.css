@@ -993,7 +993,7 @@ button.owl-next {left:unset; right: -50px;}
     text-decoration: none;
 }
 .btn-bx {
-    background: url(../images/ExploreallHotels.jpg);
+    color: #ddd;
     background-size:cover;
 }
 .btn-bx:before {
