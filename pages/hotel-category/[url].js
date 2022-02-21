@@ -149,7 +149,16 @@ const HotelCategory = (props) => {
         setCategory('');
         setProperty('');
         setValue([0,15000]);
+        UnSelectAll();
         handleFormChange({});
+    }
+
+    function UnSelectAll() {
+        var items = document.getElementsByName('amenities');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = false;
+        }
     }
     
     return (
@@ -301,7 +310,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                         }}
-                                        checked={amenities == "42" ? true : false}
                                         />
                                         <label htmlFor="amenities"> Free parking</label>
                                     </li>
@@ -311,7 +319,6 @@ const HotelCategory = (props) => {
                                                  event.target.value,event.target.checked
                                             );
                                         }}
-                                        checked={amenities == "2" ? true : false}
                                         />
                                         <label htmlFor="amenities"> 24-hour room service</label>
                                     </li>
@@ -321,7 +328,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "28" ? true : false}
                                         />
                                         <label htmlFor="amenities"> Doctor on call</label>
                                     </li>
@@ -331,7 +337,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "227" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Complimentary Breakfast</label>
                                     </li>
@@ -341,7 +346,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "35" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Gym</label>
                                     </li>
@@ -351,7 +355,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "55" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Jacuzzi</label>
                                     </li>
@@ -361,7 +364,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "76" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Restaurant</label>
                                     </li>
@@ -371,7 +373,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "84" ? true : false}
                                         />
                                         <label htmlFor="amenities"> Spa</label>
                                     </li>
@@ -381,7 +382,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "96" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Dry cleaning</label>
                                     </li>
@@ -391,7 +391,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "165" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Bar</label>
                                     </li>
@@ -401,7 +400,6 @@ const HotelCategory = (props) => {
                                                 amenity: event.target.value,
                                             });
                                          }}
-                                         checked={amenities == "269" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Meeting rooms</label>
                                     </li>
@@ -411,7 +409,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "365" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Pets Allowed</label>
                                     </li>
@@ -421,7 +418,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "367" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Couple Friendly</label>
                                     </li>
@@ -431,7 +427,6 @@ const HotelCategory = (props) => {
                                                 event.target.value,event.target.checked
                                            );
                                          }}
-                                         checked={amenities == "376" ? true : false}
                                          />
                                         <label htmlFor="amenities"> Swimming Pool</label>
                                     </li>
@@ -440,7 +435,7 @@ const HotelCategory = (props) => {
                                             handleAminityChange(
                                                 event.target.value,event.target.checked
                                            );
-                                         }}checked={amenities == "400" ? true : false}
+                                         }}
                                          />
                                         <label htmlFor="amenities"> Terrace</label>
                                     </li>
