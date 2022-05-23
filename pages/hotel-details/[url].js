@@ -305,11 +305,15 @@ const HotelDetails = (response) => {
 										rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
 											if (value === day_rate.date) {
 												if (rates_for_discount.selected_adult < cartItem.max_people) {
-													if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-														total_bar_price = day_rate.bar_price
+													if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+														total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+
 													}
 													else {
-														total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+
+														total_bar_price = day_rate.bar_price
+
 													}
 												}
 												else {
@@ -337,11 +341,14 @@ const HotelDetails = (response) => {
 												if (value === day_rate.date) {
 
 													if (rates_for_discount.selected_adult < cartItem.max_people) {
-														if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-															total_bar_price = day_rate.bar_price
+														if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+															total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+
 														}
 														else {
-															total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+															total_bar_price = day_rate.bar_price
+
 														}
 													}
 													else {
@@ -407,14 +414,16 @@ const HotelDetails = (response) => {
 							rates_for_discount.day_wise_rates && rates_for_discount.day_wise_rates.map((day_rate) => {
 								if (value === day_rate.date) {
 									if (rates_for_discount.selected_adult < max_people) {
-										if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-											total_bar_price = day_rate.bar_price
-											bar_price_for_discount = day_rate.bar_price
+										if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+
+											total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+											bar_price_for_discount = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+											
 
 										}
 										else {
-											total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
-											bar_price_for_discount = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+											total_bar_price = day_rate.bar_price
+											bar_price_for_discount = day_rate.bar_price
 
 										}
 

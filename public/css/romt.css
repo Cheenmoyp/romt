@@ -7090,3 +7090,184 @@ right:0px!important;
 .nohotel h1{text-align: center; 
     color: #98be3b;
     font-size: 25px;}
+
+
+    .booking__successful__wrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      
+      .booking__successful__wrapper::after {
+        content: "";
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQxMCIgaGVpZ2h0PSIzMDkiIHZpZXdCb3g9IjAgMCAxNDEwIDMwOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0MTAgMEwxMzYzIDI1Ljk0OTFDMTMxNiA1MS41MDk0IDEyMjIgMTAzLjk5MSAxMTI4IDEzNC43OTlDMTAzNCAxNjYuMTkxIDk0MCAxNzUuOTA5IDg0NiAxODYuNkM3NTIgMTk3LjI5MSA2NTggMjA3LjAwOSA1NjQgMTkxLjc1MUM0NzAgMTc1LjkwOSAzNzYgMTM1LjA5MSAyODIgMTM0Ljc5OUMxODggMTM1LjA5MSA5NCAxNzUuOTA5IDQ3IDE5Ni45OTlMMCAyMTcuN1YzMTFINDdDOTQgMzExIDE4OCAzMTEgMjgyIDMxMUMzNzYgMzExIDQ3MCAzMTEgNTY0IDMxMUM2NTggMzExIDc1MiAzMTEgODQ2IDMxMUM5NDAgMzExIDEwMzQgMzExIDExMjggMzExQzEyMjIgMzExIDEzMTYgMzExIDEzNjMgMzExSDE0MTBWMFoiIGZpbGw9IiNDRUNCRkYiIGZpbGwtb3BhY2l0eT0iMC41OSIvPgo8L3N2Zz4K");
+        background-repeat: repeat-x;
+        background-position: bottom;
+        background-size: contain;
+      }
+      
+      .booking__successful__padding {
+        position: relative;
+        padding: 2rem;
+        z-index: 6;
+      }
+      
+      .header__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 8;
+      }
+      
+      .transaction__id,
+      .amount {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      
+      .logo__wrapper {
+        width: 300px;
+        /* height: auto; */
+        height: 190px;
+        object-fit: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
+      }
+      
+      .logo__wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      
+      .align__center__div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 6;
+      }
+      
+      .booking__successful {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 0.34rem 1rem;
+        background-color: #3A4EC5;
+        border-radius: 30px;
+        margin-bottom: 2rem;
+        z-index: 6;
+      }
+      
+      .success__circle {
+        width: 35px;
+        height: 35px;
+        margin-right: 0.65rem;
+        background-color: #27AE60;
+        border-radius: 50%;
+      }
+      
+      .bi-check {
+        color: #ffffff;
+        width: 35px;
+        height: 35px;
+      }
+      
+      .success__text {
+        font-size: 1.02rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+      
+      .thank__you__text {
+        font-size: 1.35rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        z-index: 6;
+      }
+      
+      .button__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 6;
+      }
+      
+      .btn__print__pdf,
+      .btn__booking__engine,
+      .btn__go__home {
+        width: fit-content;
+        text-align: center;
+        font-weight: 400;
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        margin-right: 1.5rem;
+        background-color: #223189;
+        border-radius: 8px;
+      }
+      
+      
+      .btn__go__home {
+        margin-right: unset;
+      }
+      
+      .bottom__image__placeholder {
+        z-index: 3;
+        width: 250px;
+        height: auto;
+        margin-top: 2.5rem;
+      }
+      
+      .bottom__image__placeholder img {
+        width: 95%;
+      }
+      
+      .btn__print__pdf:hover {
+        cursor: pointer;
+      }
+      
+      .btn__booking__engine:hover {
+        cursor: pointer;
+      }
+      
+      .btn__go__home:hover {
+        cursor: pointer;
+      }
+      
+      @media only screen and (max-width: 700px) {
+        .header__wrapper {
+          flex-direction: column;
+        }
+      
+        .transaction__id,
+        .amount {
+          flex: 1;
+          width: 100%;
+          text-align: center;
+        }
+      
+        .thank__you__text {
+          text-align: center;
+        }
+      
+        .button__wrapper {
+          flex-direction: column;
+        }
+      
+        .btn__print__pdf,
+        .btn__booking__engine,
+        .btn__go__home {
+          flex: 1;
+          width: 100%;
+          margin-right: unset;
+          margin-bottom: 1.5rem;
+        }
+      }

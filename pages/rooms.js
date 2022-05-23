@@ -469,18 +469,30 @@ export default function Rooms(props) {
             }
 
             extra_adult_price = 0;
-            invData["multiple_occupancy"].map((occupancy) => {
+            // invData["multiple_occupancy"].map((occupancy) => {
 
-                if (occupancy[adult] == 0 || occupancy[adult] == "" || !occupancy[adult]) {
-                    occupancy[adult] = invData["bar_price"];
-                }
-                if (adult > 0) {
-                    update_price += parseFloat(occupancy[adult] / no_nights);
-                }
-                else {
+            //     if (occupancy[adult] == 0 || occupancy[adult] == "" || !occupancy[adult]) {
+            //         occupancy[adult] = invData["bar_price"];
+            //     }
+            //     if (adult > 0) {
+            //         update_price += parseFloat(occupancy[adult] / no_nights);
+            //     }
+            //     else {
+            //         update_price += parseFloat(occupancy[adult]);
+            //     }
+            // });
+
+            invData["inv_multiple_occupancy"].map((occupancy) => {
+                if (occupancy[adult]) {
                     update_price += parseFloat(occupancy[adult]);
                 }
             });
+
+            if (!update_price) {
+                update_price = getRoomPrice(cart_data.room_type_id, cart_data.rate_plan_id);
+            }
+
+
         }
         if (selected_adults > invData["max_people"]) {
             extra_adult_price = 0;
@@ -570,6 +582,8 @@ export default function Rooms(props) {
         invDetail["extra_adult_price"] = 0;
         invDetail["extra_child_price"] = 0;
         invDetail["multiple_occupancy"] = [];
+        invDetail["inv_multiple_occupancy"] = [];
+
         Rooms &&
             Rooms.map((inv) => {
                 if (room_type_id == inv.room_type_id) {
@@ -592,7 +606,9 @@ export default function Rooms(props) {
                                 invDetail["display_extra_child_price"] = (
                                     rate.extra_child_price
                                 ).toFixed(2);
-                                invDetail["multiple_occupancy"].push(rate.multiple_occupancy);
+                                // invDetail["multiple_occupancy"].push(rate.multiple_occupancy);
+                                invDetail["inv_multiple_occupancy"].push(rate.multiple_occupancy);
+
                             });
                         }
                     });
@@ -784,13 +800,11 @@ export default function Rooms(props) {
                         if (value === day_rate.date) {
                             if (rates_for_discount.selected_adult < cart.max_people) {
 
-                                if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
-
-                                    total_bar_price = day_rate.bar_price
-
+                                if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+                                    total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
                                 }
                                 else {
-                                    total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+                                    total_bar_price = day_rate.bar_price
 
                                 }
                             }
@@ -808,6 +822,7 @@ export default function Rooms(props) {
                             }
 
 
+                            total_pay_price = total_bar_price
                             if (rates_for_discount.public_coupon_discount_price_array && rates_for_discount.public_coupon_discount_price_array.length > 0) {
                                 rates_for_discount.public_coupon_discount_price_array.map((pb_coupon_price) => {
                                     if (day_rate.date === pb_coupon_price.date && pb_coupon_price.room === rates_for_discount.room) {
@@ -815,9 +830,9 @@ export default function Rooms(props) {
                                     }
                                 })
                             }
-                            else {
-                                total_pay_price = total_bar_price
-                            }
+                            // else {
+                            //     total_pay_price = total_bar_price
+                            // }
 
                             gst_price += total_pay_price;
                             const gstPercent = checkGSTPercent(gst_price);
@@ -903,13 +918,14 @@ export default function Rooms(props) {
 
                                         if (rates_for_discount.selected_adult < cart.max_people) {
 
-                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
 
-                                                total_bar_price = day_rate.bar_price
+                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
 
                                             }
                                             else {
-                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+                                                total_bar_price = day_rate.bar_price
+
                                             }
 
 
@@ -961,13 +977,14 @@ export default function Rooms(props) {
 
                                         if (rates_for_discount.selected_adult < cart.max_people) {
 
-                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == 0 || day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1] == "" || !day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
+                                            if (day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1]) {
 
-                                                total_bar_price = day_rate.bar_price
+                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
 
                                             }
                                             else {
-                                                total_bar_price = parseFloat(day_rate.multiple_occupancy[rates_for_discount.selected_adult - 1])
+                                                total_bar_price = day_rate.bar_price
+
                                             }
 
 
