@@ -61,7 +61,9 @@ export default function Search(props) {
 				router.push(`/destination/${url}`)
 			}			
 		} else {
-			alert('Select Destination and Hotel');
+			if (!cityValue) {
+				alert('Select Destination and Hotel');
+			}
 		}
     }
 	
@@ -174,7 +176,6 @@ export default function Search(props) {
 	}
 	//var citySelected = cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))?cityList.filter(option => option.value == (formData.cityid ? formData.cityid : props.cityid))[0]:'';
 	//console.log('hello', JSON.parse(citySelected).label);
-	console.log('hello', cityValue);
     return (
 		<>
         <form>

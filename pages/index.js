@@ -121,7 +121,6 @@ const destinationResponsive = {
  useEffect(() => {
       document.addEventListener("scroll", () => {
           const scrollCheck = window.scrollY > 150
-          console.log('scroll', window.scrollY);
           if (scrollCheck) {
               setScrollval('shrink')
           } else {

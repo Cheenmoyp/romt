@@ -682,7 +682,7 @@ const HotelDetails = (response) => {
 											<div className="col-md-12">
 												<div className="heading-group-2">
 													<h4>Facilities at the {response.hoteldata.hotel_name}</h4>
-													<p>Facilities here have been <span>rated {response.hoteldata.star} by 1652 guest</span></p>
+													{/* <p>Facilities here have been <span>rated {response.hoteldata.star} by 1652 guest</span></p> */}
 												</div>
 											</div>
 
@@ -875,8 +875,13 @@ const HotelDetails = (response) => {
 
 
 
-										{allTotalPriceDisplay > 0 && <div className="view-bu">
-											<div id="full-room-pay" className="full-room-pay"><ul className="clearfix"><li>Total Amount</li><li> <i className="fa fa-inr"></i>{allTotalPriceDisplay}</li></ul></div>
+										{totalPrice > 0 && <div className="view-bu">
+											<div id="full-room-pay" className="full-room-pay">
+												<ul className="clearfix">
+													<li>Total Amount</li><li className='total-amount-display'> <i className="fa fa-inr"></i>{totalPrice.toFixed(2)}</li>
+													{totalGst && <><li>GST</li><li> <i className="fa fa-inr"></i>{totalGst.toFixed(2)}</li></>}
+												</ul>
+											</div>
 										</div>}
 
 										{totalCouponDiscountPrice > 0 && <div className="view-bu public-coupon">

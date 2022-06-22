@@ -141,7 +141,6 @@ const Destination = (response) => {
   useEffect(() => {
     document.addEventListener("scroll", () => {
         const scrollCheck = window.scrollY > 600
-        console.log('scroll', window.scrollY);
         if (scrollCheck) {
             setScrollval('shrink')
         } else {
@@ -608,8 +607,8 @@ function UnSelectAll() {
 					<ReactPaginate
 							className="hotel-pagination"
 							previousClassName="fa fa-angle-left"
-							nextClassName="fa fa-angle-right"
-							
+							nextClassName="fa fa-angle-right"	
+                            						
 							breakLabel="..."
 							nextLabel=""
 							onPageChange={handlePageClick}

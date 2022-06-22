@@ -91,8 +91,12 @@ export const Footer = () => {
                     <ul>
                   
                     <li><i className="fa fa-mobile" aria-hidden="true"></i><strong>Phone:</strong><br/>
-                        82 200 267 77 / <br/>
-                        91 733 00 222 77 (24/7 Support)</li>
+                        82 200 267 77 
+                        
+                        {/* / <br/>
+                        91 733 00 222 77 (24/7 Support) */}
+                        
+                        </li>
                     <li><i className="fa fa-envelope" aria-hidden="true"></i><strong>Email:</strong><br/>
                         reservations@roomsonmytravel.in</li>
                     </ul>

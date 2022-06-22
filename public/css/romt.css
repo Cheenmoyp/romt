@@ -6733,15 +6733,23 @@ h3.heding-btmborder:before {
 
 .hotelfield{width:140px;}
 .hotel-banner-img { height:381px }
+
+.hotel-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .hotel-pagination li{
-	display: inline-block;
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
     background: #ffffff;
     color: #000;
     border: 1px solid #f48124;
     border-radius: 50%;
-    padding-top: 8px;
 	margin:0px 4px 0px 4px;
 }
 .hotel-pagination li:first-child, .hotel-pagination li:last-child, .hotel-pagination .selected, .hotel-pagination li:hover {
@@ -6749,6 +6757,10 @@ h3.heding-btmborder:before {
     color: #fff;
     border: 1px solid #f48124;
     text-decoration: none;
+}
+
+.hotel-pagination li:hover {
+    cursor: pointer;
 }
 
 .intro {font-size:13px; padding:20px 0px 20px 0px;}
@@ -6854,9 +6866,9 @@ h3.heding-btmborder:before {
     color: #e7e7e7;
     z-index: 1;
 }
-.navbar:hover div#navbarSupportedContent {
+/* .navbar:hover div#navbarSupportedContent {
     display: inline-block!important;
-}
+} */
 
 
 
@@ -7271,3 +7283,23 @@ right:0px!important;
           margin-bottom: 1.5rem;
         }
       }
+
+      ::-webkit-scrollbar{
+        display: none;
+      }
+
+      .total-amount-display{
+        text-align: right;
+      }
+
+      .signup-btn{
+        width: 100%;
+      }
+
+      .sign-in-modal .signup-wrapper {
+        padding:0px 30px;
+    }
+    
+    .signup-modal-close{
+        color: #000 !important;
+    }

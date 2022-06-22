@@ -10,6 +10,11 @@ import SEO from "../../utilities/next-seo.config";
 
 export const Header = () => {
     const [loginmodal, setLoginmodal] = useState(false);
+
+    const [signupmodal, setSignupmodal] = useState(false);
+
+
+
     const [showNavbar, setShowNavbar] = useState('');
     const [showDestinationNav, setShowDestinationNav] = useState('');
     const [showHotelNav, setShowHotelNav] = useState('');
@@ -31,6 +36,10 @@ export const Header = () => {
 	const handleLoginBoxClick = () => {
 		setError('');
         setLoginmodal(!loginmodal);
+    }
+
+	const handleSignupBoxClick = () => {
+        setSignupmodal(!signupmodal);
     }
 
 	
@@ -249,6 +258,244 @@ export const Header = () => {
 	}
 	
 
+
+	const [name,setName] = useState('');
+	const [email,setEmail] = useState('');
+	const [mobileNumber,setMobileNumber] = useState('');
+	const [address,setAddress] = useState('');
+	const [zipcode,setZipcode] = useState('');
+
+	const [nameErr,setNameErr] = useState('');
+	const [emailErr,setEmailErr] = useState('');
+	const [mobileNumberErr,setMobileNumberErr] = useState('');
+	const [addressErr,setAddressErr] = useState('');
+	const [zipcodeErr,setZipcodeErr] = useState('');
+
+
+
+
+
+	const [allCountry,setAllCountry] = useState([]);
+	const [selectedCountry,setSelectedCountry] = useState();
+
+
+	const [allStates,setAllStates] = useState([]);
+	const [selectedStates,setSelectedStates] = useState();
+
+
+	const [allCities,setAllCities] = useState([]);
+	const [selectedCities,setSelectedCities] = useState();
+
+	const [signUpSuccess,setSignUpSuccess] = useState('');
+	
+
+	useEffect(() => {
+		const get_country = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/get-all-country`).then(response => {
+			return response.data;
+		})
+			.catch(error => {
+				console.log('error', error);
+			});
+		get_country.then(response => {
+			if (response.status === 1) {
+
+				let all_country = response.all_country
+				all_country.sort(function (a, b) {
+					var nameA = a.country_name.toLowerCase(), nameB = b.country_name.toLowerCase()
+					if (nameA < nameB)
+						return -1
+					if (nameA > nameB)
+						return 1
+					return 0
+				})
+
+
+				setAllCountry(response.all_country)
+			}
+		});
+	}, [])
+
+
+	useEffect(() => {
+		setAllStates([]);
+		setSelectedStates('');
+		setAllCities([]);
+		setSelectedCities('');
+		if (selectedCountry) {
+			const get_states = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/get-all-states/${selectedCountry}`).then(response => {
+				return response.data;
+			})
+				.catch(error => {
+					console.log('error', error);
+				});
+			get_states.then(response => {
+				if (response.status === 1) {
+
+					let all_states = response.states
+					all_states.sort(function (a, b) {
+						var nameA = a.state_name.toLowerCase(), nameB = b.state_name.toLowerCase()
+						if (nameA < nameB)
+							return -1
+						if (nameA > nameB)
+							return 1
+						return 0
+					})
+					setAllStates(response.states)
+				}
+			});
+		}
+	}, [selectedCountry])
+
+
+
+	useEffect(() => {
+		setAllCities([]);
+		setSelectedCities('');
+		if (selectedStates) {
+			const get_cities = axios.get(`${process.env.NEXT_PUBLIC_HOST_BE}/get-all-city/${selectedStates}`).then(response => {
+				return response.data;
+			})
+				.catch(error => {
+					console.log('error', error);
+				});
+			get_cities.then(response => {
+				if (response.status === 1) {
+
+					let all_cities = response.city
+					all_cities.sort(function (a, b) {
+						var nameA = a.city_name.toLowerCase(), nameB = b.city_name.toLowerCase()
+						if (nameA < nameB)
+							return -1
+						if (nameA > nameB)
+							return 1
+						return 0
+					})
+
+
+					setAllCities(response.city)
+				}
+			});
+		}
+	}, [selectedStates])
+
+
+    const signUpUser = () => {
+
+		setNameErr('');
+		setEmailErr('');
+		setMobileNumberErr('');
+		setAddressErr('');
+		setZipcodeErr('');
+
+
+        let textRegex = /^[A-Za-z ]*$/;
+        let emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        if (!name || name === "null") {
+            setNameErr("Name is required!");
+			return false;
+        }
+
+        if (!textRegex.test(name)) {
+            setNameErr('Name should contain only letters!' );
+			return false;
+        }
+
+        if (!email || email === "null" || !emailRegex.test(email)) {
+            setEmailErr("Email id should be valid" );
+			return false;
+        }
+
+        if (
+            !mobileNumber ||
+            mobileNumber === "null" ||
+            mobileNumber.length !== 10
+        ) {
+            setMobileNumberErr("Mobile no should be valid" );
+			return false;
+        }
+
+
+
+
+		let comp = window.location.origin;
+		let company_url =
+			comp.search("https") > -1
+				? comp.replace("https://", "")
+				: comp.replace("http://", "");
+
+		let nameArr = name.split(" ");
+		let firstName = nameArr[0];
+		let lastName = "";
+		if (nameArr.length > 1) {
+			for (let i = 1; i < nameArr.length; i++) {
+				lastName += nameArr[i] + " ";
+			}
+		} else {
+			lastName = "NA";
+		}
+
+		let country_name = '';
+		let state_name = '';
+		let city_name = '';
+
+
+		for (let country_data of allCountry) {
+			if (country_data.country_id == selectedCountry) {
+				country_name = country_data.country_name;
+			}
+		}
+
+		for (let state_data of allStates) {
+			if (state_data.state_id == selectedStates) {
+				state_name = state_data.state_name;
+			}
+		}
+
+		for (let city_data of allCities) {
+			if (city_data.city_id == selectedCities) {
+				city_name = city_data.city_name;
+			}
+		}
+
+
+        axios.post(`${process.env.NEXT_PUBLIC_HOST_BE}/user/register`, {
+
+            company_url: company_url,
+            email_id: email,
+            mobile: mobileNumber,
+            first_name: firstName,
+            last_name: lastName,
+            company_name: "",
+            GST_IN: "",
+            address: address,
+            zip_code: zipcode,
+            country: country_name,
+            state: state_name,
+            city: city_name,
+            identity: "",
+            identity_no: "",
+            expiry_date: "",
+            date_of_birth: "",
+            GSTIN: "",
+
+        })
+			.then(function (response) {
+
+				if (response.data && response.data.status === 1) {
+					setSignUpSuccess('User Signup Successfull !')
+				}
+				else{
+					setSignUpSuccess('User Signup Failed !')
+
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+    };
+
+
     return (
         < >
 		
@@ -263,9 +510,9 @@ export const Header = () => {
         <div className="container">
             <div className="row">
             <div className="col-md-2">
-                <div className="logo"> <a href={"/index-new"}> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
+                <div className="logo"> <a href={"/"}> <img layout={'fill'} src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a> </div>
             </div>
-            <div className="col-md-7">
+            <div className="col-md-6">
                 <div className="nav-con">
 						
 					<input id="collapsible2" className="toggle" type="checkbox" checked="" />
@@ -413,13 +660,19 @@ export const Header = () => {
 						
 				  </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
 			
 				
 			
 					  <div className="top-btn-group"> 
 
-			 {!userLoggedIn && <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>}  
+			{/* Signup Modal */}
+			{!userLoggedIn && <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#signupmodal" onClick={() => handleSignupBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> SignUp</a>}
+
+
+			 {!userLoggedIn && <a href='#' className="sign-in-btn" data-toggle="modal" data-target="#loginmodal" onClick={() => handleLoginBoxClick()}><i className="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>}  
+
+			
 
 			 {/* {userLoggedIn && <a href="#" className="sign-in-btn" onClick={() => userLogout()}>{`${userLoginData.first_name} ${userLoginData.last_name}`}<i className="fa fa-sign-out" aria-hidden="true"></i></a>}     */}
 
@@ -460,7 +713,7 @@ export const Header = () => {
 								<div className="col-md-6 div1">
 								  <div className="signin-left">
 								   <div className="signinpage-logo">
-									 <a href="index-new"> <img src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a>
+									 <a href="/"> <img src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a>
 								   </div>
 								   <div className="signin-form">
 									 <h4>Welcome back, please login to your account</h4>
@@ -479,7 +732,7 @@ export const Header = () => {
 									   </div> 
 									   <input type="submit" value="Login" onClick={() => submitLogin()}/>*/}
 									   <div>										   
-										   <button type="button" style={{width:'100%'}} className="btn btn-default loginbutton-sign btn-box" onClick={() => otpValidate()} >Login</button>
+										   <button type="button" className="btn btn-default loginbutton-sign btn-box signup-btn" onClick={() => otpValidate()} >Login</button>
 									   </div>
 									   <div className="clearfix"></div>
 									   {/* <p>Dont have an account? <a href="#register-form-modal"  data-toggle="modal">Register</a></p> */}
@@ -503,6 +756,108 @@ export const Header = () => {
 				</Modal.Body>
             </Modal>
 			
+
+
+
+			<Modal className="modal fade sign-in-modal" tabIndex="-1" size="lg" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" show={signupmodal}>
+               <Modal.Body>
+			   <div className="modal-body seminor-login-modal-body">
+					  <button type="button" className="close signup-modal-close" data-dismiss="modal" onClick={() => handleSignupBoxClick()} >
+						  <span><i className="fa fa-times-circle" aria-hidden="true"></i></span>
+					  </button>
+						<div>
+							<div className="container">
+							  <div className="row login-modal-container">
+								<div className="col-md-12 div1">
+								  <div className="signup-wrapper">
+								   <div className="signinpage-logo text-center">
+									 <a href="/"> <img src="/Images/ROMTlogosvg.svg" alt="" title=""/> </a>
+								   </div>
+								   <div className="signin-form">
+									 
+									 <form>
+									
+										<div className='row'>
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<span className="text-danger">{nameErr}</span>
+												<input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<span className="text-danger">{emailErr}</span>
+												<input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<span className="text-danger">{mobileNumberErr}</span>
+												<input type="text" placeholder="Mobile Number" onChange={(e) => setMobileNumber(e.target.value)} />
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<span className="text-danger">{addressErr}</span>
+												<input type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<select name="country"
+													value={selectedCountry}
+													onChange={(e) => setSelectedCountry(e.target.value)}
+												>
+													<option value=''>Select Country</option>
+													{allCountry.map((items, i) => (
+														<option value={items.country_id} key={i}>{items.country_name}</option>
+													))}
+												</select>
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+											<select name="state"
+													value={selectedStates}
+													onChange={(e) => setSelectedStates(e.target.value)}
+												>
+													<option value=''>Select State</option>
+													{allStates.map((items, i) => (
+														<option value={items.state_id} key={i}>{items.state_name}</option>
+													))}
+												</select>
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<select name="city"
+													value={selectedCities}
+													onChange={(e) => setSelectedCities(e.target.value)}
+												>
+													<option value=''>Select City</option>
+													{allCities.map((items, i) => (
+														<option value={items.city_id} key={i}>{items.city_name}</option>
+													))}
+												</select>
+											</div>
+
+											<div className='col-md-6 col-sm-12 col-xs-12'>
+												<span className="text-danger">{zipcodeErr}</span>
+												<input type="text" placeholder="Zip Code" onChange={(e) => setZipcode(e.target.value)} />
+											</div>
+										</div>
+										
+									   <div className="clearfix"></div>
+
+									   <div>
+									   <span className="text-danger">{signUpSuccess}</span>										   
+										   <button type="button" className="btn btn-default loginbutton-sign btn-box signup-btn" onClick={() => signUpUser()} >Sign Up</button>
+									   </div>
+									   <div className="clearfix"></div>
+									   <p></p>
+									 </form>
+								   </div>
+								  </div>
+								</div>
+							  </div>
+							</div>
+							</div>
+							</div>
+				</Modal.Body>
+            </Modal>
         </div>
 		</div>
         </>

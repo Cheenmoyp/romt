@@ -153,7 +153,7 @@ const HotelDetails = (props) => {
             <div className="col-md-12">
               <div className="heading-group-2">
                 <h4>Facilities atthe signature Inn</h4>
-                <p>Facilities here have been <span>rated 3.9 by 1652 guest</span></p>
+                {/* <p>Facilities here have been <span>rated 3.9 by 1652 guest</span></p> */}
               </div>
             </div>
           </div>
