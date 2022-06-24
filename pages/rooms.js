@@ -1127,7 +1127,7 @@ export default function Rooms(props) {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-4">
-                                                                            <a href="#" className={selectedRoomTypeId.includes(slide.room_type_id) ? "addroom-btn btn-is-disabled" : "addroom-btn"} data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
+                                                                            <a className={selectedRoomTypeId.includes(slide.room_type_id) ? "addroom-btn btn-is-disabled" : "addroom-btn"} data-toggle="modal" data-target=".animate" data-ui-className="a-fadeUp" onClick={() => handleAddClick(slide, rateplan)}>Add Room</a>
                                                                             <div>
 
                                                                             </div>
